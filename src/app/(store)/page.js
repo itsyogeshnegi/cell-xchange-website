@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 import PhoneCard from "@/components/phones/PhoneCard";
 import { brands } from "@/lib/demo-data";
-import { store } from "@/lib/store";
 import { getPhones } from "@/services/phoneService";
+import { getStoreProfile } from "@/services/settingsService";
 import { discountedPrice, formatPrice } from "@/utils/format";
 
 export const dynamic = "force-dynamic";
@@ -44,7 +44,7 @@ function FeaturedPhone({ phone }) {
         <div>
           <p className="eyebrow text-[#777a80]">Featured in store · {phone.brand}</p>
           <h3 className="display mt-5 text-5xl font-semibold leading-none sm:text-6xl">{phone.model}</h3>
-          <p className="mt-6 line-clamp-4 max-w-md text-sm leading-7 text-[#65686e]">{phone.description}</p>
+          {phone.description && <p className="mt-6 line-clamp-4 max-w-md text-sm leading-7 text-[#65686e]">{phone.description}</p>}
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 border-y border-black/10 py-5 text-sm">
             <span><strong className="block text-[10px] uppercase tracking-[.14em] text-[#85888e]">Storage</strong><span className="mt-1 block font-semibold">{phone.storage}</span></span>
             <span><strong className="block text-[10px] uppercase tracking-[.14em] text-[#85888e]">Condition</strong><span className="mt-1 block font-semibold">{phone.condition}</span></span>
@@ -71,9 +71,10 @@ function FeaturedPhone({ phone }) {
 }
 
 export default async function HomePage() {
+  const store = await getStoreProfile();
   const phones = await getPhones({}, 4);
   const [featuredPhone, ...morePhones] = phones;
-  const stockUpdatesUrl = "https://wa.me/919718182727?text=Hi%20cell.xchange%2C%20please%20share%20your%20latest%20phone%20stock%20and%20offers.";
+  const stockUpdatesUrl = `https://wa.me/${store.phoneE164.replace("+", "")}?text=${encodeURIComponent(`Hi ${store.name}, please share your latest phone stock and offers.`)}`;
 
   return (
     <>
@@ -83,7 +84,7 @@ export default async function HomePage() {
             <p className="eyebrow flex items-center gap-3 text-[#62656b]"><span className="h-px w-8 bg-black" />Independent mobile store · Vasant Kunj</p>
             <h1 className="display mt-7 max-w-3xl text-[44px] font-semibold leading-[.94] sm:text-[66px] lg:text-[77px]">A better phone.<br /><span className="text-[#6c7078]">A simpler choice.</span></h1>
             <p className="mt-7 max-w-xl text-[16px] leading-7 text-[#5f6268]">Verified devices, honest condition details and a local team you can message before you visit.</p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-9 flex   flex-wrap gap-3">
               <Link href="#latest" className="inline-flex items-center gap-3 bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-[#1f55ff]">See today&apos;s phones <ArrowRight size={15} /></Link>
               <a href={store.whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-black/20 bg-white px-6 py-4 text-xs font-bold uppercase tracking-[.12em] hover:border-black"><MessageCircle size={15} /> Tell us what you need</a>
             </div>

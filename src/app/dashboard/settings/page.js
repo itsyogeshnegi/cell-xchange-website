@@ -1,3 +1,10 @@
-import { store } from "@/lib/store";
+import SettingsForm from "@/components/admin/SettingsForm";
+import { getStoreProfile } from "@/services/settingsService";
+
 export const metadata = { title: "Settings" };
-export default function Page() { return <div className="mx-auto max-w-3xl"><p className="eyebrow text-[#718078]">Workspace</p><h1 className="display mt-2 text-4xl font-black">Settings</h1><section className="mt-8 rounded-[22px] border border-[#e1e4e1] bg-white p-6"><h2 className="text-sm font-black">Store profile</h2><div className="mt-6 grid gap-5 sm:grid-cols-2"><label className="text-[11px] font-bold">Store name<input className="input mt-2" defaultValue={store.name}/></label><label className="text-[11px] font-bold">Contact email<input className="input mt-2" defaultValue={store.email}/></label><label className="text-[11px] font-bold">Phone<input className="input mt-2" defaultValue={store.phoneDisplay}/></label><label className="text-[11px] font-bold">Opening hours<input className="input mt-2" defaultValue={store.hours}/></label></div><button className="mt-6 rounded-full bg-[#173f2c] px-5 py-3 text-xs font-bold text-white">Save settings</button></section></div>; }
+export const dynamic = "force-dynamic";
+
+export default async function Page() {
+  const settings = await getStoreProfile();
+  return <div className="mx-auto max-w-3xl"><p className="eyebrow text-[#718078]">Workspace</p><h1 className="display mt-2 text-4xl font-black">Settings</h1><SettingsForm initialSettings={{ name: settings.name, email: settings.email, phoneDisplay: settings.phoneDisplay, hours: settings.hours }}/></div>;
+}

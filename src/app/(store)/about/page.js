@@ -1,9 +1,10 @@
 import { ArrowUpRight, Clock3, HeartHandshake, Mail, MapPin, Phone, ShieldCheck, Smartphone } from "lucide-react";
-import { store } from "@/lib/store";
+import { getStoreProfile } from "@/services/settingsService";
 
 export const metadata = { title: "Our store", description: "Visit cell.xchange in Kishan Garh, Vasant Kunj. Open all seven days from 12 p.m. to 10 p.m." };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const store = await getStoreProfile();
   return <>
     <section className="border-b border-[#e1e2df] bg-[#f5f5f2]"><div className="container-shell grid gap-12 py-20 lg:grid-cols-[.9fr_1.1fr] lg:py-28"><div><p className="eyebrow flex items-center gap-3 text-[#777a80]"><span className="h-px w-8 bg-black"/>Our store</p><h1 className="display mt-7 text-5xl font-semibold leading-[.98] sm:text-7xl">Local expertise.<br/><span className="text-[#70737a]">Straight answers.</span></h1></div><div className="flex items-end"><p className="max-w-xl text-lg leading-8 text-[#5f6268]">cell.xchange is an independent smartphone store in Vasant Kunj, built around transparent information, carefully selected stock and service that continues after the sale.</p></div></div></section>
     <section className="container-shell py-24"><div className="grid border border-[#dedfdd] lg:grid-cols-[1.05fr_.95fr]"><div className="bg-[#0b0c0e] p-9 text-white sm:p-14"><p className="eyebrow text-white/40">What we believe</p><h2 className="display mt-5 max-w-lg text-4xl font-semibold leading-[1.02] sm:text-6xl">Buying a phone should feel clear.</h2><p className="mt-7 max-w-md text-sm leading-7 text-white/50">No confusing bundles or vague condition grades. We explain the details that matter—performance, storage, battery, condition and price—so you can make the right choice without pressure.</p></div><div className="technical-grid grid grid-cols-2 gap-px bg-[#dedfdd] p-px">{[[Smartphone,"Focused selection"],[ShieldCheck,"Checked devices"],[HeartHandshake,"Personal advice"],[MapPin,"Local support"]].map(([Icon,text]) => <div key={text} className="flex min-h-40 flex-col justify-between bg-white p-6 sm:min-h-48 sm:p-8"><Icon size={22}/><span className="text-sm font-semibold">{text}</span></div>)}</div></div></section>

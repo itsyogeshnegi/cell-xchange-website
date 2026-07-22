@@ -1,14 +1,74 @@
 "use client";
 /* eslint-disable react-hooks/incompatible-library -- React Hook Form intentionally exposes non-memoizable form methods. */
+
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ArrowLeft, ImagePlus, LoaderCircle } from "lucide-react";
-import Link from "next/link";
 import { slugify } from "@/utils/format";
 
-const fields=[["brand","Brand","Apple"],["model","Model","iPhone 16 Pro"],["slug","Slug","iphone-16-pro"],["price","Price (₹)","119900"],["discount","Discount (%)","0"],["color","Colour","Desert Titanium"],["storage","Storage","256 GB"],["ram","RAM","8 GB"],["battery","Battery","3,582 mAh"],["display","Display","6.3-inch Super Retina XDR"],["processor","Processor","A18 Pro"],["camera","Camera","48MP Fusion camera"],["imei","IMEI (optional)","Optional"],["stock","Stock quantity","8"]];
-export default function PhoneForm({ phone }){const router=useRouter();const [previews,setPreviews]=useState((phone?.images||[]).map(x=>x.url));const {register,handleSubmit,setValue,watch,formState:{errors,isSubmitting}}=useForm({defaultValues:phone||{condition:"New",discount:0,stock:0,featured:false,latest:true}});const model=watch("model");useEffect(()=>{if(!phone&&model)setValue("slug",slugify(model))},[model,phone,setValue]);const selectImages=(event)=>{const files=[...event.target.files];setPreviews(files.map(file=>URL.createObjectURL(file)))};const submit=async(data)=>{try{const body=new FormData();Object.entries(data).forEach(([key,value])=>body.append(key,typeof value==="boolean"?String(value):value??""));[...(data.images||[])].forEach(file=>body.append("images",file));if(phone)body.append("existingImages",JSON.stringify(phone.images||[]));const config={headers:{"Content-Type":"multipart/form-data"}};phone?await axios.put(`/api/phones/${phone._id}`,body,config):await axios.post("/api/phones",body,config);toast.success(phone?"Phone updated":"Phone created");router.push("/dashboard/phones");router.refresh()}catch(error){toast.error(error.response?.data?.message||"Could not save phone")}};return <form onSubmit={handleSubmit(submit)}><div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><Link href="/dashboard/phones" className="mb-4 inline-flex items-center gap-2 text-xs font-bold text-[#6f7771]"><ArrowLeft size={14}/>Back to phones</Link><h1 className="display text-4xl font-black">{phone?"Edit phone":"Add new phone"}</h1><p className="mt-2 text-sm text-[#747c76]">{phone?"Update this device's details and inventory.":"Create a complete listing for your inventory."}</p></div><button disabled={isSubmitting} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#173f2c] px-6 py-3.5 text-xs font-bold text-white disabled:opacity-60">{isSubmitting&&<LoaderCircle className="animate-spin" size={15}/>} {phone?"Save changes":"Publish phone"}</button></div><div className="grid gap-6 xl:grid-cols-[1.25fr_.75fr]"><section className="rounded-[22px] border border-[#e1e4e1] bg-white p-5 sm:p-7"><h2 className="text-sm font-black">Device information</h2><div className="mt-6 grid gap-5 sm:grid-cols-2">{fields.map(([name,label,placeholder,type="text"])=> <label key={name} className={name==="imei"?"sm:col-span-2":""}><span className="mb-2 block text-[11px] font-bold text-[#626b64]">{label}</span><input type={type} inputMode={name==="stock"?"numeric":["price","discount"].includes(name)?"decimal":undefined} pattern={name==="stock"?"[0-9]*":["price","discount"].includes(name)?"[0-9]+([.][0-9]+)?":undefined} placeholder={placeholder} className="input" {...register(name,{required:!["imei","discount"].includes(name),valueAsNumber:type==="number"})}/>{errors[name]&&<span className="mt-1 block text-[10px] text-red-600">This field is required</span>}</label>)}</div><label className="mt-5 block"><span className="mb-2 block text-[11px] font-bold text-[#626b64]">Description</span><textarea rows="5" className="input resize-none" placeholder="Describe the phone, its strengths, and condition…" {...register("description",{required:true})}/></label></section><div className="grid content-start gap-6"><section className="rounded-[22px] border border-[#e1e4e1] bg-white p-5"><h2 className="text-sm font-black">Product images</h2><p className="mt-1 text-[11px] text-[#858c87]">JPG, PNG, WebP or AVIF. Up to 8MB each.</p><label className="mt-5 flex cursor-pointer flex-col items-center rounded-2xl border border-dashed border-[#cbd1cc] bg-[#f8f9f7] px-5 py-8 text-center hover:bg-[#f2f5f1]"><ImagePlus size={23}/><span className="mt-3 text-xs font-bold">Choose images</span><span className="mt-1 text-[10px] text-[#8b928c]">Upload multiple photos</span><input type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" {...register("images",{required:!phone,onChange:selectImages})}/></label>{previews.length>0&&<div className="mt-4 grid grid-cols-3 gap-2">{previews.map((src,index)=><div key={src} className="relative aspect-square overflow-hidden rounded-xl bg-[#f1f2f0]"><Image src={src} fill alt={`Preview ${index+1}`} className="object-cover" sizes="100px"/></div>)}</div>}</section><section className="rounded-[22px] border border-[#e1e4e1] bg-white p-5"><h2 className="text-sm font-black">Listing options</h2><label className="mt-5 block text-[11px] font-bold">Condition<select className="input mt-2" {...register("condition")}><option>New</option><option>Excellent</option><option>Good</option><option>Fair</option></select></label><div className="mt-5 grid gap-4">{[["featured","Feature on home page"],["latest","Mark as latest stock"]].map(([name,label])=><label key={name} className="flex items-center justify-between text-xs font-bold"><span>{label}</span><input type="checkbox" className="h-4 w-4 accent-[#173f2c]" {...register(name)}/></label>)}</div></section></div></div></form>}
+const phoneBrands = [
+  "Apple", "Samsung", "Google", "OnePlus", "Nothing", "Xiaomi", "Redmi", "Realme", "Motorola",
+  "Oppo", "Vivo", "Nokia", "Honor", "Asus", "Sony", "Huawei", "Infinix", "Tecno",
+];
+
+const fields = [
+  ["price", "Price (₹)", "119900", "decimal"], ["discount", "Discount (%)", "0", "decimal"],
+  ["color", "Colour", "Desert Titanium"], ["storage", "Storage", "256 GB"], ["ram", "RAM", "8 GB"],
+  ["battery", "Battery", "3,582 mAh"], ["display", "Display", "6.3-inch Super Retina XDR"],
+  ["processor", "Processor", "A18 Pro"], ["camera", "Camera", "48MP Fusion camera"],
+  ["imei", "IMEI (optional)", "Optional"], ["stock", "Stock quantity", "8", "numeric"],
+];
+
+export default function PhoneForm({ phone }) {
+  const router = useRouter();
+  const [previews, setPreviews] = useState((phone?.images || []).map((image) => image.url));
+  const { register, handleSubmit, setValue, watch, formState: { errors, isSubmitting } } = useForm({ defaultValues: phone || { condition: "New", discount: 0, stock: 0, featured: false, latest: true } });
+  const model = watch("model");
+  const slug = watch("slug");
+  const availableBrands = phone?.brand && !phoneBrands.includes(phone.brand) ? [phone.brand, ...phoneBrands] : phoneBrands;
+
+  useEffect(() => { if (!phone && model) setValue("slug", slugify(model)); }, [model, phone, setValue]);
+
+  const selectImages = (event) => {
+    const files = [...event.target.files];
+    setPreviews(files.map((file) => URL.createObjectURL(file)));
+  };
+
+  const submit = async (data) => {
+    try {
+      const body = new FormData();
+      Object.entries(data).forEach(([key, value]) => body.append(key, typeof value === "boolean" ? String(value) : value ?? ""));
+      [...(data.images || [])].forEach((file) => body.append("images", file));
+      if (phone) body.append("existingImages", JSON.stringify(phone.images || []));
+      const config = { headers: { "Content-Type": "multipart/form-data" } };
+      phone ? await axios.put(`/api/phones/${phone._id}`, body, config) : await axios.post("/api/phones", body, config);
+      toast.success(phone ? "Phone updated" : "Phone created");
+      router.push("/dashboard/phones"); router.refresh();
+    } catch (error) { toast.error(error.response?.data?.message || "Could not save phone"); }
+  };
+
+  return <form onSubmit={handleSubmit(submit)}>
+    <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><Link href="/dashboard/phones" className="mb-4 inline-flex items-center gap-2 text-xs font-bold text-[#6f7771]"><ArrowLeft size={14}/>Back to phones</Link><h1 className="display text-4xl font-black">{phone ? "Edit phone" : "Add new phone"}</h1><p className="mt-2 text-sm text-[#747c76]">{phone ? "Update this device's details and inventory." : "Create a complete listing for your inventory."}</p></div><button disabled={isSubmitting} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#173f2c] px-6 py-3.5 text-xs font-bold text-white disabled:opacity-60">{isSubmitting && <LoaderCircle className="animate-spin" size={15}/>} {phone ? "Save changes" : "Publish phone"}</button></div>
+    <div className="grid gap-6 xl:grid-cols-[1.25fr_.75fr]">
+      <section className="rounded-[22px] border border-[#e1e4e1] bg-white p-5 sm:p-7">
+        <h2 className="text-sm font-black">Device information</h2>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          <label><span className="mb-2 block text-[11px] font-bold text-[#626b64]">Brand</span><select className="input" {...register("brand", { required: true })}><option value="" disabled>Select a brand</option>{availableBrands.map((brand) => <option key={brand}>{brand}</option>)}</select></label>
+          <label><span className="mb-2 block text-[11px] font-bold text-[#626b64]">Model</span><input placeholder="iPhone 16 Pro" className="input" {...register("model", { required: true })}/></label>
+          <label><span className="mb-2 block text-[11px] font-bold text-[#626b64]">Slug</span><input type="hidden" {...register("slug")}/><input value={slug || ""} disabled aria-label="Auto-generated slug" className="input cursor-not-allowed bg-[#f1f2f0] text-[#858c87]"/></label>
+          {fields.map(([name, label, placeholder, inputMode]) => <label key={name} className={name === "imei" ? "sm:col-span-2" : ""}><span className="mb-2 block text-[11px] font-bold text-[#626b64]">{label}</span><input inputMode={inputMode} pattern={inputMode === "numeric" ? "[0-9]*" : inputMode === "decimal" ? "[0-9]+([.][0-9]+)?" : undefined} placeholder={placeholder} className="input" {...register(name, { required: !["imei", "discount"].includes(name) })}/>{errors[name] && <span className="mt-1 block text-[10px] text-red-600">This field is required</span>}</label>)}
+        </div>
+        <label className="mt-5 block"><span className="mb-2 block text-[11px] font-bold text-[#626b64]">Description <span className="font-normal text-[#929993]">(optional)</span></span><textarea rows="5" className="input resize-none" placeholder="Describe the phone, its strengths, and condition…" {...register("description")}/></label>
+      </section>
+      <div className="grid content-start gap-6">
+        <section className="rounded-[22px] border border-[#e1e4e1] bg-white p-5"><h2 className="text-sm font-black">Product images</h2><p className="mt-1 text-[11px] text-[#858c87]">JPG, PNG, WebP or AVIF. Up to 8MB each.</p><label className="mt-5 flex cursor-pointer flex-col items-center rounded-2xl border border-dashed border-[#cbd1cc] bg-[#f8f9f7] px-5 py-8 text-center hover:bg-[#f2f5f1]"><ImagePlus size={23}/><span className="mt-3 text-xs font-bold">Choose images</span><span className="mt-1 text-[10px] text-[#8b928c]">Upload multiple photos</span><input type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" {...register("images", { required: !phone, onChange: selectImages })}/></label>{previews.length > 0 && <div className="mt-4 grid grid-cols-3 gap-2">{previews.map((src, index) => <div key={src} className="relative aspect-square overflow-hidden rounded-xl bg-[#f1f2f0]"><Image src={src} fill alt={`Preview ${index + 1}`} className="object-cover" sizes="100px"/></div>)}</div>}</section>
+        <section className="rounded-[22px] border border-[#e1e4e1] bg-white p-5"><h2 className="text-sm font-black">Listing options</h2><label className="mt-5 block text-[11px] font-bold">Condition<select className="input mt-2" {...register("condition")}><option>New</option><option>Excellent</option><option>Good</option><option>Fair</option></select></label><div className="mt-5 grid gap-4">{[["featured", "Feature on home page"], ["latest", "Mark as latest stock"]].map(([name, label]) => <label key={name} className="flex items-center justify-between text-xs font-bold"><span>{label}</span><input type="checkbox" className="h-4 w-4 accent-[#173f2c]" {...register(name)}/></label>)}</div></section>
+      </div>
+    </div>
+  </form>;
+}
