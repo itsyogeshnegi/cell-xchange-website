@@ -1,3 +1,4 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-export default function StoreLayout({ children }) { return <><Header/><main>{children}</main><Footer/></>; }
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
+export default function StoreLayout({ children }) { return <><Header/><main>{children}</main><Footer/><WhatsAppButton/></>; }

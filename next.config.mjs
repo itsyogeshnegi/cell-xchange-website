@@ -3,6 +3,9 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   output: "standalone",
+  outputFileTracingIncludes: {
+    "/hero-black": ["./src/assets/images/black.jpg"],
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 86400,

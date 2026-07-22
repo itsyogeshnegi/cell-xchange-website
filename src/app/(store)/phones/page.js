@@ -4,7 +4,7 @@ import { PhoneGridSkeleton } from "@/components/ui/Skeletons";
 
 const Catalog = dynamicImport(() => import("@/components/phones/Catalog"), { loading: () => <PhoneGridSkeleton /> });
 
-export const metadata = { title: "Phones", description: "Browse and filter Mobile Hub's current smartphone inventory." };
+export const metadata = { title: "Available phones", description: "Browse and filter the current smartphone inventory at cell.xchange, Vasant Kunj." };
 export const dynamic = "force-dynamic";
 
 export default async function PhonesPage() {

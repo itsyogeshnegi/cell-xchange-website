@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export default function Logo({ compact = false, light = false }) {
-  return <Link href="/" className={`inline-flex items-center gap-2.5 font-extrabold tracking-[-.04em] ${light ? "text-white" : "text-[#15191d]"}`}>
-    <span className={`grid h-8 w-8 place-items-center rounded-[10px] ${light ? "bg-white text-[#183e2d]" : "bg-[#173f2c] text-white"}`}><span className="h-3.5 w-2.5 rounded-[3px] border-2 border-current" /></span>
-    {!compact && <span className="text-[17px]">mobile hub<span className="text-[#7d8c84]">.</span></span>}
+  return <Link href="/" aria-label="cell.xchange home" className={`inline-flex items-center gap-3 font-semibold tracking-[-.045em] ${light ? "text-white" : "text-[#0b0c0e]"}`}>
+    <span className={`grid h-8 w-8 place-items-center rounded-[7px] border text-[10px] font-black tracking-[-.08em] ${light ? "border-white/25 bg-white text-black" : "border-black bg-black text-white"}`}>c.x</span>
+    {!compact && <span className="text-[18px]">cell<span className={light ? "text-white/45" : "text-[#9b9da1]"}>.</span>xchange</span>}
   </Link>;
 }
