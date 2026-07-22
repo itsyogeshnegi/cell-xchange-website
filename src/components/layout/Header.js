@@ -7,7 +7,7 @@ import { useState } from "react";
 import Logo from "@/components/ui/Logo";
 import { store } from "@/lib/store";
 
-const links = [["/phones", "Shop phones"], ["/about", "Our store"], ["/about#contact", "Visit us"]];
+const links = [["/phones", "Shop devices"], ["/about", "Our store"], ["/about#contact", "Visit us"]];
 
 export default function Header({ profile = store }) {
   const path = usePathname();

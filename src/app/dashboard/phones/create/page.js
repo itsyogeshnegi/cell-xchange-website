@@ -3,5 +3,5 @@ import { FormSkeleton } from "@/components/ui/Skeletons";
 
 const PhoneForm = dynamicImport(() => import("@/components/admin/PhoneForm"), { loading: () => <FormSkeleton /> });
 
-export const metadata = { title: "Add phone" };
+export const metadata = { title: "Add product" };
 export default function Page() { return <div className="mx-auto max-w-6xl"><PhoneForm/></div>; }

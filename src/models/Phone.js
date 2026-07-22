@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const imageSchema = new mongoose.Schema({ url: { type: String, required: true }, publicId: { type: String, required: true } }, { _id: false });
 const phoneSchema = new mongoose.Schema({
+  category: { type: String, enum: ["Phone", "Laptop", "Smartwatch"], default: "Phone", index: true },
   brand: { type: String, required: true, trim: true, index: true },
   model: { type: String, required: true, trim: true },
   slug: { type: String, required: true, unique: true, lowercase: true, trim: true },
@@ -11,7 +12,7 @@ const phoneSchema = new mongoose.Schema({
   battery: String, processor: String, display: String, camera: String,
   condition: { type: String, enum: ["New", "Excellent", "Good", "Fair"], default: "New" },
   imei: { type: String, sparse: true }, stock: { type: Number, required: true, min: 0, default: 0 },
-  featured: { type: Boolean, default: false }, latest: { type: Boolean, default: false }, images: { type: [imageSchema], validate: [(items) => items.length > 0, "At least one image is required"] },
+  featured: { type: Boolean, default: false }, latest: { type: Boolean, default: false }, visible: { type: Boolean, default: true, index: true }, images: { type: [imageSchema], validate: { validator(items) { return !this.isNew || items.length >= 2; }, message: "At least two images are required" } },
 }, { timestamps: true });
 phoneSchema.index({ brand: "text", model: "text", description: "text" });
 phoneSchema.index({ brand: 1, storage: 1, createdAt: -1 });

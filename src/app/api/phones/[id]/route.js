@@ -26,7 +26,7 @@ export async function GET(request, { params }) {
       return cached(phone);
     }
     await connectDB();
-    const phone = await Phone.findOne(findFilter(id)).select(publicPhoneFields).lean().maxTimeMS(5000);
+    const phone = await Phone.findOne({ ...findFilter(id), visible: { $ne: false } }).select(publicPhoneFields).lean().maxTimeMS(5000);
     if (!phone) throw Object.assign(new Error("Phone not found"), { status: 404 });
     return cached(phone);
   } catch (error) { return handleError(error); }
@@ -56,6 +56,21 @@ export async function PUT(request, { params }) {
     if (uploaded.length) await deleteImages(uploaded).catch(() => {});
     return handleError(error);
   }
+}
+
+export async function PATCH(request, { params }) {
+  try {
+    await enforceRateLimit(request, { scope: "phones-write", limit: 30 });
+    await requireAdmin();
+    const { id } = await params;
+    const { visible } = await request.json();
+    if (typeof visible !== "boolean") throw Object.assign(new Error("Visibility must be true or false"), { status: 422 });
+    await connectDB();
+    const phone = await Phone.findOneAndUpdate(findFilter(id), { $set: { visible } }, { new: true, runValidators: true }).select(publicPhoneFields).lean().maxTimeMS(5000);
+    if (!phone) throw Object.assign(new Error("Product not found"), { status: 404 });
+    revalidateTag("phones", "max");
+    return ok(phone);
+  } catch (error) { return handleError(error); }
 }
 
 export async function DELETE(request, { params }) {

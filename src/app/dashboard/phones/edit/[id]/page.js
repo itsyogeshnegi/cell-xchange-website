@@ -5,7 +5,7 @@ import { FormSkeleton } from "@/components/ui/Skeletons";
 
 const PhoneForm = dynamicImport(() => import("@/components/admin/PhoneForm"), { loading: () => <FormSkeleton /> });
 
-export const metadata = { title: "Edit phone" };
+export const metadata = { title: "Edit product" };
 export const dynamic = "force-dynamic";
 export default async function Page({ params }) {
   const { id } = await params;

@@ -4,7 +4,7 @@ import { connectDB } from "@/lib/db";
 import { phones as demoPhones } from "@/lib/demo-data";
 import Phone from "@/models/Phone";
 
-const PUBLIC_FIELDS = "brand model slug description price discount color storage ram battery processor display camera condition stock featured latest images createdAt updatedAt";
+const PUBLIC_FIELDS = "category brand model slug description price discount color storage ram battery processor display camera condition stock featured latest visible images createdAt updatedAt";
 const serialize = (value) => JSON.parse(JSON.stringify(value));
 
 const readCachedPhones = unstable_cache(async (filter, limit) => {
@@ -16,13 +16,13 @@ const readCachedPhones = unstable_cache(async (filter, limit) => {
 
 const readCachedPhone = unstable_cache(async (id) => {
   await connectDB();
-  const filter = mongoose.isValidObjectId(id) ? { _id: id } : { slug: id };
+  const filter = { ...(mongoose.isValidObjectId(id) ? { _id: id } : { slug: id }), visible: { $ne: false } };
   return serialize(await Phone.findOne(filter).select(PUBLIC_FIELDS).lean().maxTimeMS(5000));
 }, ["phone-detail"], { revalidate: 60, tags: ["phones"] });
 
-const readCachedPage = unstable_cache(async ({ page, limit, q, brand, storage, sortName }) => {
+const readCachedPage = unstable_cache(async ({ page, limit, q, brand, storage, sortName, admin }) => {
   await connectDB();
-  const filter = {};
+  const filter = admin ? {} : { visible: { $ne: false } };
   if (q) filter.$text = { $search: q };
   if (brand) filter.brand = brand;
   if (storage) filter.storage = storage;
@@ -36,7 +36,8 @@ const readCachedPage = unstable_cache(async ({ page, limit, q, brand, storage, s
 
 const readCachedFacets = unstable_cache(async () => {
   await connectDB();
-  const [brands, storages] = await Promise.all([Phone.distinct("brand").maxTimeMS(5000), Phone.distinct("storage").maxTimeMS(5000)]);
+  const visible = { visible: { $ne: false } };
+  const [brands, storages] = await Promise.all([Phone.distinct("brand", visible).maxTimeMS(5000), Phone.distinct("storage", visible).maxTimeMS(5000)]);
   return { brands: brands.sort(), storages: storages.sort() };
 }, ["phone-facets"], { revalidate: 300, tags: ["phones"] });
 
@@ -44,7 +45,7 @@ export async function getPhones(filter = {}, limit) {
   if (!process.env.MONGODB_URI) {
     return demoPhones.filter((phone) => Object.entries(filter).every(([key, value]) => phone[key] === value)).slice(0, limit || demoPhones.length);
   }
-  return readCachedPhones(filter, limit || null);
+  return readCachedPhones({ visible: { $ne: false }, ...filter }, limit || null);
 }
 
 export async function getPhone(id, { admin = false } = {}) {
@@ -55,8 +56,8 @@ export async function getPhone(id, { admin = false } = {}) {
   return serialize(await Phone.findOne(filter).lean().maxTimeMS(5000));
 }
 
-export async function getPhonePage({ page = 1, limit = 12, q = "", brand = "", storage = "", sort = "newest" } = {}) {
-  const options = { page: Math.min(500, Math.max(1, page)), limit: Math.min(24, Math.max(1, limit)), q, brand, storage, sortName: sort };
+export async function getPhonePage({ page = 1, limit = 12, q = "", brand = "", storage = "", sort = "newest", admin = false } = {}) {
+  const options = { page: Math.min(500, Math.max(1, page)), limit: Math.min(24, Math.max(1, limit)), q, brand, storage, sortName: sort, admin };
   if (!process.env.MONGODB_URI) {
     let items = demoPhones.filter((phone) => (!q || `${phone.brand} ${phone.model}`.toLowerCase().includes(q.toLowerCase())) && (!brand || phone.brand === brand) && (!storage || phone.storage === storage));
     items.sort((a, b) => sort === "price-asc" ? a.price - b.price : sort === "price-desc" ? b.price - a.price : new Date(b.createdAt) - new Date(a.createdAt));
@@ -67,7 +68,12 @@ export async function getPhonePage({ page = 1, limit = 12, q = "", brand = "", s
   return readCachedPage(options);
 }
 
-export async function getPhoneFacets() {
+export async function getPhoneFacets({ admin = false } = {}) {
   if (!process.env.MONGODB_URI) return { brands: [...new Set(demoPhones.map((phone) => phone.brand))], storages: [...new Set(demoPhones.map((phone) => phone.storage))] };
+  if (admin) {
+    await connectDB();
+    const [brands, storages] = await Promise.all([Phone.distinct("brand").maxTimeMS(5000), Phone.distinct("storage").maxTimeMS(5000)]);
+    return { brands: brands.sort(), storages: storages.sort() };
+  }
   return readCachedFacets();
 }

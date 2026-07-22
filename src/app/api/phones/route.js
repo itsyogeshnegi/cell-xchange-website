@@ -22,6 +22,8 @@ export async function GET(request) {
     const q = safeString(searchParams.get("q"));
     const brand = safeString(searchParams.get("brand"));
     const storage = safeString(searchParams.get("storage"));
+    const admin = searchParams.get("admin") === "1";
+    if (admin) await requireAdmin();
 
     if (!process.env.MONGODB_URI) {
       let items = demoPhones.filter((phone) => (!q || `${phone.brand} ${phone.model}`.toLowerCase().includes(q.toLowerCase())) && (!brand || phone.brand === brand) && (!storage || phone.storage === storage));
@@ -31,7 +33,7 @@ export async function GET(request) {
     }
 
     await connectDB();
-    const filter = {};
+    const filter = admin ? {} : { visible: { $ne: false } };
     if (q) filter.$text = { $search: q };
     if (brand) filter.brand = brand;
     if (storage) filter.storage = storage;

@@ -19,7 +19,7 @@ export default async function PhoneDetails({ params }) {
   if (!phone) notFound();
   const related = (await getPhones()).filter((item) => item._id !== phone._id).slice(0, 3);
   const specs = [["Storage", phone.storage], ["Memory", phone.ram], ["Battery", phone.battery], ["Processor", phone.processor], ["Display", phone.display], ["Camera", phone.camera], ["Condition", phone.condition], ["Colour", phone.color]];
-  const message = encodeURIComponent(`Hi cell.xchange, I'm interested in the ${phone.brand} ${phone.model}. Is it available?`);
+  const message = encodeURIComponent(`Hi ${store.name}, I'm interested in the ${phone.brand} ${phone.model}. Is it available?`);
   const enquiryUrl = `https://wa.me/${store.phoneE164.replace("+", "")}?text=${message}`;
 
   return <>

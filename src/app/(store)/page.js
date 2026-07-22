@@ -85,7 +85,7 @@ export default async function HomePage() {
             <h1 className="display mt-7 max-w-3xl text-[44px] font-semibold leading-[.94] sm:text-[66px] lg:text-[77px]">A better phone.<br /><span className="text-[#6c7078]">A simpler choice.</span></h1>
             <p className="mt-7 max-w-xl text-[16px] leading-7 text-[#5f6268]">Verified devices, honest condition details and a local team you can message before you visit.</p>
             <div className="mt-9 flex   flex-wrap gap-3">
-              <Link href="#latest" className="inline-flex items-center gap-3 bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-[#1f55ff]">See today&apos;s phones <ArrowRight size={15} /></Link>
+              <Link href="#latest" className="inline-flex items-center gap-3 bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-[#1f55ff]">See today&apos;s devices <ArrowRight size={15} /></Link>
               <a href={store.whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-black/20 bg-white px-6 py-4 text-xs font-bold uppercase tracking-[.12em] hover:border-black"><MessageCircle size={15} /> Tell us what you need</a>
             </div>
             <p className="mt-6 text-xs leading-5 text-[#777a80]">Stock changes often. Save our WhatsApp and check what&apos;s new before making the trip.</p>
