@@ -54,8 +54,12 @@ function FeaturedPhone({ phone }) {
 
         <div className="mt-10 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="eyebrow text-[#85888e]">Store price</p>
-            <p className="mt-2 text-3xl font-semibold">{formatPrice(discountedPrice(phone.price, phone.discount))}</p>
+            <p className="eyebrow text-[#85888e]">{phone.discount > 0 ? "Offer price" : "Store price"}</p>
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <p className="text-3xl font-semibold">{formatPrice(discountedPrice(phone.price, phone.discount))}</p>
+              {phone.discount > 0 && <span className="bg-[#1f55ff] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[.1em] text-white">{phone.discount}% off</span>}
+            </div>
+            {phone.discount > 0 && <p className="mt-2 text-sm text-[#8a8d92]">MRP <span className="line-through">{formatPrice(phone.price)}</span></p>}
           </div>
           <Link href={href} className="inline-flex items-center gap-3 bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-[#1f55ff]">
             View phone <ArrowUpRight size={15} />

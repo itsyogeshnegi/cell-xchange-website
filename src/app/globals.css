@@ -51,6 +51,39 @@ button, a { transition: all .2s ease; }
   padding: 12px 14px; font-size: 12.6px; outline: none; transition: .2s;
 }
 .input:focus { border-color: #22252a; box-shadow: 0 0 0 4px rgba(31, 85, 255, .08); }
+input[type="number"] { appearance: textfield; -moz-appearance: textfield; }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: none; }
+input[type="checkbox"].h-4.w-4 {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex: 0 0 auto;
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid #c9ceca;
+  border-radius: 999px;
+  background: #e5e8e5;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+input[type="checkbox"].h-4.w-4::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .22);
+  transition: transform .2s ease;
+}
+input[type="checkbox"].h-4.w-4:checked {
+  border-color: #0b0c0e;
+  background: #0b0c0e;
+}
+input[type="checkbox"].h-4.w-4:checked::after { transform: translateX(18px); }
+input[type="checkbox"].h-4.w-4:focus-visible { outline: 3px solid rgba(31, 85, 255, .25); outline-offset: 2px; }
 .dot-grid { background-image: radial-gradient(#c9cacf 1px, transparent 1px); background-size: 20px 20px; }
 .technical-grid { background-image: linear-gradient(to right, rgba(20,22,26,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,22,26,.055) 1px, transparent 1px); background-size: 32px 32px; }
 .phone-shadow { filter: drop-shadow(0 32px 30px rgba(10, 20, 15, .2)); }
