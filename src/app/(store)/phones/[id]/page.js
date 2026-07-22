@@ -1,0 +1,21 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft, Check, ShieldCheck, Truck } from "lucide-react";
+import PhoneGallery from "@/components/phones/PhoneGallery";
+import PhoneCard from "@/components/phones/PhoneCard";
+import { phones } from "@/lib/demo-data";
+import { getPhone, getPhones } from "@/services/phoneService";
+import { discountedPrice, formatPrice } from "@/utils/format";
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }) { const { id } = await params; const phone = await getPhone(id); return phone ? { title: `${phone.brand} ${phone.model}`, description: phone.description } : { title: "Phone not found" }; }
+export async function generateStaticParams() { return phones.map(phone=>({id:phone._id})); }
+
+export default async function PhoneDetails({ params }) {
+  const { id } = await params; const phone = await getPhone(id); if(!phone) notFound(); const related = (await getPhones()).filter(x=>x._id!==phone._id).slice(0,3);
+  const specs = [["Storage",phone.storage],["Memory",phone.ram],["Battery",phone.battery],["Processor",phone.processor],["Display",phone.display],["Camera",phone.camera],["Condition",phone.condition],["Colour",phone.color]];
+  return <><section className="container-shell py-8 sm:py-14"><Link href="/phones" className="mb-8 inline-flex items-center gap-2 text-xs font-bold text-[#667069]"><ArrowLeft size={15}/> Back to all phones</Link><div className="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16"><PhoneGallery phone={phone}/><div className="lg:py-8"><div className="flex items-center gap-2"><span className="eyebrow text-[#718078]">{phone.brand}</span>{phone.latest&&<span className="rounded-full bg-[#d9f99d] px-2.5 py-1 text-[9px] font-black uppercase tracking-wider">New arrival</span>}</div><h1 className="display mt-3 text-5xl font-black sm:text-6xl">{phone.model}</h1><p className="mt-5 text-sm leading-7 text-[#667069]">{phone.description}</p><div className="mt-8 flex items-end gap-3"><span className="text-3xl font-black tracking-[-.04em]">{formatPrice(discountedPrice(phone.price,phone.discount))}</span>{phone.discount>0&&<span className="pb-1 text-sm text-[#929992] line-through">{formatPrice(phone.price)}</span>}</div><div className={`mt-5 inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-bold ${phone.stock?"bg-[#edf6ef] text-[#21603e]":"bg-[#f3eeee] text-[#8a3838]"}`}><span className={`h-2 w-2 rounded-full ${phone.stock?"bg-[#3da66a]":"bg-[#b85454]"}`}/>{phone.stock ? `${phone.stock} ready for collection` : "Currently out of stock"}</div><a href="mailto:hello@mobilehub.in?subject=Phone enquiry" className="mt-8 flex w-full items-center justify-center rounded-full bg-[#173f2c] px-6 py-4 text-sm font-bold text-white hover:bg-[#245b42]">Enquire about this phone</a><div className="mt-6 grid grid-cols-2 gap-3"><div className="flex gap-3 rounded-2xl bg-[#f4f6f3] p-4"><ShieldCheck size={19}/><span className="text-xs font-bold leading-5">12-month<br/>warranty</span></div><div className="flex gap-3 rounded-2xl bg-[#f4f6f3] p-4"><Truck size={19}/><span className="text-xs font-bold leading-5">Pickup or<br/>delivery</span></div></div></div></div></section>
+  <section className="border-y border-[#e7e9e7] bg-[#fafbfa] py-20"><div className="container-shell grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="eyebrow text-[#718078]">At a glance</p><h2 className="display mt-3 text-4xl font-black">Every detail,<br/>made clear.</h2></div><dl className="grid sm:grid-cols-2">{specs.map(([name,value])=><div key={name} className="border-b border-[#e0e4e0] py-5 sm:mr-8"><dt className="text-[11px] font-bold uppercase tracking-wider text-[#8a928c]">{name}</dt><dd className="mt-2 text-sm font-bold">{value||"—"}</dd></div>)}</dl></div></section>
+  <section className="container-shell py-20"><div className="mb-9 flex items-end justify-between"><div><p className="eyebrow text-[#718078]">Keep looking</p><h2 className="display mt-3 text-4xl font-black">You might also like.</h2></div><Check className="text-[#75927f]"/></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{related.map(x=><PhoneCard key={x._id} phone={x}/>)}</div></section></>;
+}

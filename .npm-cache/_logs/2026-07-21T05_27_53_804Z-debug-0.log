@@ -1,0 +1,1386 @@
+0 verbose cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.4
+2 info using node@v22.21.1
+3 silly config load:file:C:\Users\DELL\AppData\Local\nvm\v22.21.1\node_modules\npm\npmrc
+4 silly config load:file:C:\My_Projects\Cell_Xchange_Web\.npmrc
+5 silly config load:file:C:\Users\DELL\.npmrc
+6 silly config load:file:C:\nvm4w\nodejs\etc\npmrc
+7 verbose title npm install @next/swc-win32-x64-msvc@16.2.10 es-abstract@latest
+8 verbose argv "install" "@next/swc-win32-x64-msvc@16.2.10" "es-abstract@latest" "--save-dev" "--force" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:C:\My_Projects\Cell_Xchange_Web\.npm-cache\_logs\2026-07-21T05_27_53_804Z-
+10 verbose logfile C:\My_Projects\Cell_Xchange_Web\.npm-cache\_logs\2026-07-21T05_27_53_804Z-debug-0.log
+11 warn using --force Recommended protections disabled.
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+14 silly packumentCache corgi:https://registry.npmjs.org/es-abstract cache-miss
+15 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules/next
+16 http fetch GET 200 https://registry.npmjs.org/es-abstract 674ms (cache miss)
+17 silly packumentCache corgi:https://registry.npmjs.org/es-abstract set size:undefined disposed:false
+18 silly idealTree buildDeps
+19 silly fetch manifest @next/swc-win32-x64-msvc@16.2.10
+20 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-win32-x64-msvc cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/@next%2fswc-win32-x64-msvc 83ms (cache revalidated)
+22 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-win32-x64-msvc set size:5441736 disposed:false
+23 silly fetch manifest es-abstract@1.24.2
+24 silly packumentCache full:https://registry.npmjs.org/es-abstract cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/es-abstract 57ms (cache revalidated)
+26 silly packumentCache full:https://registry.npmjs.org/es-abstract set size:384124 disposed:false
+27 silly placeDep ROOT @next/swc-win32-x64-msvc@16.2.10 REPLACE for: mobile-hub@1.0.0 want: 16.2.10
+28 silly placeDep ROOT es-abstract@1.24.2 REPLACE for: mobile-hub@1.0.0 want: 1.24.2
+29 silly fetch manifest @babel/types@^7.29.7
+30 silly packumentCache full:https://registry.npmjs.org/@babel%2ftypes cache-miss
+31 http fetch GET 200 https://registry.npmjs.org/@babel%2ftypes 56ms (cache revalidated)
+32 silly packumentCache full:https://registry.npmjs.org/@babel%2ftypes set size:500625 disposed:false
+33 silly placeDep node_modules/@babel/generator @babel/types@7.29.7 OK for: @babel/generator@7.29.7 want: ^7.29.7
+34 silly placeDep node_modules/@babel/helper-module-imports @babel/types@7.29.7 OK for: @babel/helper-module-imports@7.29.7 want: ^7.29.7
+35 silly fetch manifest @babel/core@^7.0.0
+36 silly packumentCache full:https://registry.npmjs.org/@babel%2fcore cache-miss
+37 http fetch GET 200 https://registry.npmjs.org/@babel%2fcore 80ms (cache revalidated)
+38 silly packumentCache full:https://registry.npmjs.org/@babel%2fcore set size:788258 disposed:false
+39 silly placeDep ROOT @babel/core@7.29.7 REPLACE for: @babel/helper-module-transforms@7.29.7 want: ^7.0.0
+40 silly fetch manifest debug@^4.1.0
+41 silly packumentCache full:https://registry.npmjs.org/debug cache-miss
+42 silly fetch manifest json5@^2.2.3
+43 silly packumentCache full:https://registry.npmjs.org/json5 cache-miss
+44 silly fetch manifest semver@^6.3.1
+45 silly packumentCache full:https://registry.npmjs.org/semver cache-miss
+46 silly fetch manifest gensync@^1.0.0-beta.2
+47 silly packumentCache full:https://registry.npmjs.org/gensync cache-miss
+48 silly fetch manifest @babel/parser@^7.29.7
+49 silly packumentCache full:https://registry.npmjs.org/@babel%2fparser cache-miss
+50 silly fetch manifest @babel/helpers@^7.29.7
+51 silly packumentCache full:https://registry.npmjs.org/@babel%2fhelpers cache-miss
+52 silly fetch manifest @babel/template@^7.29.7
+53 silly packumentCache full:https://registry.npmjs.org/@babel%2ftemplate cache-miss
+54 http fetch GET 200 https://registry.npmjs.org/debug 161ms (cache revalidated)
+55 silly packumentCache full:https://registry.npmjs.org/debug set size:195840 disposed:false
+56 silly fetch manifest @babel/traverse@^7.29.7
+57 silly packumentCache full:https://registry.npmjs.org/@babel%2ftraverse cache-miss
+58 http fetch GET 200 https://registry.npmjs.org/@babel%2fparser 556ms (cache revalidated)
+59 silly packumentCache full:https://registry.npmjs.org/@babel%2fparser set size:735431 disposed:false
+60 silly fetch manifest @babel/generator@^7.29.7
+61 silly packumentCache full:https://registry.npmjs.org/@babel%2fgenerator cache-miss
+62 http fetch GET 200 https://registry.npmjs.org/gensync 625ms (cache revalidated)
+63 silly packumentCache full:https://registry.npmjs.org/gensync set size:15068 disposed:false
+64 silly fetch manifest @babel/code-frame@^7.29.7
+65 silly packumentCache full:https://registry.npmjs.org/@babel%2fcode-frame cache-miss
+66 http fetch GET 200 https://registry.npmjs.org/json5 635ms (cache revalidated)
+67 silly packumentCache full:https://registry.npmjs.org/json5 set size:86136 disposed:false
+68 silly fetch manifest convert-source-map@^2.0.0
+69 silly packumentCache full:https://registry.npmjs.org/convert-source-map cache-miss
+70 http fetch GET 200 https://registry.npmjs.org/semver 653ms (cache revalidated)
+71 silly packumentCache full:https://registry.npmjs.org/semver set size:246069 disposed:false
+72 silly fetch manifest @jridgewell/remapping@^2.3.5
+73 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fremapping cache-miss
+74 http fetch GET 200 https://registry.npmjs.org/@babel%2fhelpers 662ms (cache revalidated)
+75 silly packumentCache full:https://registry.npmjs.org/@babel%2fhelpers set size:398496 disposed:false
+76 silly fetch manifest @babel/helper-module-transforms@^7.29.7
+77 silly packumentCache full:https://registry.npmjs.org/@babel%2fhelper-module-transforms cache-miss
+78 http fetch GET 200 https://registry.npmjs.org/@babel%2fgenerator 119ms (cache revalidated)
+79 silly packumentCache full:https://registry.npmjs.org/@babel%2fgenerator set size:520504 disposed:false
+80 silly fetch manifest @babel/helper-compilation-targets@^7.29.7
+81 silly packumentCache full:https://registry.npmjs.org/@babel%2fhelper-compilation-targets cache-miss
+82 http fetch GET 200 https://registry.npmjs.org/@babel%2fcode-frame 136ms (cache revalidated)
+83 silly packumentCache full:https://registry.npmjs.org/@babel%2fcode-frame set size:206617 disposed:false
+84 http fetch GET 200 https://registry.npmjs.org/convert-source-map 140ms (cache revalidated)
+85 silly packumentCache full:https://registry.npmjs.org/convert-source-map set size:66997 disposed:false
+86 http fetch GET 200 https://registry.npmjs.org/@babel%2fhelper-module-transforms 110ms (cache revalidated)
+87 silly packumentCache full:https://registry.npmjs.org/@babel%2fhelper-module-transforms set size:346454 disposed:false
+88 http fetch GET 200 https://registry.npmjs.org/@jridgewell%2fremapping 136ms (cache revalidated)
+89 silly packumentCache full:https://registry.npmjs.org/@jridgewell%2fremapping set size:23809 disposed:false
+90 http fetch GET 200 https://registry.npmjs.org/@babel%2ftemplate 806ms (cache revalidated)
+91 silly packumentCache full:https://registry.npmjs.org/@babel%2ftemplate set size:237074 disposed:false
+92 http fetch GET 200 https://registry.npmjs.org/@babel%2fhelper-compilation-targets 97ms (cache revalidated)
+93 silly packumentCache full:https://registry.npmjs.org/@babel%2fhelper-compilation-targets set size:229541 disposed:false
+94 http fetch GET 200 https://registry.npmjs.org/@babel%2ftraverse 1022ms (cache revalidated)
+95 silly packumentCache full:https://registry.npmjs.org/@babel%2ftraverse set size:562384 disposed:false
+96 silly timing Tried to end timer that doesn't exist: idealTree:#root
+97 silly fetch manifest semver@^7.7.3
+98 silly packumentCache full:https://registry.npmjs.org/semver cache-hit
+99 silly fetch manifest @img/sharp-darwin-arm64@0.34.5
+100 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-arm64 cache-miss
+101 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-arm64 980ms (cache revalidated)
+102 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-arm64 set size:105848 disposed:false
+103 silly fetch manifest @img/sharp-darwin-x64@0.34.5
+104 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-x64 cache-miss
+105 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-x64 119ms (cache revalidated)
+106 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-x64 set size:104467 disposed:false
+107 silly fetch manifest @img/sharp-libvips-darwin-arm64@1.2.4
+108 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 cache-miss
+109 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 75ms (cache revalidated)
+110 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 set size:83997 disposed:false
+111 silly fetch manifest @img/sharp-libvips-darwin-x64@1.2.4
+112 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 cache-miss
+113 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 75ms (cache revalidated)
+114 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 set size:83096 disposed:false
+115 silly fetch manifest @img/sharp-libvips-linux-arm@1.2.4
+116 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm cache-miss
+117 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm 414ms (cache revalidated)
+118 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm set size:90480 disposed:false
+119 silly fetch manifest @img/sharp-libvips-linux-arm64@1.2.4
+120 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 cache-miss
+121 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 328ms (cache revalidated)
+122 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 set size:87554 disposed:false
+123 silly fetch manifest @img/sharp-libvips-linux-ppc64@1.2.4
+124 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-ppc64 cache-miss
+125 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-ppc64 147ms (cache revalidated)
+126 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-ppc64 set size:72601 disposed:false
+127 silly fetch manifest @img/sharp-libvips-linux-riscv64@1.2.4
+128 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-riscv64 cache-miss
+129 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-riscv64 528ms (cache revalidated)
+130 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-riscv64 set size:58803 disposed:false
+131 silly fetch manifest @img/sharp-libvips-linux-s390x@1.2.4
+132 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-s390x cache-miss
+133 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-s390x 72ms (cache revalidated)
+134 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-s390x set size:81565 disposed:false
+135 silly fetch manifest @img/sharp-libvips-linux-x64@1.2.4
+136 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 cache-miss
+137 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 76ms (cache revalidated)
+138 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 set size:86327 disposed:false
+139 silly fetch manifest @img/sharp-libvips-linuxmusl-arm64@1.2.4
+140 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 cache-miss
+141 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 73ms (cache revalidated)
+142 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 set size:86720 disposed:false
+143 silly fetch manifest @img/sharp-libvips-linuxmusl-x64@1.2.4
+144 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 cache-miss
+145 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 305ms (cache revalidated)
+146 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 set size:83650 disposed:false
+147 silly fetch manifest @img/sharp-linux-arm@0.34.5
+148 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm cache-miss
+149 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm 71ms (cache revalidated)
+150 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm set size:102715 disposed:false
+151 silly fetch manifest @img/sharp-linux-arm64@0.34.5
+152 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm64 cache-miss
+153 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm64 73ms (cache revalidated)
+154 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm64 set size:103552 disposed:false
+155 silly fetch manifest @img/sharp-linux-ppc64@0.34.5
+156 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-ppc64 cache-miss
+157 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-ppc64 77ms (cache revalidated)
+158 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-ppc64 set size:68168 disposed:false
+159 silly fetch manifest @img/sharp-linux-riscv64@0.34.5
+160 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-riscv64 cache-miss
+161 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-riscv64 81ms (cache revalidated)
+162 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-riscv64 set size:45681 disposed:false
+163 silly fetch manifest @img/sharp-linux-s390x@0.34.5
+164 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-s390x cache-miss
+165 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-s390x 313ms (cache revalidated)
+166 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-s390x set size:101430 disposed:false
+167 silly fetch manifest @img/sharp-linux-x64@0.34.5
+168 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-x64 cache-miss
+169 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-x64 332ms (cache revalidated)
+170 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-x64 set size:102218 disposed:false
+171 silly fetch manifest @img/sharp-linuxmusl-arm64@0.34.5
+172 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 cache-miss
+173 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 72ms (cache revalidated)
+174 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 set size:105157 disposed:false
+175 silly fetch manifest @img/sharp-linuxmusl-x64@0.34.5
+176 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 cache-miss
+177 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 44ms (cache revalidated)
+178 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 set size:103818 disposed:false
+179 silly fetch manifest @img/sharp-wasm32@0.34.5
+180 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-wasm32 cache-miss
+181 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-wasm32 64ms (cache revalidated)
+182 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-wasm32 set size:99309 disposed:false
+183 silly fetch manifest @img/sharp-win32-arm64@0.34.5
+184 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-arm64 cache-miss
+185 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-win32-arm64 1284ms (cache revalidated)
+186 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-arm64 set size:63462 disposed:false
+187 silly fetch manifest @img/sharp-win32-ia32@0.34.5
+188 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-ia32 cache-miss
+189 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-win32-ia32 322ms (cache revalidated)
+190 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-ia32 set size:104482 disposed:false
+191 silly fetch manifest @img/sharp-win32-x64@0.34.5
+192 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-x64 cache-miss
+193 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-win32-x64 305ms (cache revalidated)
+194 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-x64 set size:103513 disposed:false
+195 silly placeDep node_modules/sharp @img/sharp-darwin-arm64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+196 silly placeDep node_modules/sharp @img/sharp-darwin-x64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+197 silly placeDep node_modules/sharp @img/sharp-libvips-darwin-arm64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+198 silly placeDep node_modules/sharp @img/sharp-libvips-darwin-x64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+199 silly placeDep node_modules/sharp @img/sharp-libvips-linux-arm@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+200 silly placeDep node_modules/sharp @img/sharp-libvips-linux-arm64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+201 silly placeDep node_modules/sharp @img/sharp-libvips-linux-ppc64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+202 silly placeDep node_modules/sharp @img/sharp-libvips-linux-riscv64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+203 silly placeDep node_modules/sharp @img/sharp-libvips-linux-s390x@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+204 silly placeDep node_modules/sharp @img/sharp-libvips-linux-x64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+205 silly placeDep node_modules/sharp @img/sharp-libvips-linuxmusl-arm64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+206 silly placeDep node_modules/sharp @img/sharp-libvips-linuxmusl-x64@1.2.4 OK for: sharp@0.34.5 want: 1.2.4
+207 silly placeDep node_modules/sharp @img/sharp-linux-arm@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+208 silly placeDep node_modules/sharp @img/sharp-linux-arm64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+209 silly placeDep node_modules/sharp @img/sharp-linux-ppc64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+210 silly placeDep node_modules/sharp @img/sharp-linux-riscv64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+211 silly placeDep node_modules/sharp @img/sharp-linux-s390x@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+212 silly placeDep node_modules/sharp @img/sharp-linux-x64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+213 silly placeDep node_modules/sharp @img/sharp-linuxmusl-arm64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+214 silly placeDep node_modules/sharp @img/sharp-linuxmusl-x64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+215 silly placeDep node_modules/sharp @img/sharp-wasm32@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+216 silly placeDep node_modules/sharp @img/sharp-win32-arm64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+217 silly placeDep node_modules/sharp @img/sharp-win32-ia32@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+218 silly placeDep node_modules/sharp @img/sharp-win32-x64@0.34.5 OK for: sharp@0.34.5 want: 0.34.5
+219 silly placeDep node_modules/sharp semver@7.8.5 REPLACE for: sharp@0.34.5 want: ^7.7.3
+220 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\es-abstract' ]
+221 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\core' ]
+222 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\types' ]
+223 silly reify mark retired [
+223 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-darwin-arm64'
+223 silly reify ]
+224 silly reify mark retired [
+224 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-darwin-x64'
+224 silly reify ]
+225 silly reify mark retired [
+225 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-darwin-arm64'
+225 silly reify ]
+226 silly reify mark retired [
+226 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-darwin-x64'
+226 silly reify ]
+227 silly reify mark retired [
+227 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-arm'
+227 silly reify ]
+228 silly reify mark retired [
+228 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-arm64'
+228 silly reify ]
+229 silly reify mark retired [
+229 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-ppc64'
+229 silly reify ]
+230 silly reify mark retired [
+230 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-riscv64'
+230 silly reify ]
+231 silly reify mark retired [
+231 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-s390x'
+231 silly reify ]
+232 silly reify mark retired [
+232 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-x64'
+232 silly reify ]
+233 silly reify mark retired [
+233 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linuxmusl-arm64'
+233 silly reify ]
+234 silly reify mark retired [
+234 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linuxmusl-x64'
+234 silly reify ]
+235 silly reify mark retired [
+235 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-arm'
+235 silly reify ]
+236 silly reify mark retired [
+236 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-arm64'
+236 silly reify ]
+237 silly reify mark retired [
+237 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-ppc64'
+237 silly reify ]
+238 silly reify mark retired [
+238 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-riscv64'
+238 silly reify ]
+239 silly reify mark retired [
+239 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-s390x'
+239 silly reify ]
+240 silly reify mark retired [
+240 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-x64'
+240 silly reify ]
+241 silly reify mark retired [
+241 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linuxmusl-arm64'
+241 silly reify ]
+242 silly reify mark retired [
+242 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linuxmusl-x64'
+242 silly reify ]
+243 silly reify mark retired [
+243 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-wasm32'
+243 silly reify ]
+244 silly reify mark retired [
+244 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-win32-arm64'
+244 silly reify ]
+245 silly reify mark retired [
+245 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-win32-ia32'
+245 silly reify ]
+246 silly reify mark retired [
+246 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-win32-x64'
+246 silly reify ]
+247 silly reify mark retired [
+247 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array-includes\\node_modules\\es-abstract'
+247 silly reify ]
+248 silly reify mark retired [
+248 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.findlastindex\\node_modules\\es-abstract'
+248 silly reify ]
+249 silly reify mark retired [
+249 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.flat\\node_modules\\es-abstract'
+249 silly reify ]
+250 silly reify mark retired [
+250 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.flatmap\\node_modules\\es-abstract'
+250 silly reify ]
+251 silly reify mark retired [
+251 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\browserslist',
+251 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\browserslist',
+251 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\browserslist.cmd',
+251 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\browserslist.ps1'
+251 silly reify ]
+252 silly reify mark retired [
+252 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\convert-source-map'
+252 silly reify ]
+253 silly reify mark retired [
+253 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\electron-to-chromium'
+253 silly reify ]
+254 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\escalade' ]
+255 silly reify mark retired [
+255 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-config-next\\node_modules\\es-abstract'
+255 silly reify ]
+256 silly reify mark retired [
+256 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\core'
+256 silly reify ]
+257 silly reify mark retired [
+257 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\helpers'
+257 silly reify ]
+258 silly reify mark retired [
+258 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\types'
+258 silly reify ]
+259 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\gensync' ]
+260 silly reify mark retired [
+260 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\jsesc',
+260 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\jsesc',
+260 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\jsesc.cmd',
+260 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\jsesc.ps1'
+260 silly reify ]
+261 silly reify mark retired [
+261 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\json5',
+261 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\json5',
+261 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\json5.cmd',
+261 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\json5.ps1'
+261 silly reify ]
+262 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lru-cache' ]
+263 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\node-releases' ]
+264 silly reify mark retired [
+264 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\object.fromentries\\node_modules\\es-abstract'
+264 silly reify ]
+265 silly reify mark retired [
+265 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\object.groupby\\node_modules\\es-abstract'
+265 silly reify ]
+266 silly reify mark retired [
+266 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\semver'
+266 silly reify ]
+267 silly reify mark retired [
+267 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\update-browserslist-db',
+267 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\update-browserslist-db',
+267 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\update-browserslist-db.cmd',
+267 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\update-browserslist-db.ps1'
+267 silly reify ]
+268 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\yallist' ]
+269 silly reify mark retired [
+269 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\code-frame'
+269 silly reify ]
+270 silly reify mark retired [
+270 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\compat-data'
+270 silly reify ]
+271 silly reify mark retired [
+271 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\generator'
+271 silly reify ]
+272 silly reify mark retired [
+272 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-module-transforms'
+272 silly reify ]
+273 silly reify mark retired [
+273 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-compilation-targets'
+273 silly reify ]
+274 silly reify mark retired [
+274 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-globals'
+274 silly reify ]
+275 silly reify mark retired [
+275 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-module-imports'
+275 silly reify ]
+276 silly reify mark retired [
+276 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-validator-option'
+276 silly reify ]
+277 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\template' ]
+278 silly reify mark retired [ 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\traverse' ]
+279 silly reify mark retired [
+279 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-win32-x64-msvc'
+279 silly reify ]
+280 silly reify moves {
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.es-abstract-Fc008ASa',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\core': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.core-iIzZ93k2',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\types': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.types-thyKTwGq',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-darwin-arm64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-darwin-arm64-43CcQMGK',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-darwin-x64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-darwin-x64-3TkTz3m9',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-darwin-arm64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-darwin-arm64-AUvaL6Q8',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-darwin-x64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-darwin-x64-Nx2488Kx',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-arm': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linux-arm-nJUWPtY8',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-arm64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linux-arm64-sqSmjdGz',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-ppc64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linux-ppc64-a37pyCc7',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-riscv64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linux-riscv64-7G0UnS4o',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-s390x': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linux-s390x-mFoq3u4J',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linux-x64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linux-x64-1EIohJxX',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linuxmusl-arm64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linuxmusl-arm64-MPJUpSa2',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-libvips-linuxmusl-x64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-libvips-linuxmusl-x64-c8TnFqhV',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-arm': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linux-arm-kFiqv5W9',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-arm64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linux-arm64-jJuyG6eZ',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-ppc64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linux-ppc64-dToUya9a',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-riscv64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linux-riscv64-9Qy44fn7',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-s390x': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linux-s390x-aqM2NPMy',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linux-x64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linux-x64-3NrqKgCf',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linuxmusl-arm64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linuxmusl-arm64-nO5mT52C',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-linuxmusl-x64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-linuxmusl-x64-RvXlSIxE',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-wasm32': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-wasm32-9vA5RR35',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-win32-arm64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-win32-arm64-bMfrp91B',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-win32-ia32': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-win32-ia32-jWgTHDsd',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\sharp-win32-x64': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@img\\.sharp-win32-x64-4b0zPzp7',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array-includes\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array-includes\\node_modules\\.es-abstract-cYnipePm',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.findlastindex\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.findlastindex\\node_modules\\.es-abstract-Bw3xKc3q',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.flat\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.flat\\node_modules\\.es-abstract-IJWfE9R8',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.flatmap\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\array.prototype.flatmap\\node_modules\\.es-abstract-FT8y9yVe',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\browserslist': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.browserslist-BG6atOyw',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\browserslist': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.browserslist-OY7E9KUT',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\browserslist.cmd': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.browserslist.cmd-wfDxWvrl',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\browserslist.ps1': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.browserslist.ps1-lWtwPydJ',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\convert-source-map': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.convert-source-map-QwAWjq0A',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\electron-to-chromium': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.electron-to-chromium-B1lZ9BLU',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\escalade': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.escalade-V4SDykbZ',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-config-next\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-config-next\\node_modules\\.es-abstract-lF7qPvwC',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\core': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\.core-DOvcbwBp',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\helpers': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\.helpers-vhnf99nu',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\types': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\eslint-plugin-react-hooks\\node_modules\\@babel\\.types-EwJUaIyc',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\gensync': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.gensync-WQsfY3O7',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\jsesc': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.jsesc-1qs9eSX0',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\jsesc': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.jsesc-PyC93Jsu',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\jsesc.cmd': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.jsesc.cmd-INNUYQB4',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\jsesc.ps1': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.jsesc.ps1-cLhFFoDm',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\json5': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.json5-pyb6FywO',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\json5': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.json5-nF0xbSJG',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\json5.cmd': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.json5.cmd-u2yaSURI',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\json5.ps1': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.json5.ps1-gEIRdRod',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lru-cache': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.lru-cache-sNgB7X82',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\node-releases': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.node-releases-OcEHhotN',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\object.fromentries\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\object.fromentries\\node_modules\\.es-abstract-1YRi72cF',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\object.groupby\\node_modules\\es-abstract': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\object.groupby\\node_modules\\.es-abstract-JoxJHFJY',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\semver': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\.semver-0E1qXTUA',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\update-browserslist-db': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.update-browserslist-db-svdCRaic',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\update-browserslist-db': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.update-browserslist-db-zoNN21lw',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\update-browserslist-db.cmd': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.update-browserslist-db.cmd-klHZ2pqh',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\update-browserslist-db.ps1': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.bin\\.update-browserslist-db.ps1-Y4yTOtpa',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\yallist': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\.yallist-NLYYeuan',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\code-frame': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.code-frame-Xf7o2xZI',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\compat-data': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.compat-data-WBS3O5QO',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\generator': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.generator-ew178uIo',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-module-transforms': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.helper-module-transforms-5Hxc0y3C',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-compilation-targets': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.helper-compilation-targets-zz8wxb4O',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-globals': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.helper-globals-4vwMpQRj',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-module-imports': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.helper-module-imports-A6rnDeFO',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\helper-validator-option': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.helper-validator-option-jEr5w0Po',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\template': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.template-FqFOt79Y',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\traverse': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@babel\\.traverse-X46YUjUy',
+280 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-win32-x64-msvc': 'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\.swc-win32-x64-msvc-asVEQntS'
+280 silly reify }
+281 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-wasm32-wasi
+282 silly reify mark deleted [
+282 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-wasm32-wasi'
+282 silly reify ]
+283 silly audit bulk request {
+283 silly audit   '@alloc/quick-lru': [ '5.2.0' ],
+283 silly audit   '@babel/helper-string-parser': [ '7.29.7' ],
+283 silly audit   '@babel/helper-validator-identifier': [ '7.29.7' ],
+283 silly audit   '@babel/parser': [ '7.29.7' ],
+283 silly audit   '@babel/types': [ '7.29.7' ],
+283 silly audit   '@emnapi/core': [ '1.10.0' ],
+283 silly audit   '@emnapi/runtime': [ '1.11.2', '1.10.0' ],
+283 silly audit   '@emnapi/wasi-threads': [ '1.2.1' ],
+283 silly audit   '@eslint-community/eslint-utils': [ '4.9.1' ],
+283 silly audit   'eslint-visitor-keys': [ '3.4.3', '5.0.1', '4.2.1' ],
+283 silly audit   '@eslint-community/regexpp': [ '4.12.2' ],
+283 silly audit   '@eslint/config-array': [ '0.21.2' ],
+283 silly audit   '@eslint/config-helpers': [ '0.4.2' ],
+283 silly audit   '@eslint/core': [ '0.17.0' ],
+283 silly audit   '@eslint/eslintrc': [ '3.3.6' ],
+283 silly audit   '@eslint/js': [ '9.39.5' ],
+283 silly audit   '@eslint/object-schema': [ '2.1.7' ],
+283 silly audit   '@eslint/plugin-kit': [ '0.4.1' ],
+283 silly audit   '@hookform/resolvers': [ '5.4.0' ],
+283 silly audit   '@humanfs/core': [ '0.19.2' ],
+283 silly audit   '@humanfs/node': [ '0.16.8' ],
+283 silly audit   '@humanfs/types': [ '0.15.0' ],
+283 silly audit   '@humanwhocodes/module-importer': [ '1.0.1' ],
+283 silly audit   '@humanwhocodes/retry': [ '0.4.3' ],
+283 silly audit   '@img/colour': [ '1.1.0' ],
+283 silly audit   '@img/sharp-darwin-arm64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-darwin-x64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linux-arm': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linux-riscv64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linux-x64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.2.4' ],
+283 silly audit   '@img/sharp-linux-arm': [ '0.34.5' ],
+283 silly audit   '@img/sharp-linux-arm64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-linux-ppc64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-linux-riscv64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-linux-s390x': [ '0.34.5' ],
+283 silly audit   '@img/sharp-linux-x64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-linuxmusl-x64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-wasm32': [ '0.34.5' ],
+283 silly audit   '@img/sharp-win32-arm64': [ '0.34.5' ],
+283 silly audit   '@img/sharp-win32-ia32': [ '0.34.5' ],
+283 silly audit   '@img/sharp-win32-x64': [ '0.34.5' ],
+283 silly audit   '@jridgewell/gen-mapping': [ '0.3.13' ],
+283 silly audit   '@jridgewell/remapping': [ '2.3.5' ],
+283 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+283 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+283 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+283 silly audit   '@mongodb-js/saslprep': [ '1.4.12' ],
+283 silly audit   '@napi-rs/wasm-runtime': [ '1.1.6' ],
+283 silly audit   '@next/env': [ '16.2.10' ],
+283 silly audit   '@next/eslint-plugin-next': [ '16.2.10' ],
+283 silly audit   '@next/swc-darwin-arm64': [ '16.2.10' ],
+283 silly audit   '@next/swc-darwin-x64': [ '16.2.10' ],
+283 silly audit   '@next/swc-linux-arm64-gnu': [ '16.2.10' ],
+283 silly audit   '@next/swc-linux-arm64-musl': [ '16.2.10' ],
+283 silly audit   '@next/swc-linux-x64-gnu': [ '16.2.10' ],
+283 silly audit   '@next/swc-linux-x64-musl': [ '16.2.10' ],
+283 silly audit   '@next/swc-win32-arm64-msvc': [ '16.2.10' ],
+283 silly audit   '@nodelib/fs.scandir': [ '2.1.5' ],
+283 silly audit   '@nodelib/fs.stat': [ '2.0.5' ],
+283 silly audit   '@nodelib/fs.walk': [ '1.2.8' ],
+283 silly audit   '@nolyfill/is-core-module': [ '1.0.39' ],
+283 silly audit   '@rtsao/scc': [ '1.1.0' ],
+283 silly audit   '@standard-schema/utils': [ '0.3.0' ],
+283 silly audit   '@swc/helpers': [ '0.5.15' ],
+283 silly audit   '@tailwindcss/node': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-win32-x64-msvc': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-android-arm64': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-darwin-arm64': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-darwin-x64': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-freebsd-x64': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-linux-arm-gnueabihf': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-linux-arm64-gnu': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-linux-arm64-musl': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-linux-x64-gnu': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-linux-x64-musl': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/oxide-win32-arm64-msvc': [ '4.3.3' ],
+283 silly audit   '@tailwindcss/postcss': [ '4.3.3' ],
+283 silly audit   '@tybys/wasm-util': [ '0.10.3' ],
+283 silly audit   '@types/estree': [ '1.0.9' ],
+283 silly audit   '@types/json-schema': [ '7.0.15' ],
+283 silly audit   '@types/json5': [ '0.0.29' ],
+283 silly audit   '@types/webidl-conversions': [ '7.0.3' ],
+283 silly audit   '@types/whatwg-url': [ '11.0.5' ],
+283 silly audit   '@typescript-eslint/parser': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/scope-manager': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/project-service': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/tsconfig-utils': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/type-utils': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/types': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/typescript-estree': [ '8.65.0' ],
+283 silly audit   'balanced-match': [ '4.0.4', '1.0.2' ],
+283 silly audit   'brace-expansion': [ '5.0.7', '1.1.16' ],
+283 silly audit   minimatch: [ '10.2.5', '3.1.5' ],
+283 silly audit   semver: [ '7.8.5', '6.3.1' ],
+283 silly audit   '@typescript-eslint/utils': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/visitor-keys': [ '8.65.0' ],
+283 silly audit   '@unrs/resolver-binding-win32-x64-msvc': [ '1.12.2' ],
+283 silly audit   acorn: [ '8.17.0' ],
+283 silly audit   'acorn-jsx': [ '5.3.2' ],
+283 silly audit   'agent-base': [ '6.0.2' ],
+283 silly audit   ajv: [ '6.15.0' ],
+283 silly audit   'ansi-styles': [ '4.3.0' ],
+283 silly audit   'append-field': [ '1.0.0' ],
+283 silly audit   argparse: [ '2.0.1' ],
+283 silly audit   'array-buffer-byte-length': [ '1.0.2' ],
+283 silly audit   'array-includes': [ '3.1.9' ],
+283 silly audit   'es-abstract': [ '1.24.2' ],
+283 silly audit   'array.prototype.findlast': [ '1.2.5' ],
+283 silly audit   'array.prototype.findlastindex': [ '1.2.6' ],
+283 silly audit   'array.prototype.flat': [ '1.3.3' ],
+283 silly audit   'array.prototype.flatmap': [ '1.3.3' ],
+283 silly audit   'array.prototype.tosorted': [ '1.1.4' ],
+283 silly audit   'arraybuffer.prototype.slice': [ '1.0.4' ],
+283 silly audit   'ast-types-flow': [ '0.0.8' ],
+283 silly audit   'async-function': [ '1.0.0' ],
+283 silly audit   asynckit: [ '0.4.0' ],
+283 silly audit   'available-typed-arrays': [ '1.0.7' ],
+283 silly audit   'axe-core': [ '4.12.1' ],
+283 silly audit   axios: [ '1.18.1' ],
+283 silly audit   'baseline-browser-mapping': [ '2.10.44' ],
+283 silly audit   bcryptjs: [ '3.0.3' ],
+283 silly audit   braces: [ '3.0.3' ],
+283 silly audit   bson: [ '6.10.4' ],
+283 silly audit   'buffer-equal-constant-time': [ '1.0.1' ],
+283 silly audit   'buffer-from': [ '1.1.2' ],
+283 silly audit   busboy: [ '1.6.0' ],
+283 silly audit   'call-bind': [ '1.0.9' ],
+283 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+283 silly audit   'call-bound': [ '1.0.4' ],
+283 silly audit   callsites: [ '3.1.0' ],
+283 silly audit   'caniuse-lite': [ '1.0.30001806' ],
+283 silly audit   chalk: [ '4.1.2' ],
+283 silly audit   'client-only': [ '0.0.1' ],
+283 silly audit   cloudinary: [ '2.10.0' ],
+283 silly audit   lodash: [ '4.18.1' ],
+283 silly audit   'color-convert': [ '2.0.1' ],
+283 silly audit   'color-name': [ '1.1.4' ],
+283 silly audit   'combined-stream': [ '1.0.8' ],
+283 silly audit   'concat-map': [ '0.0.1' ],
+283 silly audit   'concat-stream': [ '2.0.0' ],
+283 silly audit   'cross-spawn': [ '7.0.6' ],
+283 silly audit   csstype: [ '3.2.3' ],
+283 silly audit   'damerau-levenshtein': [ '1.0.8' ],
+283 silly audit   'data-view-buffer': [ '1.0.2' ],
+283 silly audit   'data-view-byte-length': [ '1.0.2' ],
+283 silly audit   'data-view-byte-offset': [ '1.0.1' ],
+283 silly audit   debug: [ '4.4.3', '3.2.7' ],
+283 silly audit   'deep-is': [ '0.1.4' ],
+283 silly audit   'define-data-property': [ '1.1.4' ],
+283 silly audit   'define-properties': [ '1.2.1' ],
+283 silly audit   'delayed-stream': [ '1.0.0' ],
+283 silly audit   'detect-libc': [ '2.1.2' ],
+283 silly audit   doctrine: [ '2.1.0' ],
+283 silly audit   'dunder-proto': [ '1.0.1' ],
+283 silly audit   'ecdsa-sig-formatter': [ '1.0.11' ],
+283 silly audit   'emoji-regex': [ '9.2.2' ],
+283 silly audit   'enhanced-resolve': [ '5.24.3' ],
+283 silly audit   'es-abstract-get': [ '1.0.0' ],
+283 silly audit   'es-define-property': [ '1.0.1' ],
+283 silly audit   'es-errors': [ '1.3.0' ],
+283 silly audit   'es-object-atoms': [ '1.1.2' ],
+283 silly audit   'es-set-tostringtag': [ '2.1.0' ],
+283 silly audit   'es-shim-unscopables': [ '1.1.0' ],
+283 silly audit   'es-to-primitive': [ '1.3.4' ],
+283 silly audit   'escape-string-regexp': [ '4.0.0' ],
+283 silly audit   eslint: [ '9.39.5' ],
+283 silly audit   'eslint-config-next': [ '16.2.10' ],
+283 silly audit   'aria-query': [ '5.3.2' ],
+283 silly audit   'axobject-query': [ '4.1.0' ],
+283 silly audit   'es-iterator-helpers': [ '1.4.0' ],
+283 silly audit   'eslint-plugin-jsx-a11y': [ '6.10.2' ],
+283 silly audit   'eslint-plugin-react': [ '7.37.5' ],
+283 silly audit   globals: [ '16.4.0', '14.0.0' ],
+283 silly audit   'eslint-import-resolver-node': [ '0.3.10' ],
+283 silly audit   'eslint-import-resolver-typescript': [ '3.10.1' ],
+283 silly audit   'eslint-module-utils': [ '2.14.0' ],
+283 silly audit   'eslint-plugin-import': [ '2.32.0' ],
+283 silly audit   'eslint-plugin-react-hooks': [ '7.1.1' ],
+283 silly audit   'eslint-scope': [ '8.4.0' ],
+283 silly audit   espree: [ '10.4.0' ],
+283 silly audit   esquery: [ '1.7.0' ],
+283 silly audit   esrecurse: [ '4.3.0' ],
+283 silly audit   estraverse: [ '5.3.0' ],
+283 silly audit   esutils: [ '2.0.3' ],
+283 silly audit   'fast-deep-equal': [ '3.1.3' ],
+283 silly audit   'fast-glob': [ '3.3.1' ],
+283 silly audit   'glob-parent': [ '5.1.2', '6.0.2' ],
+283 silly audit   'fast-json-stable-stringify': [ '2.1.0' ],
+283 silly audit   'fast-levenshtein': [ '2.0.6' ],
+283 silly audit   fastq: [ '1.20.1' ],
+283 silly audit   'file-entry-cache': [ '8.0.0' ],
+283 silly audit   'fill-range': [ '7.1.1' ],
+283 silly audit   'find-up': [ '5.0.0' ],
+283 silly audit   'flat-cache': [ '4.0.1' ],
+283 silly audit   flatted: [ '3.4.2' ],
+283 silly audit   'follow-redirects': [ '1.16.0' ],
+283 silly audit   'for-each': [ '0.3.5' ],
+283 silly audit   'form-data': [ '4.0.6' ],
+283 silly audit   'framer-motion': [ '12.42.2' ],
+283 silly audit   'function-bind': [ '1.1.2' ],
+283 silly audit   'function.prototype.name': [ '1.2.0' ],
+283 silly audit   'functions-have-names': [ '1.2.3' ],
+283 silly audit   'generator-function': [ '2.0.1' ],
+283 silly audit   'get-intrinsic': [ '1.3.0' ],
+283 silly audit   'get-proto': [ '1.0.1' ],
+283 silly audit   'get-symbol-description': [ '1.1.0' ],
+283 silly audit   'get-tsconfig': [ '4.14.0' ],
+283 silly audit   globalthis: [ '1.0.4' ],
+283 silly audit   goober: [ '2.1.19' ],
+283 silly audit   gopd: [ '1.2.0' ],
+283 silly audit   'graceful-fs': [ '4.2.11' ],
+283 silly audit   'has-bigints': [ '1.1.0' ],
+283 silly audit   'has-flag': [ '4.0.0' ],
+283 silly audit   'has-property-descriptors': [ '1.0.2' ],
+283 silly audit   'has-proto': [ '1.2.0' ],
+283 silly audit   'has-symbols': [ '1.1.0' ],
+283 silly audit   'has-tostringtag': [ '1.0.2' ],
+283 silly audit   hasown: [ '2.0.4' ],
+283 silly audit   'hermes-estree': [ '0.25.1' ],
+283 silly audit   'hermes-parser': [ '0.25.1' ],
+283 silly audit   'https-proxy-agent': [ '5.0.1' ],
+283 silly audit   ignore: [ '5.3.2', '7.0.6' ],
+283 silly audit   'import-fresh': [ '3.3.1' ],
+283 silly audit   imurmurhash: [ '0.1.4' ],
+283 silly audit   inherits: [ '2.0.4' ],
+283 silly audit   'internal-slot': [ '1.1.0' ],
+283 silly audit   'is-array-buffer': [ '3.0.5' ],
+283 silly audit   'is-async-function': [ '2.1.1' ],
+283 silly audit   'is-bigint': [ '1.1.0' ],
+283 silly audit   'is-boolean-object': [ '1.2.2' ],
+283 silly audit   'is-bun-module': [ '2.0.0' ],
+283 silly audit   'is-callable': [ '1.2.7' ],
+283 silly audit   'is-core-module': [ '2.16.2' ],
+283 silly audit   'is-data-view': [ '1.0.2' ],
+283 silly audit   'is-date-object': [ '1.1.0' ],
+283 silly audit   'is-document.all': [ '1.0.0' ],
+283 silly audit   'is-extglob': [ '2.1.1' ],
+283 silly audit   'is-finalizationregistry': [ '1.1.1' ],
+283 silly audit   'is-generator-function': [ '1.1.2' ],
+283 silly audit   'is-glob': [ '4.0.3' ],
+283 silly audit   'is-map': [ '2.0.3' ],
+283 silly audit   'is-negative-zero': [ '2.0.3' ],
+283 silly audit   'is-number': [ '7.0.0' ],
+283 silly audit   'is-number-object': [ '1.1.1' ],
+283 silly audit   'is-regex': [ '1.2.1' ],
+283 silly audit   'is-set': [ '2.0.3' ],
+283 silly audit   'is-shared-array-buffer': [ '1.0.4' ],
+283 silly audit   'is-string': [ '1.1.1' ],
+283 silly audit   'is-symbol': [ '1.1.1' ],
+283 silly audit   'is-typed-array': [ '1.1.15' ],
+283 silly audit   'is-weakmap': [ '2.0.2' ],
+283 silly audit   'is-weakref': [ '1.1.1' ],
+283 silly audit   'is-weakset': [ '2.0.4' ],
+283 silly audit   isarray: [ '2.0.5' ],
+283 silly audit   isexe: [ '2.0.0' ],
+283 silly audit   'iterator.prototype': [ '1.1.5' ],
+283 silly audit   jiti: [ '2.7.0' ],
+283 silly audit   jose: [ '6.2.3' ],
+283 silly audit   'js-tokens': [ '4.0.0' ],
+283 silly audit   'js-yaml': [ '4.3.0' ],
+283 silly audit   'json-buffer': [ '3.0.1' ],
+283 silly audit   'json-schema-traverse': [ '0.4.1' ],
+283 silly audit   'json-stable-stringify-without-jsonify': [ '1.0.1' ],
+283 silly audit   json5: [ '1.0.2' ],
+283 silly audit   jsonwebtoken: [ '9.0.3' ],
+283 silly audit   'jsx-ast-utils': [ '3.3.5' ],
+283 silly audit   jwa: [ '2.0.1' ],
+283 silly audit   jws: [ '4.0.1' ],
+283 silly audit   kareem: [ '2.6.3' ],
+283 silly audit   keyv: [ '4.5.4' ],
+283 silly audit   'language-subtag-registry': [ '0.3.23' ],
+283 silly audit   'language-tags': [ '1.0.9' ],
+283 silly audit   levn: [ '0.4.1' ],
+283 silly audit   lightningcss: [ '1.32.0' ],
+283 silly audit   'lightningcss-win32-x64-msvc': [ '1.32.0' ],
+283 silly audit   'lightningcss-android-arm64': [ '1.32.0' ],
+283 silly audit   'lightningcss-darwin-arm64': [ '1.32.0' ],
+283 silly audit   'lightningcss-darwin-x64': [ '1.32.0' ],
+283 silly audit   'lightningcss-freebsd-x64': [ '1.32.0' ],
+283 silly audit   'lightningcss-linux-arm-gnueabihf': [ '1.32.0' ],
+283 silly audit   'lightningcss-linux-arm64-gnu': [ '1.32.0' ],
+283 silly audit   'lightningcss-linux-arm64-musl': [ '1.32.0' ],
+283 silly audit   'lightningcss-linux-x64-gnu': [ '1.32.0' ],
+283 silly audit   'lightningcss-linux-x64-musl': [ '1.32.0' ],
+283 silly audit   'lightningcss-win32-arm64-msvc': [ '1.32.0' ],
+283 silly audit   'locate-path': [ '6.0.0' ],
+283 silly audit   'lodash.includes': [ '4.3.0' ],
+283 silly audit   'lodash.isboolean': [ '3.0.3' ],
+283 silly audit   'lodash.isinteger': [ '4.0.4' ],
+283 silly audit   'lodash.isnumber': [ '3.0.3' ],
+283 silly audit   'lodash.isplainobject': [ '4.0.6' ],
+283 silly audit   'lodash.isstring': [ '4.0.1' ],
+283 silly audit   'lodash.merge': [ '4.6.2' ],
+283 silly audit   'lodash.once': [ '4.1.1' ],
+283 silly audit   'loose-envify': [ '1.4.0' ],
+283 silly audit   'lucide-react': [ '0.468.0' ],
+283 silly audit   'magic-string': [ '0.30.21' ],
+283 silly audit   'math-intrinsics': [ '1.1.0' ],
+283 silly audit   'media-typer': [ '0.3.0' ],
+283 silly audit   'memory-pager': [ '1.5.0' ],
+283 silly audit   merge2: [ '1.4.1' ],
+283 silly audit   micromatch: [ '4.0.8' ],
+283 silly audit   'mime-db': [ '1.52.0' ],
+283 silly audit   'mime-types': [ '2.1.35' ],
+283 silly audit   minimist: [ '1.2.8' ],
+283 silly audit   mongodb: [ '6.20.0' ],
+283 silly audit   'mongodb-connection-string-url': [ '3.0.2' ],
+283 silly audit   mongoose: [ '8.24.1' ],
+283 silly audit   'motion-dom': [ '12.42.2' ],
+283 silly audit   'motion-utils': [ '12.39.0' ],
+283 silly audit   mpath: [ '0.9.0' ],
+283 silly audit   mquery: [ '5.0.0' ],
+283 silly audit   ms: [ '2.1.3' ],
+283 silly audit   multer: [ '2.2.0' ],
+283 silly audit   nanoid: [ '3.3.16' ],
+283 silly audit   'napi-postinstall': [ '0.3.4' ],
+283 silly audit   'natural-compare': [ '1.4.0' ],
+283 silly audit   next: [ '16.2.10' ],
+283 silly audit   postcss: [ '8.4.31', '8.5.20' ],
+283 silly audit   'node-exports-info': [ '1.6.2' ],
+283 silly audit   'object-assign': [ '4.1.1' ],
+283 silly audit   'object-inspect': [ '1.13.4' ],
+283 silly audit   'object-keys': [ '1.1.1' ],
+283 silly audit   'object.assign': [ '4.1.7' ],
+283 silly audit   'object.entries': [ '1.1.9' ],
+283 silly audit   'object.fromentries': [ '2.0.8' ],
+283 silly audit   'object.groupby': [ '1.0.3' ],
+283 silly audit   'object.values': [ '1.2.1' ],
+283 silly audit   optionator: [ '0.9.4' ],
+283 silly audit   'own-keys': [ '1.0.1' ],
+283 silly audit   'p-limit': [ '3.1.0' ],
+283 silly audit   'p-locate': [ '5.0.0' ],
+283 silly audit   'parent-module': [ '1.0.1' ],
+283 silly audit   'path-exists': [ '4.0.0' ],
+283 silly audit   'path-key': [ '3.1.1' ],
+283 silly audit   'path-parse': [ '1.0.7' ],
+283 silly audit   picocolors: [ '1.1.1' ],
+283 silly audit   picomatch: [ '2.3.2', '4.0.5' ],
+283 silly audit   'possible-typed-array-names': [ '1.1.0' ],
+283 silly audit   'prelude-ls': [ '1.2.1' ],
+283 silly audit   'prop-types': [ '15.8.1' ],
+283 silly audit   'proxy-from-env': [ '2.1.0' ],
+283 silly audit   punycode: [ '2.3.1' ],
+283 silly audit   'queue-microtask': [ '1.2.3' ],
+283 silly audit   react: [ '19.2.7' ],
+283 silly audit   'react-dom': [ '19.2.7' ],
+283 silly audit   'react-hook-form': [ '7.82.0' ],
+283 silly audit   'react-hot-toast': [ '2.6.0' ],
+283 silly audit   'react-is': [ '16.13.1' ],
+283 silly audit   'readable-stream': [ '3.6.2' ],
+283 silly audit   'reflect.getprototypeof': [ '1.0.10' ],
+283 silly audit   'regexp.prototype.flags': [ '1.5.4' ],
+283 silly audit   resolve: [ '2.0.0-next.7' ],
+283 silly audit   'resolve-from': [ '4.0.0' ],
+283 silly audit   'resolve-pkg-maps': [ '1.0.0' ],
+283 silly audit   reusify: [ '1.1.0' ],
+283 silly audit   'run-parallel': [ '1.2.0' ],
+283 silly audit   'safe-array-concat': [ '1.1.4' ],
+283 silly audit   'safe-buffer': [ '5.2.1' ],
+283 silly audit   'safe-push-apply': [ '1.0.0' ],
+283 silly audit   'safe-regex-test': [ '1.1.0' ],
+283 silly audit   scheduler: [ '0.27.0' ],
+283 silly audit   'set-function-length': [ '1.2.2' ],
+283 silly audit   'set-function-name': [ '2.0.2' ],
+283 silly audit   'set-proto': [ '1.0.0' ],
+283 silly audit   sharp: [ '0.34.5' ],
+283 silly audit   'shebang-command': [ '2.0.0' ],
+283 silly audit   'shebang-regex': [ '3.0.0' ],
+283 silly audit   'side-channel': [ '1.1.1' ],
+283 silly audit   'side-channel-list': [ '1.0.1' ],
+283 silly audit   'side-channel-map': [ '1.0.1' ],
+283 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+283 silly audit   sift: [ '17.1.3' ],
+283 silly audit   'source-map-js': [ '1.2.1' ],
+283 silly audit   'sparse-bitfield': [ '3.0.3' ],
+283 silly audit   'stable-hash': [ '0.0.5' ],
+283 silly audit   'stop-iteration-iterator': [ '1.1.0' ],
+283 silly audit   streamsearch: [ '1.1.0' ],
+283 silly audit   string_decoder: [ '1.3.0' ],
+283 silly audit   'string.prototype.includes': [ '2.0.1' ],
+283 silly audit   'string.prototype.matchall': [ '4.0.12' ],
+283 silly audit   'string.prototype.repeat': [ '1.0.0' ],
+283 silly audit   'string.prototype.trim': [ '1.2.11' ],
+283 silly audit   'string.prototype.trimend': [ '1.0.10' ],
+283 silly audit   'string.prototype.trimstart': [ '1.0.8' ],
+283 silly audit   'strip-bom': [ '3.0.0' ],
+283 silly audit   'strip-json-comments': [ '3.1.1' ],
+283 silly audit   'styled-jsx': [ '5.1.6' ],
+283 silly audit   'supports-color': [ '7.2.0' ],
+283 silly audit   'supports-preserve-symlinks-flag': [ '1.0.0' ],
+283 silly audit   tailwindcss: [ '4.3.3' ],
+283 silly audit   tapable: [ '2.3.3' ],
+283 silly audit   tinyglobby: [ '0.2.17' ],
+283 silly audit   fdir: [ '6.5.0' ],
+283 silly audit   'to-regex-range': [ '5.0.1' ],
+283 silly audit   tr46: [ '5.1.1' ],
+283 silly audit   'ts-api-utils': [ '2.5.0' ],
+283 silly audit   'tsconfig-paths': [ '3.15.0' ],
+283 silly audit   tslib: [ '2.8.1' ],
+283 silly audit   'type-check': [ '0.4.0' ],
+283 silly audit   'type-is': [ '1.6.18' ],
+283 silly audit   'typed-array-buffer': [ '1.0.3' ],
+283 silly audit   'typed-array-byte-length': [ '1.0.3' ],
+283 silly audit   'typed-array-byte-offset': [ '1.0.4' ],
+283 silly audit   'typed-array-length': [ '1.0.8' ],
+283 silly audit   typedarray: [ '0.0.6' ],
+283 silly audit   typescript: [ '6.0.3' ],
+283 silly audit   'typescript-eslint': [ '8.65.0' ],
+283 silly audit   '@typescript-eslint/eslint-plugin': [ '8.65.0' ],
+283 silly audit   'unbox-primitive': [ '1.1.0' ],
+283 silly audit   'unrs-resolver': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-android-arm-eabi': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-android-arm64': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-darwin-arm64': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-darwin-x64': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-freebsd-x64': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-arm-gnueabihf': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-arm-musleabihf': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-arm64-gnu': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-arm64-musl': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-loong64-gnu': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-loong64-musl': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-ppc64-gnu': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-riscv64-gnu': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-riscv64-musl': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-s390x-gnu': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-x64-gnu': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-linux-x64-musl': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-openharmony-arm64': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-wasm32-wasi': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-win32-arm64-msvc': [ '1.12.2' ],
+283 silly audit   '@unrs/resolver-binding-win32-ia32-msvc': [ '1.12.2' ],
+283 silly audit   'uri-js': [ '4.4.1' ],
+283 silly audit   'util-deprecate': [ '1.0.2' ],
+283 silly audit   'webidl-conversions': [ '7.0.0' ],
+283 silly audit   'whatwg-url': [ '14.2.0' ],
+283 silly audit   which: [ '2.0.2' ],
+283 silly audit   'which-boxed-primitive': [ '1.1.1' ],
+283 silly audit   'which-builtin-type': [ '1.2.1' ],
+283 silly audit   'which-collection': [ '1.0.2' ],
+283 silly audit   'which-typed-array': [ '1.1.22' ],
+283 silly audit   'word-wrap': [ '1.2.5' ],
+283 silly audit   'yocto-queue': [ '0.1.0' ],
+283 silly audit   zod: [ '4.4.3' ],
+283 silly audit   'zod-validation-error': [ '4.0.2' ],
+283 silly audit   '@next/swc-win32-x64-msvc': [ '16.2.10' ],
+283 silly audit   '@tailwindcss/oxide-wasm32-wasi': [ '4.3.3' ]
+283 silly audit }
+284 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@next\swc-win32-arm64-msvc
+285 silly reify mark deleted [
+285 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-win32-arm64-msvc'
+285 silly reify ]
+286 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@next\swc-linux-x64-musl
+287 silly reify mark deleted [
+287 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-linux-x64-musl'
+287 silly reify ]
+288 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@next\swc-linux-x64-gnu
+289 silly reify mark deleted [
+289 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-linux-x64-gnu'
+289 silly reify ]
+290 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@next\swc-linux-arm64-musl
+291 silly reify mark deleted [
+291 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-linux-arm64-musl'
+291 silly reify ]
+292 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@next\swc-linux-arm64-gnu
+293 silly reify mark deleted [
+293 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-linux-arm64-gnu'
+293 silly reify ]
+294 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@next\swc-darwin-x64
+295 silly reify mark deleted [
+295 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-darwin-x64'
+295 silly reify ]
+296 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@next\swc-darwin-arm64
+297 silly reify mark deleted [
+297 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@next\\swc-darwin-arm64'
+297 silly reify ]
+298 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-win32-arm64-msvc
+299 silly reify mark deleted [
+299 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-win32-arm64-msvc'
+299 silly reify ]
+300 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-linux-x64-musl
+301 silly reify mark deleted [
+301 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-linux-x64-musl'
+301 silly reify ]
+302 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-linux-x64-gnu
+303 silly reify mark deleted [
+303 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-linux-x64-gnu'
+303 silly reify ]
+304 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-linux-arm64-musl
+305 silly reify mark deleted [
+305 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-linux-arm64-musl'
+305 silly reify ]
+306 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-linux-arm64-gnu
+307 silly reify mark deleted [
+307 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-linux-arm64-gnu'
+307 silly reify ]
+308 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-linux-arm-gnueabihf
+309 silly reify mark deleted [
+309 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-linux-arm-gnueabihf'
+309 silly reify ]
+310 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-freebsd-x64
+311 silly reify mark deleted [
+311 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-freebsd-x64'
+311 silly reify ]
+312 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-darwin-x64
+313 silly reify mark deleted [
+313 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-darwin-x64'
+313 silly reify ]
+314 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-darwin-arm64
+315 silly reify mark deleted [
+315 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-darwin-arm64'
+315 silly reify ]
+316 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\@tailwindcss\oxide\node_modules\@tailwindcss\oxide-android-arm64
+317 silly reify mark deleted [
+317 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\@tailwindcss\\oxide\\node_modules\\@tailwindcss\\oxide-android-arm64'
+317 silly reify ]
+318 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-win32-ia32-msvc
+319 silly reify mark deleted [
+319 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-win32-ia32-msvc'
+319 silly reify ]
+320 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-win32-arm64-msvc
+321 silly reify mark deleted [
+321 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-win32-arm64-msvc'
+321 silly reify ]
+322 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-wasm32-wasi
+323 silly reify mark deleted [
+323 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-wasm32-wasi'
+323 silly reify ]
+324 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@emnapi\runtime
+325 silly reify mark deleted [
+325 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@emnapi\\runtime'
+325 silly reify ]
+326 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-openharmony-arm64
+327 silly reify mark deleted [
+327 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-openharmony-arm64'
+327 silly reify ]
+328 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-x64-musl
+329 silly reify mark deleted [
+329 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-x64-musl'
+329 silly reify ]
+330 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-x64-gnu
+331 silly reify mark deleted [
+331 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-x64-gnu'
+331 silly reify ]
+332 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-s390x-gnu
+333 silly reify mark deleted [
+333 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-s390x-gnu'
+333 silly reify ]
+334 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-riscv64-musl
+335 silly reify mark deleted [
+335 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-riscv64-musl'
+335 silly reify ]
+336 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-riscv64-gnu
+337 silly reify mark deleted [
+337 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-riscv64-gnu'
+337 silly reify ]
+338 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-ppc64-gnu
+339 silly reify mark deleted [
+339 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-ppc64-gnu'
+339 silly reify ]
+340 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-loong64-musl
+341 silly reify mark deleted [
+341 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-loong64-musl'
+341 silly reify ]
+342 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-loong64-gnu
+343 silly reify mark deleted [
+343 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-loong64-gnu'
+343 silly reify ]
+344 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-arm64-musl
+345 silly reify mark deleted [
+345 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-arm64-musl'
+345 silly reify ]
+346 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-arm64-gnu
+347 silly reify mark deleted [
+347 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-arm64-gnu'
+347 silly reify ]
+348 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-arm-musleabihf
+349 silly reify mark deleted [
+349 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-arm-musleabihf'
+349 silly reify ]
+350 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-linux-arm-gnueabihf
+351 silly reify mark deleted [
+351 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-linux-arm-gnueabihf'
+351 silly reify ]
+352 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-freebsd-x64
+353 silly reify mark deleted [
+353 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-freebsd-x64'
+353 silly reify ]
+354 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-darwin-x64
+355 silly reify mark deleted [
+355 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-darwin-x64'
+355 silly reify ]
+356 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-darwin-arm64
+357 silly reify mark deleted [
+357 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-darwin-arm64'
+357 silly reify ]
+358 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-android-arm64
+359 silly reify mark deleted [
+359 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-android-arm64'
+359 silly reify ]
+360 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\unrs-resolver\node_modules\@unrs\resolver-binding-android-arm-eabi
+361 silly reify mark deleted [
+361 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\unrs-resolver\\node_modules\\@unrs\\resolver-binding-android-arm-eabi'
+361 silly reify ]
+362 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-win32-ia32
+363 silly reify mark deleted [
+363 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-win32-ia32'
+363 silly reify ]
+364 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-win32-arm64
+365 silly reify mark deleted [
+365 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-win32-arm64'
+365 silly reify ]
+366 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-wasm32
+367 silly reify mark deleted [
+367 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-wasm32'
+367 silly reify ]
+368 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linuxmusl-x64
+369 silly reify mark deleted [
+369 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linuxmusl-x64'
+369 silly reify ]
+370 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linuxmusl-arm64
+371 silly reify mark deleted [
+371 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linuxmusl-arm64'
+371 silly reify ]
+372 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linux-x64
+373 silly reify mark deleted [
+373 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linux-x64'
+373 silly reify ]
+374 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linux-s390x
+375 silly reify mark deleted [
+375 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linux-s390x'
+375 silly reify ]
+376 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linux-riscv64
+377 silly reify mark deleted [
+377 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linux-riscv64'
+377 silly reify ]
+378 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linux-ppc64
+379 silly reify mark deleted [
+379 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linux-ppc64'
+379 silly reify ]
+380 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linux-arm64
+381 silly reify mark deleted [
+381 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linux-arm64'
+381 silly reify ]
+382 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-linux-arm
+383 silly reify mark deleted [
+383 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-linux-arm'
+383 silly reify ]
+384 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linuxmusl-x64
+385 silly reify mark deleted [
+385 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linuxmusl-x64'
+385 silly reify ]
+386 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linuxmusl-arm64
+387 silly reify mark deleted [
+387 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linuxmusl-arm64'
+387 silly reify ]
+388 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linux-x64
+389 silly reify mark deleted [
+389 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linux-x64'
+389 silly reify ]
+390 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linux-s390x
+391 silly reify mark deleted [
+391 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linux-s390x'
+391 silly reify ]
+392 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linux-riscv64
+393 silly reify mark deleted [
+393 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linux-riscv64'
+393 silly reify ]
+394 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linux-ppc64
+395 silly reify mark deleted [
+395 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linux-ppc64'
+395 silly reify ]
+396 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linux-arm64
+397 silly reify mark deleted [
+397 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linux-arm64'
+397 silly reify ]
+398 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-linux-arm
+399 silly reify mark deleted [
+399 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-linux-arm'
+399 silly reify ]
+400 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-darwin-x64
+401 silly reify mark deleted [
+401 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-darwin-x64'
+401 silly reify ]
+402 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-libvips-darwin-arm64
+403 silly reify mark deleted [
+403 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-libvips-darwin-arm64'
+403 silly reify ]
+404 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-darwin-x64
+405 silly reify mark deleted [
+405 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-darwin-x64'
+405 silly reify ]
+406 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\sharp\node_modules\@img\sharp-darwin-arm64
+407 silly reify mark deleted [
+407 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\sharp\\node_modules\\@img\\sharp-darwin-arm64'
+407 silly reify ]
+408 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-win32-arm64-msvc
+409 silly reify mark deleted [
+409 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-win32-arm64-msvc'
+409 silly reify ]
+410 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-linux-x64-musl
+411 silly reify mark deleted [
+411 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-linux-x64-musl'
+411 silly reify ]
+412 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-linux-x64-gnu
+413 silly reify mark deleted [
+413 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-linux-x64-gnu'
+413 silly reify ]
+414 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-linux-arm64-musl
+415 silly reify mark deleted [
+415 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-linux-arm64-musl'
+415 silly reify ]
+416 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-linux-arm64-gnu
+417 silly reify mark deleted [
+417 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-linux-arm64-gnu'
+417 silly reify ]
+418 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-linux-arm-gnueabihf
+419 silly reify mark deleted [
+419 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-linux-arm-gnueabihf'
+419 silly reify ]
+420 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-freebsd-x64
+421 silly reify mark deleted [
+421 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-freebsd-x64'
+421 silly reify ]
+422 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-darwin-x64
+423 silly reify mark deleted [
+423 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-darwin-x64'
+423 silly reify ]
+424 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-darwin-arm64
+425 silly reify mark deleted [
+425 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-darwin-arm64'
+425 silly reify ]
+426 verbose reify failed optional dependency C:\My_Projects\Cell_Xchange_Web\node_modules\lightningcss\node_modules\lightningcss-android-arm64
+427 silly reify mark deleted [
+427 silly reify   'C:\\My_Projects\\Cell_Xchange_Web\\node_modules\\lightningcss\\node_modules\\lightningcss-android-arm64'
+427 silly reify ]
+428 http cache @next/swc-win32-x64-msvc@https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-16.2.10.tgz 0ms (cache hit)
+429 http cache @img/sharp-win32-x64@https://registry.npmjs.org/@img/sharp-win32-x64/-/sharp-win32-x64-0.34.5.tgz 0ms (cache hit)
+430 http cache @emnapi/runtime@https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.10.0.tgz 0ms (cache hit)
+431 silly tarball no local data for @next/swc-win32-x64-msvc@https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-16.2.10.tgz. Extracting by manifest.
+432 http cache semver@https://registry.npmjs.org/semver/-/semver-7.8.5.tgz 0ms (cache hit)
+433 silly tarball no local data for @img/sharp-win32-x64@https://registry.npmjs.org/@img/sharp-win32-x64/-/sharp-win32-x64-0.34.5.tgz. Extracting by manifest.
+434 http cache es-abstract@https://registry.npmjs.org/es-abstract/-/es-abstract-1.24.2.tgz 0ms (cache hit)
+435 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 421ms
+436 silly audit report {
+436 silly audit report   postcss: [
+436 silly audit report     {
+436 silly audit report       id: 1117015,
+436 silly audit report       url: 'https://github.com/advisories/GHSA-qx2v-qp2m-jg93',
+436 silly audit report       title: 'PostCSS has XSS via Unescaped </style> in its CSS Stringify Output',
+436 silly audit report       severity: 'moderate',
+436 silly audit report       vulnerable_versions: '<8.5.10',
+436 silly audit report       cwe: [Array],
+436 silly audit report       cvss: [Object]
+436 silly audit report     }
+436 silly audit report   ]
+436 silly audit report }
+437 silly packumentCache corgi:https://registry.npmjs.org/postcss cache-miss
+438 http cache https://registry.npmjs.org/postcss 68ms (cache hit)
+439 silly packumentCache corgi:https://registry.npmjs.org/postcss set size:349702 disposed:false
+440 silly packumentCache corgi:https://registry.npmjs.org/next cache-miss
+441 http cache https://registry.npmjs.org/next 185ms (cache hit)
+442 silly packumentCache corgi:https://registry.npmjs.org/next set size:25374844 disposed:false
+443 http fetch GET 200 https://registry.npmjs.org/@img/sharp-win32-x64/-/sharp-win32-x64-0.34.5.tgz 6837ms (cache miss)
+444 http fetch GET 200 https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-16.2.10.tgz 13723ms (cache miss)
+445 silly ADD
+446 silly ADD
+447 silly ADD
+448 silly ADD
+449 silly ADD
+450 silly ADD
+451 silly ADD
+452 silly ADD
+453 silly ADD
+454 silly ADD
+455 silly ADD
+456 silly ADD
+457 silly ADD
+458 silly ADD
+459 silly ADD
+460 silly ADD
+461 silly ADD
+462 silly ADD
+463 silly CHANGE node_modules/@next/swc-win32-x64-msvc
+464 silly REMOVE node_modules/@babel/traverse
+465 silly REMOVE node_modules/@babel/template
+466 silly REMOVE node_modules/@babel/helper-validator-option
+467 silly REMOVE node_modules/@babel/helper-module-imports
+468 silly REMOVE node_modules/@babel/helper-globals
+469 silly REMOVE node_modules/@babel/helper-compilation-targets
+470 silly REMOVE node_modules/@babel/helper-module-transforms
+471 silly REMOVE node_modules/@babel/generator
+472 silly REMOVE node_modules/@babel/compat-data
+473 silly REMOVE node_modules/@babel/code-frame
+474 silly REMOVE node_modules/yallist
+475 silly REMOVE node_modules/update-browserslist-db
+476 silly ADD
+477 silly ADD
+478 silly ADD
+479 silly ADD
+480 silly ADD
+481 silly ADD
+482 silly ADD
+483 silly ADD
+484 silly ADD
+485 silly ADD
+486 silly ADD
+487 silly ADD
+488 silly ADD
+489 silly ADD
+490 silly ADD
+491 silly ADD
+492 silly ADD
+493 silly ADD
+494 silly ADD
+495 silly ADD
+496 silly ADD
+497 silly ADD
+498 silly ADD node_modules/sharp/node_modules/@img/sharp-win32-x64
+499 silly ADD
+500 silly ADD
+501 silly ADD
+502 silly ADD
+503 silly ADD
+504 silly ADD
+505 silly ADD
+506 silly ADD
+507 silly ADD
+508 silly ADD
+509 silly ADD
+510 silly ADD
+511 silly ADD
+512 silly ADD
+513 silly ADD
+514 silly ADD
+515 silly ADD
+516 silly ADD
+517 silly ADD
+518 silly ADD
+519 silly ADD
+520 silly ADD
+521 silly ADD
+522 silly CHANGE node_modules/sharp/node_modules/semver
+523 silly REMOVE node_modules/object.groupby/node_modules/es-abstract
+524 silly REMOVE node_modules/object.fromentries/node_modules/es-abstract
+525 silly REMOVE node_modules/node-releases
+526 silly REMOVE node_modules/lru-cache
+527 silly ADD
+528 silly ADD
+529 silly ADD
+530 silly ADD
+531 silly ADD
+532 silly ADD
+533 silly ADD
+534 silly ADD
+535 silly ADD
+536 silly ADD
+537 silly REMOVE node_modules/json5
+538 silly REMOVE node_modules/jsesc
+539 silly REMOVE node_modules/gensync
+540 silly REMOVE node_modules/eslint-plugin-react-hooks/node_modules/@babel/types
+541 silly REMOVE node_modules/eslint-plugin-react-hooks/node_modules/@babel/helpers
+542 silly REMOVE node_modules/eslint-plugin-react-hooks/node_modules/@babel/core
+543 silly REMOVE node_modules/eslint-config-next/node_modules/es-abstract
+544 silly REMOVE node_modules/escalade
+545 silly REMOVE node_modules/electron-to-chromium
+546 silly REMOVE node_modules/convert-source-map
+547 silly REMOVE node_modules/browserslist
+548 silly REMOVE node_modules/array.prototype.flatmap/node_modules/es-abstract
+549 silly REMOVE node_modules/array.prototype.flat/node_modules/es-abstract
+550 silly REMOVE node_modules/array.prototype.findlastindex/node_modules/es-abstract
+551 silly REMOVE node_modules/array-includes/node_modules/es-abstract
+552 silly REMOVE node_modules/@img/sharp-win32-x64
+553 silly REMOVE node_modules/@img/sharp-win32-ia32
+554 silly REMOVE node_modules/@img/sharp-win32-arm64
+555 silly REMOVE node_modules/@img/sharp-wasm32
+556 silly REMOVE node_modules/@img/sharp-linuxmusl-x64
+557 silly REMOVE node_modules/@img/sharp-linuxmusl-arm64
+558 silly REMOVE node_modules/@img/sharp-linux-x64
+559 silly REMOVE node_modules/@img/sharp-linux-s390x
+560 silly REMOVE node_modules/@img/sharp-linux-riscv64
+561 silly REMOVE node_modules/@img/sharp-linux-ppc64
+562 silly REMOVE node_modules/@img/sharp-linux-arm64
+563 silly REMOVE node_modules/@img/sharp-linux-arm
+564 silly REMOVE node_modules/@img/sharp-libvips-linuxmusl-x64
+565 silly REMOVE node_modules/@img/sharp-libvips-linuxmusl-arm64
+566 silly REMOVE node_modules/@img/sharp-libvips-linux-x64
+567 silly REMOVE node_modules/@img/sharp-libvips-linux-s390x
+568 silly REMOVE node_modules/@img/sharp-libvips-linux-riscv64
+569 silly REMOVE node_modules/@img/sharp-libvips-linux-ppc64
+570 silly REMOVE node_modules/@img/sharp-libvips-linux-arm64
+571 silly REMOVE node_modules/@img/sharp-libvips-linux-arm
+572 silly REMOVE node_modules/@img/sharp-libvips-darwin-x64
+573 silly REMOVE node_modules/@img/sharp-libvips-darwin-arm64
+574 silly REMOVE node_modules/@img/sharp-darwin-x64
+575 silly REMOVE node_modules/@img/sharp-darwin-arm64
+576 silly REMOVE node_modules/@babel/types
+577 silly REMOVE node_modules/@babel/core
+578 silly CHANGE node_modules/es-abstract
+579 silly unfinished npm timer idealTree:node_modules/@babel/helper-module-transforms 1784611676388
+580 verbose cwd C:\My_Projects\Cell_Xchange_Web
+581 verbose os Windows_NT 10.0.26200
+582 verbose node v22.21.1
+583 verbose npm  v10.9.4
+584 verbose exit 0
+585 info ok

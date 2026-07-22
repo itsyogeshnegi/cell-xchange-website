@@ -1,0 +1,44 @@
+{
+  "name": "mobile-hub",
+  "version": "1.0.0",
+  "private": true,
+  "overrides": {
+    "postcss": "^8.5.10"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "seed:admin": "node scripts/seed-admin.mjs"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.7.0",
+    "framer-motion": "^12.23.12",
+    "jose": "^6.0.12",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.468.0",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2",
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.82.0",
+    "react-hot-toast": "^2.6.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@eslint/eslintrc": "^3.3.1",
+    "@next/swc-win32-x64-msvc": "^16.2.10",
+    "@tailwindcss/postcss": "^4.1.13",
+    "es-abstract": "^1.24.2",
+    "eslint": "^9.35.0",
+    "eslint-config-next": "^16.0.0",
+    "lightningcss-win32-x64-msvc": "^1.30.2",
+    "tailwindcss": "^4.1.13"
+  }
+}

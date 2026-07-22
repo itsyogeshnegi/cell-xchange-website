@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="container-shell grid min-h-[70vh] animate-pulse place-items-center"><div className="text-center"><div className="mx-auto h-10 w-10 rounded-full border-4 border-[#d9f99d] border-t-[#173f2c] animate-spin"/><p className="mt-4 text-xs font-bold text-[#727a74]">Loading Mobile Hub</p></div></div>}
