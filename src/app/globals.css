@@ -36,14 +36,14 @@ body {
   color: var(--ink);
   background: #fff;
   font-size: 90%;
-  font-family: var(--font-playwrite-nz-basic), cursive;
+  font-family: var(--font-plus-jakarta-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   text-rendering: optimizeLegibility;
 }
 button, a, input, select, textarea { font: inherit; -webkit-tap-highlight-color: transparent; }
 button, a { transition: all .2s ease; }
 ::selection { background: #cbd7ff; color: var(--ink); }
 .container-shell { width: min(1240px, calc(100% - 32px)); margin-inline: auto; }
-.display { font-family: var(--font-playwrite-nz-basic), cursive; letter-spacing: -.05em; }
+.display { font-family: var(--font-plus-jakarta-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; letter-spacing: -.03em; }
 .eyebrow { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; }
 .soft-card { border: 1px solid var(--line); border-radius: 22px; background: #fff; box-shadow: 0 12px 35px rgba(16, 20, 25, .055); }
 .input {

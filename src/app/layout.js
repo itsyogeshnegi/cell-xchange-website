@@ -1,12 +1,11 @@
-import { Playwrite_NZ_Basic } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const playwrite = Playwrite_NZ_Basic({
-  adjustFontFallback: false,
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
   display: "swap",
-  variable: "--font-playwrite-nz-basic",
-  weight: "variable",
+  variable: "--font-plus-jakarta-sans",
 });
 
 export const metadata = {
@@ -16,4 +15,14 @@ export const metadata = {
   openGraph: { title: "cell.xchange", description: "The right phone. No sales noise.", type: "website" },
 };
 
-export default function RootLayout({ children }) { return <html lang="en" className={playwrite.variable}><body suppressHydrationWarning><Toaster position="top-right" toastOptions={{ style: { borderRadius: 12, fontSize: 13 } }}/>{children}</body></html>; }
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={plusJakartaSans.variable}>
+      <body>
+        <Toaster position="top-right" toastOptions={{ style: { borderRadius: 12, fontSize: 13 } }} />
+        {children}
+      </body>
+    </html>
+  );
+}
+
