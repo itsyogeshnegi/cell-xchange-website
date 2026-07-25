@@ -88,6 +88,8 @@ export async function GET(request) {
         "Condition": item.condition || "New",
         "IMEI / Serial": item.imei || "N/A",
         "Website Visible": item.visible !== false ? "Yes" : "No",
+        "Image URL": item.images?.[0]?.url || "N/A",
+        "All Image URLs": item.images?.length ? item.images.map((img) => img.url).join(", ") : "N/A",
         "Created Date": item.createdAt ? new Date(item.createdAt).toISOString().split("T")[0] : "-",
       };
     });
