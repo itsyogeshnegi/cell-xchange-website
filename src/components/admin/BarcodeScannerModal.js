@@ -33,14 +33,31 @@ export default function BarcodeScannerModal({ open, onClose, onDetected }) {
         if (!window.isSecureContext && window.location.hostname !== "localhost") {
           throw new Error("Camera scanning requires HTTPS.");
         }
-        const { BrowserMultiFormatReader } = await import("@zxing/browser");
-        const reader = new BrowserMultiFormatReader();
+        const [{ BrowserMultiFormatReader }, { BarcodeFormat, DecodeHintType }] = await Promise.all([
+          import("@zxing/browser"),
+          import("@zxing/library"),
+        ]);
+        const hints = new Map();
+        hints.set(DecodeHintType.POSSIBLE_FORMATS, [
+          BarcodeFormat.CODE_128,
+          BarcodeFormat.CODE_39,
+          BarcodeFormat.CODE_93,
+          BarcodeFormat.ITF,
+          BarcodeFormat.CODABAR,
+        ]);
+        hints.set(DecodeHintType.ALLOWED_LENGTHS, Int32Array.from([15]));
+        const reader = new BrowserMultiFormatReader(hints, {
+          delayBetweenScanAttempts: 60,
+          delayBetweenScanSuccess: 150,
+          tryPlayVideoTimeout: 3000,
+        });
         controls = await reader.decodeFromConstraints({
           audio: false,
           video: {
             facingMode: { ideal: "environment" },
-            width: { ideal: 1920 },
-            height: { ideal: 1080 },
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            advanced: [{ focusMode: "continuous" }],
           },
         }, videoElement, (result) => {
           if (!active || detectedRef.current || !result) return;
