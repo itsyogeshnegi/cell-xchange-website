@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={playwrite.variable}>
+    <html lang="en" className={playwrite.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <Toaster position="top-right" toastOptions={{ style: { borderRadius: 12, fontSize: 13 } }} />
         {children}
