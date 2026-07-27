@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Camera, LoaderCircle, RotateCw, ScanLine, X } from "lucide-react";
 
-export default function BarcodeScannerModal({ open, onClose, onDetected }) {
+export default function BarcodeScannerModal({ open, onClose, onDetected, targetLabel = "IMEI" }) {
   const videoRef = useRef(null);
   const detectedRef = useRef(false);
   const onCloseRef = useRef(onClose);
@@ -103,7 +103,7 @@ export default function BarcodeScannerModal({ open, onClose, onDetected }) {
   return <div className="fixed inset-0 z-[150] grid place-items-center bg-black/75 p-3 backdrop-blur-[2px]" role="dialog" aria-modal="true" aria-labelledby="scanner-title">
     <div className="w-full max-w-xl overflow-hidden rounded-[24px] bg-white shadow-2xl">
       <div className="flex items-start justify-between gap-4 border-b px-5 py-4">
-        <div><h2 id="scanner-title" className="flex items-center gap-2 text-base font-black"><ScanLine size={19}/>Scan IMEI barcode</h2><p className="mt-1 text-[10px] text-[#747c76]">The detected 15-digit number will fill the product form automatically.</p></div>
+        <div><h2 id="scanner-title" className="flex items-center gap-2 text-base font-black"><ScanLine size={19}/>Scan {targetLabel} barcode</h2><p className="mt-1 text-[10px] text-[#747c76]">The detected 15-digit number will fill the selected product field automatically.</p></div>
         <button type="button" onClick={onClose} aria-label="Close barcode scanner" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#f0f2f0]"><X size={16}/></button>
       </div>
 

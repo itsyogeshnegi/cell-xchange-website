@@ -68,7 +68,7 @@ export async function getPhone(id, { admin = false } = {}) {
   if (!admin) return readCachedPhone(id);
   await connectDB();
   const filter = mongoose.isValidObjectId(id) ? { _id: id } : { slug: id };
-  return serialize(await Phone.findOne(filter).select(`${PUBLIC_FIELDS} imei`).lean().maxTimeMS(5000));
+  return serialize(await Phone.findOne(filter).select(`${PUBLIC_FIELDS} imei imei2`).lean().maxTimeMS(5000));
 }
 
 export async function getPhonePage({ page = 1, limit = 12, q = "", brand = "", storage = "", sort = "newest", admin = false } = {}) {

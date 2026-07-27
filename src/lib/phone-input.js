@@ -15,7 +15,9 @@ export function parsePhoneForm(form) {
     color: safeString(form.get("color")), storage: safeString(form.get("storage")), ram: safeString(form.get("ram")),
     battery: safeString(form.get("battery")), processor: safeString(form.get("processor")), display: safeString(form.get("display")), camera: safeString(form.get("camera")),
     warrantyStatus: safeString(form.get("warrantyStatus"), 120) || "Not specified",
-    condition: safeString(form.get("condition")) || undefined, imei: safeString(form.get("imei"), 32) || undefined,
+    condition: safeString(form.get("condition")) || undefined,
+    imei: safeString(form.get("imei"), 15) || undefined,
+    imei2: safeString(form.get("imei2"), 15) || undefined,
     featured: form.get("featured") === "true", latest: form.get("latest") === "true", visible: form.get("visible") !== "false",
   };
 }

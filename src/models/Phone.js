@@ -12,7 +12,9 @@ const phoneSchema = new mongoose.Schema({
   battery: String, processor: String, display: String, camera: String,
   warrantyStatus: { type: String, trim: true, default: "Not specified", maxlength: 120 },
   condition: { type: String, enum: ["New", "Excellent", "Good", "Fair"], required: true },
-  imei: { type: String, sparse: true, match: [/^\d{15}$/, "IMEI must be exactly 15 digits"] }, stock: { type: Number, min: 0, default: 1 },
+  imei: { type: String, sparse: true, match: [/^\d{15}$/, "IMEI 1 must be exactly 15 digits"] },
+  imei2: { type: String, sparse: true, match: [/^\d{15}$/, "IMEI 2 must be exactly 15 digits"] },
+  stock: { type: Number, min: 0, default: 1 },
   featured: { type: Boolean, default: false }, latest: { type: Boolean, default: false }, visible: { type: Boolean, default: true, index: true }, images: { type: [imageSchema], validate: { validator(items) { return !this.isNew || items.length >= 2; }, message: "At least two images are required" } },
 }, { timestamps: true });
 phoneSchema.index({ brand: "text", model: "text", description: "text" });
