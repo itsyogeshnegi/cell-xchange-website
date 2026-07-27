@@ -7,7 +7,7 @@ export const getStoreProfile = cache(async () => {
   if (!process.env.MONGODB_URI) return store;
   try {
     await connectDB();
-    const saved = await StoreSettings.findOne({ key: "primary" }).select("name email phoneDisplay hours -_id").lean().maxTimeMS(5000);
+    const saved = await StoreSettings.findOne({ key: "primary" }).select("-_id -__v -key -createdAt -updatedAt").lean().maxTimeMS(5000);
     return createStoreProfile(saved || {});
   } catch (error) {
     console.error("Could not load store settings", error);

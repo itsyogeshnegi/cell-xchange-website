@@ -4,7 +4,7 @@ import { connectDB } from "@/lib/db";
 import { phones as demoPhones } from "@/lib/demo-data";
 import Phone from "@/models/Phone";
 
-const PUBLIC_FIELDS = "category brand model slug description price discount color storage ram battery processor display camera condition stock featured latest visible images createdAt updatedAt";
+const PUBLIC_FIELDS = "category brand model slug description price color storage ram battery processor display camera warrantyStatus condition stock featured latest visible images createdAt updatedAt";
 const serialize = (value) => JSON.parse(JSON.stringify(value));
 
 const readCachedPhones = unstable_cache(async (filter, limit) => {
@@ -53,7 +53,7 @@ export async function getPhone(id, { admin = false } = {}) {
   if (!admin) return readCachedPhone(id);
   await connectDB();
   const filter = mongoose.isValidObjectId(id) ? { _id: id } : { slug: id };
-  return serialize(await Phone.findOne(filter).lean().maxTimeMS(5000));
+  return serialize(await Phone.findOne(filter).select(`${PUBLIC_FIELDS} imei`).lean().maxTimeMS(5000));
 }
 
 export async function getPhonePage({ page = 1, limit = 12, q = "", brand = "", storage = "", sort = "newest", admin = false } = {}) {
