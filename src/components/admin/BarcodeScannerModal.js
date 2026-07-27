@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Camera, LoaderCircle, ScanLine, X } from "lucide-react";
+import { Camera, LoaderCircle, RotateCw, ScanLine, X } from "lucide-react";
 
 export default function BarcodeScannerModal({ open, onClose, onDetected }) {
   const videoRef = useRef(null);
@@ -10,6 +10,7 @@ export default function BarcodeScannerModal({ open, onClose, onDetected }) {
   const onDetectedRef = useRef(onDetected);
   const [status, setStatus] = useState("starting");
   const [message, setMessage] = useState("");
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
   useEffect(() => { onDetectedRef.current = onDetected; }, [onDetected]);
@@ -78,7 +79,7 @@ export default function BarcodeScannerModal({ open, onClose, onDetected }) {
       const stream = videoElement?.srcObject;
       stream?.getTracks?.().forEach((track) => track.stop());
     };
-  }, [open]);
+  }, [open, retryKey]);
 
   if (!open) return null;
 
@@ -103,7 +104,7 @@ export default function BarcodeScannerModal({ open, onClose, onDetected }) {
 
       <div className="flex items-start gap-3 px-5 py-4">
         <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${status === "error" ? "bg-red-50 text-red-600" : status === "success" ? "bg-green-50 text-green-700" : "bg-[#eef4ef] text-[#173f2c]"}`}><Camera size={17}/></span>
-        <div><p className="text-xs font-black">{status === "error" ? "Camera unavailable" : status === "success" ? "Barcode detected" : "Scanning…"}</p><p className={`mt-1 text-[10px] leading-5 ${status === "error" ? "text-red-600" : "text-[#747c76]"}`}>{message}</p></div>
+        <div className="min-w-0 flex-1"><p className="text-xs font-black">{status === "error" ? "Camera unavailable" : status === "success" ? "Barcode detected" : "Scanning…"}</p><p className={`mt-1 text-[10px] leading-5 ${status === "error" ? "text-red-600" : "text-[#747c76]"}`}>{message}</p>{status === "error" && <button type="button" onClick={() => setRetryKey((key) => key + 1)} className="mt-3 inline-flex items-center gap-2 rounded-full border border-red-200 px-4 py-2 text-[10px] font-bold text-red-700"><RotateCw size={13}/>Try camera again</button>}</div>
       </div>
     </div>
   </div>;
