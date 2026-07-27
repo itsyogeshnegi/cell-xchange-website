@@ -16,4 +16,13 @@ export const metadata = {
   openGraph: { title: "cell.xchange", description: "The right phone. No sales noise.", type: "website" },
 };
 
-export default function RootLayout({ children }) { return <html lang="en" className={playwrite.variable}><body suppressHydrationWarning><Toaster position="top-right" toastOptions={{ style: { borderRadius: 12, fontSize: 13 } }}/>{children}</body></html>; }
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={playwrite.variable}>
+      <body suppressHydrationWarning>
+        <Toaster position="top-right" toastOptions={{ style: { borderRadius: 12, fontSize: 13 } }} />
+        {children}
+      </body>
+    </html>
+  );
+}
