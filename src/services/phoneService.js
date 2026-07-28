@@ -4,8 +4,27 @@ import { connectDB } from "@/lib/db";
 import { phones as demoPhones } from "@/lib/demo-data";
 import Phone from "@/models/Phone";
 
-const PUBLIC_FIELDS = "category brand model slug description price color storage ram battery processor display camera warrantyStatus condition stock featured latest visible images createdAt updatedAt";
+const PUBLIC_FIELDS = "category brand model slug description price color storage ram battery processor display camera accessories warrantyStatus condition status stock featured latest visible images createdAt updatedAt";
 const serialize = (value) => JSON.parse(JSON.stringify(value));
+
+function applyDeviceFilter(filter, device) {
+  if (device === "Apple") filter.brand = "Apple";
+  if (device === "Android") { filter.category = "Phone"; filter.brand = { $ne: "Apple" }; }
+  if (device === "iPad") { filter.category = "iPad & Tabs"; filter.brand = "Apple"; }
+  if (device === "Smartwatch") filter.category = "Smartwatch";
+  if (device === "Tabs") { filter.category = "iPad & Tabs"; filter.brand = { $ne: "Apple" }; }
+  if (device === "Accessories") filter.category = "Accessories";
+}
+
+function matchesDevice(phone, device) {
+  if (!device) return true;
+  if (device === "Apple") return phone.brand === "Apple";
+  if (device === "Android") return phone.category === "Phone" && phone.brand !== "Apple";
+  if (device === "iPad") return phone.category === "iPad & Tabs" && phone.brand === "Apple";
+  if (device === "Smartwatch") return phone.category === "Smartwatch";
+  if (device === "Tabs") return phone.category === "iPad & Tabs" && phone.brand !== "Apple";
+  return device === "Accessories" && phone.category === "Accessories";
+}
 
 const readCachedPhones = (filter, limit) =>
   unstable_cache(
@@ -38,6 +57,7 @@ const readCachedPage = (options) =>
       if (options.q) filter.$text = { $search: options.q };
       if (options.brand) filter.brand = options.brand;
       if (options.storage) filter.storage = options.storage;
+      applyDeviceFilter(filter, options.device);
       const sort = options.sortName === "price-asc" ? { price: 1, _id: 1 } : options.sortName === "price-desc" ? { price: -1, _id: -1 } : { createdAt: -1, _id: -1 };
       const [items, total] = await Promise.all([
         Phone.find(filter).select(PUBLIC_FIELDS).sort(sort).skip((options.page - 1) * options.limit).limit(options.limit).lean().maxTimeMS(5000),
@@ -71,10 +91,10 @@ export async function getPhone(id, { admin = false } = {}) {
   return serialize(await Phone.findOne(filter).select(`${PUBLIC_FIELDS} imei imei2`).lean().maxTimeMS(5000));
 }
 
-export async function getPhonePage({ page = 1, limit = 12, q = "", brand = "", storage = "", sort = "newest", admin = false } = {}) {
-  const options = { page: Math.min(500, Math.max(1, page)), limit: Math.min(24, Math.max(1, limit)), q, brand, storage, sortName: sort, admin };
+export async function getPhonePage({ page = 1, limit = 12, q = "", brand = "", storage = "", sort = "newest", device = "", admin = false } = {}) {
+  const options = { page: Math.min(500, Math.max(1, page)), limit: Math.min(24, Math.max(1, limit)), q, brand, storage, sortName: sort, device, admin };
   if (!process.env.MONGODB_URI) {
-    let items = demoPhones.filter((phone) => (!q || `${phone.brand} ${phone.model}`.toLowerCase().includes(q.toLowerCase())) && (!brand || phone.brand === brand) && (!storage || phone.storage === storage));
+    let items = demoPhones.filter((phone) => (!q || `${phone.brand} ${phone.model}`.toLowerCase().includes(q.toLowerCase())) && (!brand || phone.brand === brand) && (!storage || phone.storage === storage) && matchesDevice(phone, device));
     items.sort((a, b) => sort === "price-asc" ? a.price - b.price : sort === "price-desc" ? b.price - a.price : new Date(b.createdAt) - new Date(a.createdAt));
     const total = items.length;
     items = items.slice((options.page - 1) * options.limit, options.page * options.limit);

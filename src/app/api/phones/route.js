@@ -6,6 +6,28 @@ import { phones as demoPhones } from "@/lib/demo-data";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { parsePhoneForm, publicPhoneFields, safeString, validateImageFiles } from "@/lib/phone-input";
 import Phone from "@/models/Phone";
+import { registerBrand } from "@/services/brandService";
+
+const deviceFilters = ["Apple", "Android", "iPad", "Smartwatch", "Tabs", "Accessories"];
+
+function applyDeviceFilter(filter, device) {
+  if (device === "Apple") filter.brand = "Apple";
+  if (device === "Android") { filter.category = "Phone"; filter.brand = { $ne: "Apple" }; }
+  if (device === "iPad") { filter.category = "iPad & Tabs"; filter.brand = "Apple"; }
+  if (device === "Smartwatch") filter.category = "Smartwatch";
+  if (device === "Tabs") { filter.category = "iPad & Tabs"; filter.brand = { $ne: "Apple" }; }
+  if (device === "Accessories") filter.category = "Accessories";
+}
+
+function matchesDevice(phone, device) {
+  if (!device) return true;
+  if (device === "Apple") return phone.brand === "Apple";
+  if (device === "Android") return phone.category === "Phone" && phone.brand !== "Apple";
+  if (device === "iPad") return phone.category === "iPad & Tabs" && phone.brand === "Apple";
+  if (device === "Smartwatch") return phone.category === "Smartwatch";
+  if (device === "Tabs") return phone.category === "iPad & Tabs" && phone.brand !== "Apple";
+  return device === "Accessories" && phone.category === "Accessories";
+}
 
 function cached(data) {
   const response = ok(data);
@@ -22,11 +44,22 @@ export async function GET(request) {
     const q = safeString(searchParams.get("q"));
     const brand = safeString(searchParams.get("brand"));
     const storage = safeString(searchParams.get("storage"));
+    const status = safeString(searchParams.get("status"));
+    const device = safeString(searchParams.get("device"));
     const admin = searchParams.get("admin") === "1";
     if (admin) await requireAdmin();
+    if (status && !["Available", "Sold", "Block"].includes(status)) throw Object.assign(new Error("Invalid product status"), { status: 422 });
+    if (device && !deviceFilters.includes(device)) throw Object.assign(new Error("Invalid device filter"), { status: 422 });
 
     if (!process.env.MONGODB_URI) {
-      let items = demoPhones.filter((phone) => (!q || `${phone.brand} ${phone.model}`.toLowerCase().includes(q.toLowerCase())) && (!brand || phone.brand === brand) && (!storage || phone.storage === storage));
+      let items = demoPhones.filter((phone) => {
+        const productStatus = phone.status || (phone.stock > 0 ? "Available" : "Sold");
+        return (!q || `${phone.brand} ${phone.model}`.toLowerCase().includes(q.toLowerCase()))
+          && (!brand || phone.brand === brand)
+          && (!storage || phone.storage === storage)
+          && (!status || productStatus === status)
+          && matchesDevice(phone, device);
+      });
       const total = items.length;
       items = items.slice((page - 1) * limit, page * limit);
       return cached({ items, total, page, pages: Math.max(1, Math.ceil(total / limit)) });
@@ -37,6 +70,8 @@ export async function GET(request) {
     if (q) filter.$text = { $search: q };
     if (brand) filter.brand = brand;
     if (storage) filter.storage = storage;
+    if (status) filter.status = status;
+    applyDeviceFilter(filter, device);
     const sortName = searchParams.get("sort");
     const sort = sortName === "price-asc" ? { price: 1, _id: 1 } : sortName === "price-desc" ? { price: -1, _id: -1 } : { createdAt: -1, _id: -1 };
     const [items, total] = await Promise.all([
@@ -56,9 +91,11 @@ export async function POST(request) {
     const form = await request.formData();
     const files = form.getAll("images").filter((file) => file?.size);
     validateImageFiles(files);
+    const values = parsePhoneForm(form);
+    await registerBrand(values.brand, values.category);
     images = await Promise.all(files.map(uploadImage));
     await connectDB();
-    const phone = await Phone.create({ ...parsePhoneForm(form), images });
+    const phone = await Phone.create({ ...values, images });
     revalidateTag("phones", "max");
     return ok(phone, 201);
   } catch (error) {

@@ -5,7 +5,7 @@ cloudinary.config({ cloud_name: process.env.CLOUDINARY_CLOUD_NAME, api_key: proc
 export function uploadImage(file) {
   return new Promise(async (resolve, reject) => {
     const buffer = Buffer.from(await file.arrayBuffer());
-    const stream = cloudinary.uploader.upload_stream({ folder: "mobile-hub/phones", resource_type: "image", transformation: [{ width: 1600, height: 1600, crop: "limit", quality: "auto", fetch_format: "auto" }] }, (error, result) => error ? reject(error) : resolve({ url: result.secure_url, publicId: result.public_id }));
+    const stream = cloudinary.uploader.upload_stream({ folder: "mobile-hub/phones", resource_type: "image", transformation: [{ width: 3000, height: 3000, crop: "limit", quality: "auto:best", fetch_format: "auto" }] }, (error, result) => error ? reject(error) : resolve({ url: result.secure_url, publicId: result.public_id }));
     stream.end(buffer);
   });
 }

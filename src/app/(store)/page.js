@@ -11,16 +11,17 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import FeaturedCarousel from "@/components/phones/FeaturedCarousel";
-import { brands } from "@/lib/demo-data";
 import { getPhones } from "@/services/phoneService";
 import { getStoreProfile } from "@/services/settingsService";
 
 export const dynamic = "force-dynamic";
+const deviceFilters = ["Apple", "Android", "iPad", "Smartwatch", "Tabs", "Accessories"];
 
 export default async function HomePage() {
   const store = await getStoreProfile();
   const phones = await getPhones({}, 8);
   const stockUpdatesUrl = `https://wa.me/${store.phoneE164.replace("+", "")}?text=${encodeURIComponent(`Hi ${store.name}, please share your latest phone stock and offers.`)}`;
+  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(`${store.name}, ${store.addressLine1}, ${store.addressLine2}`)}&output=embed`;
 
   return (
     <>
@@ -57,10 +58,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <nav aria-label="Shop by brand" className="border-b border-[#e2e2df] py-6">
+      <nav aria-label="Shop by device family" className="border-b border-[#e2e2df] py-6">
         <div className="container-shell flex items-center gap-8 overflow-x-auto no-scrollbar">
-          <span className="eyebrow shrink-0 text-[#9a9ca0]">Shop by brand</span>
-          {brands.map((brand) => <Link key={brand} href={`/phones?brand=${encodeURIComponent(brand)}`} className="shrink-0 text-sm font-semibold text-[#4f5258] hover:text-[#1f55ff]">{brand}</Link>)}
+          <span className="eyebrow shrink-0 text-[#9a9ca0]">Shop by device</span>
+          {deviceFilters.map((device) => <Link key={device} href={`/phones?device=${encodeURIComponent(device)}`} className="shrink-0 text-sm font-semibold text-[#4f5258] hover:text-[#1f55ff]">{device === "Smartwatch" ? "Smart watch" : device}</Link>)}
         </div>
       </nav>
 
@@ -104,8 +105,19 @@ export default async function HomePage() {
             <p className="mt-6 max-w-lg text-sm leading-7 text-[#666970]">{store.visitDescription}</p>
             <div className="mt-9 flex flex-wrap gap-3"><a href={store.mapUrl} target="_blank" rel="noreferrer" className="bg-[#1f55ff] px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white">{store.directionsCta}</a><a href={`tel:${store.phoneE164}`} className="border border-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em]">Call {store.phoneDisplay}</a></div>
           </div>
-          <div className="technical-grid min-h-72 border-t border-[#dedfdd] bg-[#f2f2ef] p-7 lg:border-l lg:border-t-0">
-            <div className="flex h-full flex-col justify-end border border-black/10 bg-white/90 p-7 backdrop-blur"><MapPin size={20} /><p className="eyebrow mt-10 text-[#74777d]">Address</p><p className="mt-4 text-xl font-semibold leading-8">{store.addressLine1}</p><p className="mt-3 text-sm leading-6 text-[#65686e]">{store.addressLine2}</p></div>
+          <div className="relative min-h-[360px] overflow-hidden border-t border-[#dedfdd] bg-[#f2f2ef] lg:min-h-full lg:border-l lg:border-t-0">
+            <iframe
+              src={mapEmbedUrl}
+              title={`${store.name} location on Google Maps`}
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <a href={store.mapUrl} target="_blank" rel="noreferrer" className="absolute bottom-4 left-4 right-4 flex items-start gap-3 border border-black/10 bg-white/95 p-4 shadow-lg backdrop-blur sm:bottom-6 sm:left-6 sm:right-auto sm:max-w-sm">
+              <MapPin size={18} className="mt-0.5 shrink-0"/>
+              <span><strong className="block text-xs">{store.addressLine1}</strong><span className="mt-1 block text-[10px] leading-5 text-[#65686e]">{store.addressLine2}</span></span>
+            </a>
           </div>
         </div>
       </section>

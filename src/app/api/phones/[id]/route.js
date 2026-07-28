@@ -7,6 +7,7 @@ import { phones as demoPhones } from "@/lib/demo-data";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { parsePhoneForm, publicPhoneFields, validateImageFiles } from "@/lib/phone-input";
 import Phone from "@/models/Phone";
+import { registerBrand } from "@/services/brandService";
 
 const findFilter = (id) => mongoose.isValidObjectId(id) ? { _id: id } : { slug: id };
 
@@ -45,9 +46,11 @@ export async function PUT(request, { params }) {
     const form = await request.formData();
     const files = form.getAll("images").filter((file) => file?.size);
     validateImageFiles(files, false);
+    const values = parsePhoneForm(form);
+    await registerBrand(values.brand, values.category);
     const previousImages = current.images.map((image) => image.toObject());
     if (files.length) uploaded = await Promise.all(files.map(uploadImage));
-    Object.assign(current, { ...parsePhoneForm(form), images: uploaded.length ? uploaded : current.images });
+    Object.assign(current, { ...values, images: uploaded.length ? uploaded : current.images });
     await current.save();
     if (uploaded.length) await deleteImages(previousImages).catch(() => {});
     revalidateTag("phones", "max");
