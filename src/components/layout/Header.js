@@ -30,9 +30,9 @@ export default function Header({ profile = store }) {
     <div className="container-shell flex h-[68px] items-center justify-between">
       <Logo logo={profile.brandLogo} name={profile.name}/>
       <nav className="hidden items-center gap-9 md:flex">{links.map(([href, label]) => <Link key={href} href={href} className={`text-[12px] font-semibold tracking-[.01em] ${path === href || (href === "/phones" && path.startsWith("/phones/")) ? "text-black" : "text-[#73767c] hover:text-black"}`}>{label}</Link>)}</nav>
-      <div className="flex items-center gap-1.5"><Link href="/phones" aria-label="Search phones" className="grid h-10 w-10 place-items-center rounded-full hover:bg-[#f2f2f0]"><Search size={17}/></Link><Link href="/login" className="hidden border border-black px-4 py-2.5 text-[10px] font-bold uppercase tracking-[.12em] hover:bg-black hover:text-white sm:block">Staff login</Link><button aria-label="Toggle menu" onClick={() => setOpen((value) => !value)} className="grid h-10 w-10 place-items-center rounded-full bg-[#f2f2f0] md:hidden">{open ? <X size={18}/> : <Menu size={18}/>}</button></div>
+      <div className="flex items-center gap-1.5"><Link href="/phones" aria-label="Search phones" className="grid h-10 w-10 place-items-center rounded-full hover:bg-[#f2f2f0]"><Search size={17}/></Link><button aria-label="Toggle menu" onClick={() => setOpen((value) => !value)} className="grid h-10 w-10 place-items-center rounded-full bg-[#f2f2f0] md:hidden">{open ? <X size={18}/> : <Menu size={18}/>}</button></div>
     </div>
-    {open && <nav className="container-shell grid gap-1 border-t border-black/[.06] py-4 md:hidden">{links.map(([href, label]) => <Link onClick={() => setOpen(false)} key={href} href={href} className="border-b border-black/[.06] px-1 py-3 text-sm font-semibold">{label}</Link>)}<Link href="/login" className="mt-3 bg-black px-4 py-3 text-center text-xs font-bold uppercase tracking-wider text-white">Staff login</Link></nav>}
+    {open && <nav className="container-shell grid gap-1 border-t border-black/[.06] py-4 md:hidden">{links.map(([href, label]) => <Link onClick={() => setOpen(false)} key={href} href={href} className="border-b border-black/[.06] px-1 py-3 text-sm font-semibold">{label}</Link>)}</nav>}
     {profile.offerBarEnabled && profile.offerBarText && <OfferTicker text={profile.offerBarText}/>}
   </header>;
 }
