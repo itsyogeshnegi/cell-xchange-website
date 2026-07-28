@@ -9,6 +9,19 @@ import { store } from "@/lib/store";
 
 const links = [["/phones", "Shop devices"], ["/about", "Our store"], ["/about#contact", "Visit us"]];
 
+function OfferTicker({ text }) {
+  return <div className="offer-ticker border-t border-white/10 bg-[#173f2c] text-white" role="region" aria-label="Current offers">
+    <span className="sr-only">{text}</span>
+    <div className="offer-ticker-track h-8 items-center text-[9px] font-bold uppercase tracking-[.14em]" aria-hidden="true">
+      {[0, 1].map((copy) => <div key={copy} className="offer-ticker-group">
+        {[0, 1, 2].map((item) => <span key={item} className="flex shrink-0 items-center gap-12 whitespace-nowrap px-6">
+          {text}<i className="not-italic text-[#f5d66f]">◆</i>
+        </span>)}
+      </div>)}
+    </div>
+  </div>;
+}
+
 export default function Header({ profile = store }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
@@ -20,5 +33,6 @@ export default function Header({ profile = store }) {
       <div className="flex items-center gap-1.5"><Link href="/phones" aria-label="Search phones" className="grid h-10 w-10 place-items-center rounded-full hover:bg-[#f2f2f0]"><Search size={17}/></Link><Link href="/login" className="hidden border border-black px-4 py-2.5 text-[10px] font-bold uppercase tracking-[.12em] hover:bg-black hover:text-white sm:block">Staff login</Link><button aria-label="Toggle menu" onClick={() => setOpen((value) => !value)} className="grid h-10 w-10 place-items-center rounded-full bg-[#f2f2f0] md:hidden">{open ? <X size={18}/> : <Menu size={18}/>}</button></div>
     </div>
     {open && <nav className="container-shell grid gap-1 border-t border-black/[.06] py-4 md:hidden">{links.map(([href, label]) => <Link onClick={() => setOpen(false)} key={href} href={href} className="border-b border-black/[.06] px-1 py-3 text-sm font-semibold">{label}</Link>)}<Link href="/login" className="mt-3 bg-black px-4 py-3 text-center text-xs font-bold uppercase tracking-wider text-white">Staff login</Link></nav>}
+    {profile.offerBarEnabled && profile.offerBarText && <OfferTicker text={profile.offerBarText}/>}
   </header>;
 }

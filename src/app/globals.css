@@ -88,6 +88,27 @@ input[type="checkbox"].h-4.w-4:focus-visible { outline: 3px solid rgba(31, 85, 2
 .technical-grid { background-image: linear-gradient(to right, rgba(20,22,26,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,22,26,.055) 1px, transparent 1px); background-size: 32px 32px; }
 .phone-shadow { filter: drop-shadow(0 32px 30px rgba(10, 20, 15, .2)); }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+.offer-ticker { overflow: hidden; }
+.offer-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: offer-ticker-scroll 24s linear infinite;
+  will-change: transform;
+}
+.offer-ticker-group {
+  display: flex;
+  min-width: 100vw;
+  align-items: center;
+  justify-content: space-around;
+}
+.offer-ticker:hover .offer-ticker-track { animation-play-state: paused; }
+@keyframes offer-ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-ticker-track { animation: none; transform: none; }
+}
 .text-\[7px\] { font-size: 6.3px; }
 .text-\[8px\] { font-size: 7.2px; }
 .text-\[9px\] { font-size: 8.1px; }

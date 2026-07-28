@@ -17,6 +17,8 @@ export const store = {
   heroDescription: "Verified devices, honest condition details and a local team you can message before you visit.",
   heroPrimaryCta: "See today’s devices",
   heroSecondaryCta: "Tell us what you need",
+  offerBarEnabled: true,
+  offerBarText: "Diwali offers now live · Special exchange bonuses · Fresh devices added regularly · Ask us for today’s best price",
   latestEyebrow: "In store now",
   latestTitle: "Start with what’s here.",
   stockEyebrow: "Your direct line to the store",
@@ -56,7 +58,7 @@ export const store = {
   whatsappUrl: "https://wa.me/919718182727?text=Hi%20cell.xchange%2C%20I%27m%20interested%20in%20a%20phone.",
 };
 
-export const editableStoreFields = Object.keys(store).filter((key) => !["phoneE164", "whatsappUrl", "brandLogo", "heroImage"].includes(key));
+export const editableStoreFields = Object.keys(store).filter((key) => !["phoneE164", "whatsappUrl", "brandLogo", "heroImage", "offerBarEnabled"].includes(key));
 
 export function createStoreProfile(values = {}) {
   const profile = {

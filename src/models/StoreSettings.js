@@ -9,6 +9,7 @@ const storeSettingsSchema = new mongoose.Schema({
   email: { type: String, required: true, trim: true, lowercase: true, maxlength: 160 },
   phoneDisplay: { type: String, required: true, trim: true, maxlength: 30 },
   hours: { type: String, required: true, trim: true, maxlength: 80 },
+  offerBarEnabled: { type: Boolean, default: true },
   brandLogo: {
     url: { type: String, trim: true },
     publicId: { type: String, trim: true },

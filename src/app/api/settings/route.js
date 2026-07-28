@@ -23,6 +23,7 @@ export async function PUT(request) {
     values.email = clean(form.get("email"), 160).toLowerCase();
     values.phoneDisplay = clean(form.get("phoneDisplay"), 30);
     values.hours = clean(form.get("hours"), 80);
+    values.offerBarEnabled = form.get("offerBarEnabled") === "true";
     if (!values.name || !values.email || !values.phoneDisplay || !values.hours) throw Object.assign(new Error("All store profile fields are required"), { status: 422 });
     if (!/^\S+@\S+\.\S+$/.test(values.email)) throw Object.assign(new Error("Enter a valid contact email"), { status: 422 });
     if (values.phoneDisplay.replace(/\D/g, "").length < 10) throw Object.assign(new Error("Enter a valid phone number"), { status: 422 });

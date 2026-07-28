@@ -27,6 +27,14 @@ const sections = [
     ],
   },
   {
+    title: "Offer ticker",
+    description: "Control the scrolling offer message displayed directly below the storefront navigation.",
+    fields: [
+      ["offerBarEnabled", "Show offer ticker", "toggle"],
+      ["offerBarText", "Offer message", "textarea"],
+    ],
+  },
+  {
     title: "Home — stock and visit",
     fields: [
       ["latestEyebrow", "Inventory eyebrow"], ["latestTitle", "Inventory heading"],
@@ -117,7 +125,7 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
     event.preventDefault(); setSaving(true);
     try {
       const body = new FormData();
-      Object.entries(values).forEach(([key, value]) => { if (typeof value === "string") body.append(key, value); });
+      Object.entries(values).forEach(([key, value]) => { if (typeof value === "string" || typeof value === "boolean") body.append(key, String(value)); });
       if (stagedLogo) { body.append("brandLogoUrl", stagedLogo.url); body.append("brandLogoPublicId", stagedLogo.publicId); }
       if (heroFile) body.append("heroImage", heroFile);
       const { data } = await axios.put("/api/settings", body);
@@ -151,7 +159,7 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
           <label className="flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-dashed border-[#cbd1cc] bg-[#f8f9f7] px-5 py-7 text-xs font-bold hover:bg-[#f2f5f1]"><ImagePlus size={18}/>Replace hero image<input type="file" accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" onChange={chooseHero}/></label>
         </div>
       </div>}
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">{section.fields.map(([name, label, type = "text"]) => <label key={name} className={`text-[11px] font-bold ${type === "textarea" ? "sm:col-span-2" : ""}`}>{label}{type === "textarea" ? <textarea name={name} rows="3" value={values[name] || ""} onChange={update} className="input mt-2 resize-y"/> : <input name={name} type={type} value={values[name] || ""} onChange={update} className="input mt-2"/>}</label>)}</div>
+      <div className="mt-6 grid gap-5 sm:grid-cols-2">{section.fields.map(([name, label, type = "text"]) => type === "toggle" ? <label key={name} className="flex items-center justify-between gap-5 rounded-2xl border border-[#e1e4e1] bg-[#f8f9f7] px-4 py-4 sm:col-span-2"><span><span className="block text-[11px] font-bold">{label}</span><span className="mt-1 block text-[10px] font-normal text-[#7a817c]">Turn this off to hide the offer bar from the website.</span></span><input name={name} type="checkbox" checked={Boolean(values[name])} onChange={(event) => setValues((current) => ({ ...current, [name]: event.target.checked }))} className="h-4 w-4" /></label> : <label key={name} className={`text-[11px] font-bold ${type === "textarea" ? "sm:col-span-2" : ""}`}>{label}{type === "textarea" ? <textarea name={name} rows="3" value={values[name] || ""} onChange={update} className="input mt-2 resize-y"/> : <input name={name} type={type} value={values[name] || ""} onChange={update} className="input mt-2"/>}</label>)}</div>
     </section>)}
     <div className="sticky bottom-4 z-10"><button disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-[#173f2c] px-6 py-3.5 text-xs font-bold text-white shadow-lg disabled:opacity-60">{saving ? <LoaderCircle size={15} className="animate-spin"/> : <Save size={15}/>}Save {mode === "profile" ? "settings" : "website content"}</button></div>
     {logoModalOpen && <div className="fixed inset-0 z-[100] grid place-items-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="logo-upload-title">
