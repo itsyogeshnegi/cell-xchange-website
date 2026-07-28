@@ -23,6 +23,7 @@ export default async function PhoneDetails({ params }) {
     ["Model", phone.model],
     ["RAM / Storage", [phone.ram, phone.storage].filter(Boolean).join(" / ")],
     ["Warranty status", phone.warrantyStatus || "Not specified"],
+    ["Battery health", phone.battery || "Not specified"],
     ["Condition", phone.condition],
     ["Accessories", phone.accessories?.length ? phone.accessories.join(", ") : "Not included"],
     ["Price", formatPrice(phone.price)],

@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { AlertTriangle, Download, ExternalLink, FileDown, LoaderCircle, Plus, ReceiptText, Trash2, X } from "lucide-react";
-import { invoiceTerms } from "@/lib/invoice";
 import { amountInWords } from "@/utils/amount-in-words";
 import { formatPrice } from "@/utils/format";
 
@@ -47,6 +46,7 @@ const initialForm = (invoiceDate, invoiceNumber) => ({
 
 function InvoicePreview({ form, profile, previewRef }) {
   const words = amountInWords(form.amount);
+  const terms = String(profile.invoiceTermsText || "").split(/\r?\n/).map((term) => term.trim()).filter(Boolean);
   return <div ref={previewRef} className="mx-auto aspect-[297/210] w-full overflow-hidden bg-white text-black" style={{ fontFamily: "Arial, sans-serif" }}>
     <div className="flex h-full flex-col border-2 border-black p-[3.2%]">
       <header className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)] gap-[2%] border-b-2 border-black pb-[1.5%]">
@@ -64,6 +64,7 @@ function InvoicePreview({ form, profile, previewRef }) {
           </div> : <><span className="grid size-[clamp(30px,5vw,56px)] place-items-center rounded-lg bg-black text-[clamp(6px,1vw,12px)] font-black text-white">c.x</span><h2 className="text-[clamp(14px,3vw,30px)] font-black">{profile.name}</h2></>}
         </div>
         <div className="min-w-0 self-center text-right text-[clamp(5px,.95vw,10px)] leading-[1.35] [overflow-wrap:anywhere]">
+          {profile.showInvoiceHeader && profile.invoiceHeader && <p className="mb-[2%] text-[clamp(8px,1.5vw,16px)] font-black uppercase tracking-[.08em]">{profile.invoiceHeader}</p>}
           <p className="font-bold">{profile.addressLine1}</p>
           <p>{profile.addressLine2}</p>
           <p>{profile.phoneDisplay} · {profile.email}</p>
@@ -102,7 +103,7 @@ function InvoicePreview({ form, profile, previewRef }) {
       </section>
 
       <footer className="grid grid-cols-[minmax(0,1fr)_clamp(110px,27%,260px)] border-t-2 border-black text-[clamp(4px,.85vw,9px)]">
-        <div className="p-[2%]"><p className="font-black">Terms:</p>{invoiceTerms.map((term) => <p key={term}>{term}</p>)}<p className="mt-[1%] font-bold">E. & O.E.</p></div>
+        <div className="p-[2%]"><p className="font-black">Terms &amp; Conditions:</p>{terms.map((term) => <p key={term}>{term}</p>)}<p className="mt-[1%] font-bold">E. & O.E.</p></div>
         <div className="flex flex-col justify-between border-l-2 border-black p-[4%] text-right"><p className="font-bold">For {profile.name}</p><p>Authorized Signatory</p></div>
       </footer>
     </div>

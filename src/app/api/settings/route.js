@@ -27,6 +27,7 @@ export async function PUT(request) {
     values.showInstagram = form.get("showInstagram") === "true";
     values.showYoutube = form.get("showYoutube") === "true";
     values.showWhatsapp = form.get("showWhatsapp") === "true";
+    values.showInvoiceHeader = form.get("showInvoiceHeader") === "true";
     if (!values.name || !values.email || !values.phoneDisplay || !values.hours) throw Object.assign(new Error("All store profile fields are required"), { status: 422 });
     if (!/^\S+@\S+\.\S+$/.test(values.email)) throw Object.assign(new Error("Enter a valid contact email"), { status: 422 });
     if (values.phoneDisplay.replace(/\D/g, "").length < 10) throw Object.assign(new Error("Enter a valid phone number"), { status: 422 });

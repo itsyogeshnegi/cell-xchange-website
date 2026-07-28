@@ -13,6 +13,7 @@ const storeSettingsSchema = new mongoose.Schema({
   showInstagram: { type: Boolean, default: true },
   showYoutube: { type: Boolean, default: true },
   showWhatsapp: { type: Boolean, default: true },
+  showInvoiceHeader: { type: Boolean, default: true },
   brandLogo: {
     url: { type: String, trim: true },
     publicId: { type: String, trim: true },

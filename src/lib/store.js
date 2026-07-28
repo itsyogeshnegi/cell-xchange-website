@@ -56,6 +56,9 @@ export const store = {
   availabilityTitle: "Message the shop directly.",
   availabilityCta: "Chat on WhatsApp",
   footerDescription: "A trusted local destination for smartphones, exchanges and straightforward buying advice in Vasant Kunj.",
+  invoiceHeader: "Proof of Purchase",
+  showInvoiceHeader: true,
+  invoiceTermsText: "7 days warranty on used phones.\nNo warranty on display.\nOur responsibility ceases once the goods leave our premises.\nSubject to Delhi jurisdiction.\nAfter-sales service will be provided by the respective service centre directly.",
   instagramUrl: "",
   youtubeUrl: "",
   footerWhatsappUrl: "https://wa.me/919718182727",
@@ -75,6 +78,7 @@ export const editableStoreFields = Object.keys(store).filter((key) => ![
   "showInstagram",
   "showYoutube",
   "showWhatsapp",
+  "showInvoiceHeader",
 ].includes(key));
 
 export function createStoreProfile(values = {}) {

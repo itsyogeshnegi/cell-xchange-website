@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import { connectDB } from "@/lib/db";
 import { handleError, ok, requireDashboardUser } from "@/lib/api";
 import { deleteImages, uploadInvoiceImage } from "@/lib/cloudinary";
-import { invoiceTerms } from "@/lib/invoice";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import Invoice from "@/models/Invoice";
 import { getStoreProfile } from "@/services/settingsService";
@@ -65,12 +64,13 @@ export async function POST(request) {
     }
     if (values.imei && !/^\d{15}$/.test(values.imei)) throw Object.assign(new Error("IMEI must be exactly 15 digits"), { status: 422 });
     const store = await getStoreProfile();
+    const terms = String(store.invoiceTermsText || "").split(/\r?\n/).map((term) => term.trim()).filter(Boolean);
     invoiceImage = await uploadInvoiceImage(image);
     await connectDB();
     const invoice = await Invoice.create({
       ...values,
       amountInWords: amountInWords(values.amount),
-      terms: invoiceTerms,
+      terms,
       image: invoiceImage,
       store: {
         name: store.name,
@@ -79,6 +79,8 @@ export async function POST(request) {
         addressLine1: store.addressLine1,
         addressLine2: store.addressLine2,
         logoUrl: store.brandLogo?.url || "",
+        invoiceHeader: store.invoiceHeader,
+        showInvoiceHeader: store.showInvoiceHeader,
       },
     });
     revalidatePath("/dashboard/invoices");

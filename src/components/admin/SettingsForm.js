@@ -77,6 +77,15 @@ const sections = [
       ["showWhatsapp", "Show WhatsApp icon", "toggle", "Display the WhatsApp icon in the website footer."],
     ],
   },
+  {
+    title: "Invoice settings",
+    description: "Admin-controlled content used on newly generated invoices.",
+    fields: [
+      ["showInvoiceHeader", "Show invoice header", "toggle", "Display the custom heading on generated invoices."],
+      ["invoiceHeader", "Invoice header"],
+      ["invoiceTermsText", "Terms and conditions (one per line)", "textarea"],
+    ],
+  },
 ];
 
 export default function SettingsForm({ initialSettings, mode = "content" }) {
@@ -172,7 +181,9 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
     finally { setSaving(false); }
   };
 
-  const visibleSections = mode === "profile" ? sections.slice(0, 1) : sections;
+  const visibleSections = mode === "profile"
+    ? sections.filter((section) => ["Store profile", "Invoice settings"].includes(section.title))
+    : sections.filter((section) => section.title !== "Invoice settings");
 
   return <form onSubmit={submit} className="mt-8 grid gap-6">
     {visibleSections.map((section) => <section key={section.title} className="rounded-[22px] border border-[#e1e4e1] bg-white p-6">

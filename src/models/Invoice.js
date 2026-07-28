@@ -12,6 +12,8 @@ const storeSnapshotSchema = new mongoose.Schema({
   addressLine1: String,
   addressLine2: String,
   logoUrl: String,
+  invoiceHeader: String,
+  showInvoiceHeader: Boolean,
 }, { _id: false });
 
 const invoiceSchema = new mongoose.Schema({
