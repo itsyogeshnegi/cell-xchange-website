@@ -10,6 +10,9 @@ const storeSettingsSchema = new mongoose.Schema({
   phoneDisplay: { type: String, required: true, trim: true, maxlength: 30 },
   hours: { type: String, required: true, trim: true, maxlength: 80 },
   offerBarEnabled: { type: Boolean, default: true },
+  showInstagram: { type: Boolean, default: true },
+  showYoutube: { type: Boolean, default: true },
+  showWhatsapp: { type: Boolean, default: true },
   brandLogo: {
     url: { type: String, trim: true },
     publicId: { type: String, trim: true },
@@ -18,6 +21,11 @@ const storeSettingsSchema = new mongoose.Schema({
     url: { type: String, trim: true },
     publicId: { type: String, trim: true },
   },
+  heroImages: [{
+    url: { type: String, required: true, trim: true },
+    publicId: { type: String, trim: true, default: "" },
+    _id: false,
+  }],
 }, { timestamps: true });
 
 export default mongoose.models.StoreSettings || mongoose.model("StoreSettings", storeSettingsSchema);

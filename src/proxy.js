@@ -7,7 +7,7 @@ export async function proxy(request) {
   try {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET);
     const { payload } = await jwtVerify(token, secret);
-    if (!["admin", "manager"].includes(payload.role)) throw new Error("Forbidden");
+    if (!["super_admin", "admin", "manager"].includes(payload.role)) throw new Error("Forbidden");
     const adminOnly = request.nextUrl.pathname.startsWith("/dashboard/settings")
       || request.nextUrl.pathname.startsWith("/dashboard/content");
     if (payload.role === "manager" && adminOnly) return NextResponse.redirect(new URL("/dashboard", request.url));

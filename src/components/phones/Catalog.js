@@ -4,8 +4,7 @@ import { useCallback, useDeferredValue, useEffect, useRef, useState, useTransiti
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import PhoneCard from "@/components/phones/PhoneCard";
 import { PhoneGridSkeleton } from "@/components/ui/Skeletons";
-
-const deviceFilters = ["All", "Apple", "Android", "iPad", "Smartwatch", "Tabs", "Accessories"];
+import { deviceFilterOptions } from "@/lib/device-filters";
 
 export default function Catalog({ initialPage, initialDevice = "All" }) {
   const [items, setItems] = useState(initialPage.items);
@@ -48,7 +47,7 @@ export default function Catalog({ initialPage, initialDevice = "All" }) {
   return <>
     <div className="mb-10 grid gap-3 rounded-[20px] border border-[#e5e8e5] bg-[#fafbfa] p-3 md:grid-cols-[1fr_auto]">
       <label className="flex items-center gap-2 rounded-xl bg-white px-4 ring-1 ring-[#e5e8e5]"><Search size={16} className="text-[#737c76]"/><input value={query} onChange={updateQuery} placeholder="Search model or brand" className="h-12 min-w-0 flex-1 bg-transparent text-sm outline-none"/></label>
-      <label className="flex items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-[#e5e8e5]"><SlidersHorizontal size={15}/><select aria-label="Filter by device family" value={device} onChange={(event) => updateFilter(setDevice, event.target.value)} className="h-12 bg-transparent text-sm font-semibold outline-none">{deviceFilters.map((item) => <option key={item} value={item}>{item === "All" ? "All devices" : item === "Smartwatch" ? "Smart watch" : item}</option>)}</select></label>
+      <label className="flex items-center gap-2 rounded-xl bg-white px-3 ring-1 ring-[#e5e8e5]"><SlidersHorizontal size={15}/><select aria-label="Filter by device family" value={device} onChange={(event) => updateFilter(setDevice, event.target.value)} className="h-12 bg-transparent text-sm font-semibold outline-none">{deviceFilterOptions.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}</select></label>
     </div>
     <div className="mb-5 flex items-center justify-between" aria-live="polite"><p className={`text-sm text-[#69716c] transition-opacity ${pending ? "opacity-50" : "opacity-100"}`}><strong className="text-[#151915]">{total}</strong> products available</p>{(query || device !== "All") && <button onClick={clear} className="flex items-center gap-1 text-xs font-bold"><X size={14}/> Clear filters</button>}</div>
     {loading ? <PhoneGridSkeleton count={6}/> : items.length ? <div className={`grid gap-5 transition-opacity sm:grid-cols-2 lg:grid-cols-3 ${isPending ? "opacity-60" : "opacity-100"}`}>{items.map((phone) => <PhoneCard key={phone._id} phone={phone}/>)}</div> : <div className="rounded-[24px] bg-[#f5f6f4] py-24 text-center"><Search className="mx-auto mb-4 text-[#94a099]"/><h3 className="text-xl font-bold">No products found</h3><p className="mt-2 text-sm text-[#6e766f]">Try a different search or clear your filters.</p></div>}

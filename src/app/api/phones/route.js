@@ -2,32 +2,12 @@ import { revalidateTag } from "next/cache";
 import { connectDB } from "@/lib/db";
 import { handleError, ok, requireDashboardUser } from "@/lib/api";
 import { deleteImages, uploadImage } from "@/lib/cloudinary";
+import { applyDeviceFilter, deviceFilterValues, matchesDeviceFilter } from "@/lib/device-filters";
 import { phones as demoPhones } from "@/lib/demo-data";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { parsePhoneForm, publicPhoneFields, safeString, validateImageFiles } from "@/lib/phone-input";
 import Phone from "@/models/Phone";
 import { registerBrand } from "@/services/brandService";
-
-const deviceFilters = ["Apple", "Android", "iPad", "Smartwatch", "Tabs", "Accessories"];
-
-function applyDeviceFilter(filter, device) {
-  if (device === "Apple") filter.brand = "Apple";
-  if (device === "Android") { filter.category = "Phone"; filter.brand = { $ne: "Apple" }; }
-  if (device === "iPad") { filter.category = "iPad & Tabs"; filter.brand = "Apple"; }
-  if (device === "Smartwatch") filter.category = "Smartwatch";
-  if (device === "Tabs") { filter.category = "iPad & Tabs"; filter.brand = { $ne: "Apple" }; }
-  if (device === "Accessories") filter.category = "Accessories";
-}
-
-function matchesDevice(phone, device) {
-  if (!device) return true;
-  if (device === "Apple") return phone.brand === "Apple";
-  if (device === "Android") return phone.category === "Phone" && phone.brand !== "Apple";
-  if (device === "iPad") return phone.category === "iPad & Tabs" && phone.brand === "Apple";
-  if (device === "Smartwatch") return phone.category === "Smartwatch";
-  if (device === "Tabs") return phone.category === "iPad & Tabs" && phone.brand !== "Apple";
-  return device === "Accessories" && phone.category === "Accessories";
-}
 
 function cached(data) {
   const response = ok(data);
@@ -49,7 +29,7 @@ export async function GET(request) {
     const admin = searchParams.get("admin") === "1";
     if (admin) await requireDashboardUser();
     if (status && !["Available", "Sold", "Block"].includes(status)) throw Object.assign(new Error("Invalid product status"), { status: 422 });
-    if (device && !deviceFilters.includes(device)) throw Object.assign(new Error("Invalid device filter"), { status: 422 });
+    if (device && !deviceFilterValues.includes(device)) throw Object.assign(new Error("Invalid device filter"), { status: 422 });
 
     if (!process.env.MONGODB_URI) {
       let items = demoPhones.filter((phone) => {
@@ -58,7 +38,7 @@ export async function GET(request) {
           && (!brand || phone.brand === brand)
           && (!storage || phone.storage === storage)
           && (!status || productStatus === status)
-          && matchesDevice(phone, device);
+          && matchesDeviceFilter(phone, device);
       });
       const total = items.length;
       items = items.slice((page - 1) * limit, page * limit);

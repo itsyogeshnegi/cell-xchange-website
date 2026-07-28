@@ -10,6 +10,7 @@ export const store = {
   mapUrl: "https://www.google.com/maps/search/?api=1&query=140%2F9%20Kishan%20Garh%20Vasant%20Kunj%20Gaushala%20Road",
   brandLogo: { url: "", publicId: "" },
   heroImage: { url: "/hero-black", publicId: "" },
+  heroImages: [{ url: "/hero-black", publicId: "" }],
   heroImageAlt: "Black iPhone available from cell.xchange",
   heroEyebrow: "Independent mobile store · Vasant Kunj",
   heroTitle: "A better phone.",
@@ -55,17 +56,39 @@ export const store = {
   availabilityTitle: "Message the shop directly.",
   availabilityCta: "Chat on WhatsApp",
   footerDescription: "A trusted local destination for smartphones, exchanges and straightforward buying advice in Vasant Kunj.",
+  instagramUrl: "",
+  youtubeUrl: "",
+  footerWhatsappUrl: "https://wa.me/919718182727",
+  showInstagram: true,
+  showYoutube: true,
+  showWhatsapp: true,
   whatsappUrl: "https://wa.me/919718182727?text=Hi%20cell.xchange%2C%20I%27m%20interested%20in%20a%20phone.",
 };
 
-export const editableStoreFields = Object.keys(store).filter((key) => !["phoneE164", "whatsappUrl", "brandLogo", "heroImage", "offerBarEnabled"].includes(key));
+export const editableStoreFields = Object.keys(store).filter((key) => ![
+  "phoneE164",
+  "whatsappUrl",
+  "brandLogo",
+  "heroImage",
+  "heroImages",
+  "offerBarEnabled",
+  "showInstagram",
+  "showYoutube",
+  "showWhatsapp",
+].includes(key));
 
 export function createStoreProfile(values = {}) {
+  const legacyHero = values.heroImage?.url ? values.heroImage : store.heroImage;
+  const heroImages = Array.isArray(values.heroImages)
+    ? values.heroImages.filter((image) => image?.url).slice(0, 8)
+    : [];
+  if (!heroImages.length) heroImages.push(legacyHero);
   const profile = {
     ...store,
     ...values,
     brandLogo: values.brandLogo?.url ? values.brandLogo : store.brandLogo,
-    heroImage: values.heroImage?.url ? values.heroImage : store.heroImage,
+    heroImage: heroImages[0],
+    heroImages,
   };
   const digits = String(profile.phoneDisplay || "").replace(/\D/g, "");
   profile.phoneE164 = digits.length === 10 ? `+91${digits}` : `+${digits}`;

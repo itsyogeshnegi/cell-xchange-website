@@ -7,7 +7,13 @@ export const fail = (message, status = 400, details) => NextResponse.json({ succ
 
 export async function requireAdmin() {
   const payload = await requireDashboardUser();
-  if (payload.role !== "admin") throw Object.assign(new Error("Administrator access required"), { status: 403 });
+  if (!["super_admin", "admin"].includes(payload.role)) throw Object.assign(new Error("Administrator access required"), { status: 403 });
+  return payload;
+}
+
+export async function requireSuperAdmin() {
+  const payload = await requireDashboardUser();
+  if (payload.role !== "super_admin") throw Object.assign(new Error("Super administrator access required"), { status: 403 });
   return payload;
 }
 
@@ -16,7 +22,7 @@ export async function requireDashboardUser() {
   const token = store.get(sessionCookie.name)?.value;
   if (!token) throw Object.assign(new Error("Authentication required"), { status: 401 });
   const payload = verifyToken(token);
-  if (!["admin", "manager"].includes(payload.role)) throw Object.assign(new Error("Dashboard access required"), { status: 403 });
+  if (!["super_admin", "admin", "manager"].includes(payload.role)) throw Object.assign(new Error("Dashboard access required"), { status: 403 });
   return payload;
 }
 

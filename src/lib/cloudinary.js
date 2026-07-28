@@ -13,7 +13,7 @@ export function uploadImage(file) {
 export function uploadSiteImage(file) {
   return new Promise(async (resolve, reject) => {
     const buffer = Buffer.from(await file.arrayBuffer());
-    const stream = cloudinary.uploader.upload_stream({ folder: "mobile-hub/site", resource_type: "image", transformation: [{ width: 2400, height: 1800, crop: "limit", quality: "auto", fetch_format: "auto" }] }, (error, result) => error ? reject(error) : resolve({ url: result.secure_url, publicId: result.public_id }));
+    const stream = cloudinary.uploader.upload_stream({ folder: "mobile-hub/site", resource_type: "image", transformation: [{ width: 2400, height: 1800, crop: "limit", quality: "auto:best", fetch_format: "auto" }] }, (error, result) => error ? reject(error) : resolve({ url: result.secure_url, publicId: result.public_id }));
     stream.end(buffer);
   });
 }

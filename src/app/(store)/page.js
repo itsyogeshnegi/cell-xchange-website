@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -11,11 +10,12 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import FeaturedCarousel from "@/components/phones/FeaturedCarousel";
+import HeroImageCarousel from "@/components/layout/HeroImageCarousel";
+import { deviceFilterOptions } from "@/lib/device-filters";
 import { getPhones } from "@/services/phoneService";
 import { getStoreProfile } from "@/services/settingsService";
 
 export const dynamic = "force-dynamic";
-const deviceFilters = ["Apple", "Android", "iPad", "Smartwatch", "Tabs", "Accessories"];
 
 export default async function HomePage() {
   const store = await getStoreProfile();
@@ -39,7 +39,7 @@ export default async function HomePage() {
           </div>
 
           <div className="relative min-h-[510px] overflow-hidden lg:min-h-full">
-            <Image src={store.heroImage.url} alt={store.heroImageAlt} fill priority sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover object-center" />
+            <HeroImageCarousel images={store.heroImages} alt={store.heroImageAlt}/>
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
             <div className="absolute right-6 top-6 border border-white/25 bg-black/80 px-5 py-4 text-white backdrop-blur-sm sm:right-8 sm:top-8">
               <p className="eyebrow text-white/60">{store.days}</p>
@@ -61,7 +61,7 @@ export default async function HomePage() {
       <nav aria-label="Shop by device family" className="border-b border-[#e2e2df] py-6">
         <div className="container-shell flex items-center gap-8 overflow-x-auto no-scrollbar">
           <span className="eyebrow shrink-0 text-[#9a9ca0]">Shop by device</span>
-          {deviceFilters.map((device) => <Link key={device} href={`/phones?device=${encodeURIComponent(device)}`} className="shrink-0 text-sm font-semibold text-[#4f5258] hover:text-[#1f55ff]">{device === "Smartwatch" ? "Smart watch" : device}</Link>)}
+          {deviceFilterOptions.slice(1).map(({ value, label }) => <Link key={value} href={`/phones?device=${encodeURIComponent(value)}`} className="shrink-0 text-sm font-semibold text-[#4f5258] hover:text-[#1f55ff]">{label}</Link>)}
         </div>
       </nav>
 

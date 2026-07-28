@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { ImagePlus, LoaderCircle, Save, UploadCloud, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ImagePlus, LoaderCircle, Save, Trash2, UploadCloud, X } from "lucide-react";
 
 const sections = [
   {
@@ -69,6 +69,12 @@ const sections = [
       ["contactDescription", "Contact description", "textarea"], ["availabilityEyebrow", "Availability eyebrow"],
       ["availabilityTitle", "Availability heading"], ["availabilityCta", "WhatsApp button"],
       ["footerDescription", "Footer description", "textarea"],
+      ["instagramUrl", "Instagram URL", "url"],
+      ["showInstagram", "Show Instagram icon", "toggle", "Display the Instagram icon in the website footer."],
+      ["youtubeUrl", "YouTube URL", "url"],
+      ["showYoutube", "Show YouTube icon", "toggle", "Display the YouTube icon in the website footer."],
+      ["footerWhatsappUrl", "WhatsApp URL", "url"],
+      ["showWhatsapp", "Show WhatsApp icon", "toggle", "Display the WhatsApp icon in the website footer."],
     ],
   },
 ];
@@ -76,6 +82,7 @@ const sections = [
 export default function SettingsForm({ initialSettings, mode = "content" }) {
   const router = useRouter();
   const [values, setValues] = useState(initialSettings);
+  const initialHeroImages = initialSettings.heroImages?.length ? initialSettings.heroImages : [initialSettings.heroImage || { url: "/hero-black", publicId: "" }];
   const [logoPreview, setLogoPreview] = useState(initialSettings.brandLogo?.url || "");
   const [stagedLogo, setStagedLogo] = useState(null);
   const [pendingLogoFile, setPendingLogoFile] = useState(null);
@@ -83,17 +90,37 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
   const [logoModalOpen, setLogoModalOpen] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [logoInputKey, setLogoInputKey] = useState(0);
-  const [heroFile, setHeroFile] = useState(null);
-  const [heroPreview, setHeroPreview] = useState(initialSettings.heroImage?.url || "/hero-black");
+  const [heroItems, setHeroItems] = useState(() => initialHeroImages.map((image, index) => ({ ...image, id: `saved-${image.publicId || index}`, file: null })));
+  const [heroInputKey, setHeroInputKey] = useState(0);
   const [saving, setSaving] = useState(false);
   const update = (event) => setValues((current) => ({ ...current, [event.target.name]: event.target.value }));
   const chooseHero = (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    if (file.size > 8 * 1024 * 1024) { toast.error("Hero image must be under 8MB"); event.target.value = ""; return; }
-    setHeroFile(file);
-    setHeroPreview(URL.createObjectURL(file));
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+    if (heroItems.length + files.length > 8) { toast.error("You can use up to 8 hero images"); event.target.value = ""; return; }
+    if (files.some((file) => file.size > 8 * 1024 * 1024)) { toast.error("Each hero image must be under 8MB"); event.target.value = ""; return; }
+    const additions = files.map((file, index) => ({
+      id: `new-${Date.now()}-${index}`,
+      url: URL.createObjectURL(file),
+      publicId: "",
+      file,
+    }));
+    setHeroItems((current) => [...current, ...additions]);
+    setHeroInputKey((value) => value + 1);
   };
+  const moveHero = (index, direction) => setHeroItems((current) => {
+    const target = index + direction;
+    if (target < 0 || target >= current.length) return current;
+    const next = [...current];
+    [next[index], next[target]] = [next[target], next[index]];
+    return next;
+  });
+  const removeHero = (index) => setHeroItems((current) => {
+    if (current.length === 1) { toast.error("Keep at least one hero image"); return current; }
+    const removed = current[index];
+    if (removed.file) URL.revokeObjectURL(removed.url);
+    return current.filter((_, itemIndex) => itemIndex !== index);
+  });
   const chooseLogo = (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -127,10 +154,18 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
       const body = new FormData();
       Object.entries(values).forEach(([key, value]) => { if (typeof value === "string" || typeof value === "boolean") body.append(key, String(value)); });
       if (stagedLogo) { body.append("brandLogoUrl", stagedLogo.url); body.append("brandLogoPublicId", stagedLogo.publicId); }
-      if (heroFile) body.append("heroImage", heroFile);
+      const newHeroItems = heroItems.filter((item) => item.file);
+      newHeroItems.forEach((item) => body.append("heroImageFiles", item.file));
+      body.append("heroImageOrder", JSON.stringify(heroItems.map((item) => item.file
+        ? { type: "new", index: newHeroItems.indexOf(item) }
+        : { type: "existing", url: item.url, publicId: item.publicId || "" })));
       const { data } = await axios.put("/api/settings", body);
       if (stagedLogo && data.data.brandLogo?.publicId !== stagedLogo.publicId) throw new Error("Logo URL was not persisted");
-      setValues(data.data); setStagedLogo(null); setLogoPreview(data.data.brandLogo?.url || ""); setHeroFile(null); setHeroPreview(data.data.heroImage?.url || "/hero-black");
+      heroItems.filter((item) => item.file).forEach((item) => URL.revokeObjectURL(item.url));
+      setValues(data.data);
+      setStagedLogo(null);
+      setLogoPreview(data.data.brandLogo?.url || "");
+      setHeroItems((data.data.heroImages?.length ? data.data.heroImages : [data.data.heroImage]).map((image, index) => ({ ...image, id: `saved-${image.publicId || index}`, file: null })));
       router.refresh();
       toast.success(mode === "profile" ? "Store settings saved" : "Website content saved");
     } catch (error) { toast.error(error.response?.data?.message || "Could not save website content"); }
@@ -153,13 +188,25 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
         <p className="mt-2 text-[10px] text-[#858c87]">Transparent PNG, WebP, JPG, or AVIF · 5MB maximum. A horizontal logo works best.</p>
       </div>}
       {section.title === "Home — hero" && <div className="mt-6">
-        <span className="text-[11px] font-bold">Hero image</span>
-        <div className="mt-2 grid gap-4 sm:grid-cols-[220px_1fr] sm:items-center">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#f2f3f1]"><Image src={heroPreview} fill sizes="220px" className="object-cover" alt="Hero preview"/></div>
-          <label className="flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-dashed border-[#cbd1cc] bg-[#f8f9f7] px-5 py-7 text-xs font-bold hover:bg-[#f2f5f1]"><ImagePlus size={18}/>Replace hero image<input type="file" accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" onChange={chooseHero}/></label>
+        <div className="flex items-end justify-between gap-4">
+          <span><span className="block text-[11px] font-bold">Hero carousel images</span><span className="mt-1 block text-[10px] text-[#858c87]">Priority 1 appears first. Images rotate automatically in this order.</span></span>
+          <span className="text-[10px] font-bold text-[#747c76]">{heroItems.length}/8 images</span>
         </div>
+        <div className="mt-3 grid gap-3">
+          {heroItems.map((item, index) => <div key={item.id} className="grid gap-3 rounded-2xl border border-[#e1e4e1] bg-[#f8f9f7] p-3 sm:grid-cols-[110px_1fr_auto] sm:items-center">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#eceeeb]"><Image src={item.url} fill sizes="110px" className="object-cover" alt={`Hero priority ${index + 1} preview`}/></div>
+            <div><p className="text-xs font-black">Priority {index + 1}</p><p className="mt-1 text-[10px] text-[#7a817c]">{item.file ? item.file.name : index === 0 ? "First carousel slide" : `Carousel slide ${index + 1}`}</p></div>
+            <div className="flex items-center gap-1 sm:justify-end">
+              <button type="button" onClick={() => moveHero(index, -1)} disabled={index === 0} aria-label={`Move hero image ${index + 1} up`} className="grid size-9 place-items-center rounded-full border border-[#d9ddda] bg-white disabled:opacity-30"><ArrowUp size={15}/></button>
+              <button type="button" onClick={() => moveHero(index, 1)} disabled={index === heroItems.length - 1} aria-label={`Move hero image ${index + 1} down`} className="grid size-9 place-items-center rounded-full border border-[#d9ddda] bg-white disabled:opacity-30"><ArrowDown size={15}/></button>
+              <button type="button" onClick={() => removeHero(index)} disabled={heroItems.length === 1} aria-label={`Remove hero image ${index + 1}`} className="grid size-9 place-items-center rounded-full border border-[#ead8d8] bg-white text-red-600 disabled:opacity-30"><Trash2 size={15}/></button>
+            </div>
+          </div>)}
+        </div>
+        {heroItems.length < 8 && <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-dashed border-[#cbd1cc] bg-[#f8f9f7] px-5 py-6 text-xs font-bold hover:bg-[#f2f5f1]"><ImagePlus size={18}/>Add hero images<input key={heroInputKey} type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" onChange={chooseHero}/></label>}
+        <p className="mt-2 text-[10px] text-[#858c87]">JPG, PNG, WebP, or AVIF · 8MB maximum each. Save website content to publish the order.</p>
       </div>}
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">{section.fields.map(([name, label, type = "text"]) => type === "toggle" ? <label key={name} className="flex items-center justify-between gap-5 rounded-2xl border border-[#e1e4e1] bg-[#f8f9f7] px-4 py-4 sm:col-span-2"><span><span className="block text-[11px] font-bold">{label}</span><span className="mt-1 block text-[10px] font-normal text-[#7a817c]">Turn this off to hide the offer bar from the website.</span></span><input name={name} type="checkbox" checked={Boolean(values[name])} onChange={(event) => setValues((current) => ({ ...current, [name]: event.target.checked }))} className="h-4 w-4" /></label> : <label key={name} className={`text-[11px] font-bold ${type === "textarea" ? "sm:col-span-2" : ""}`}>{label}{type === "textarea" ? <textarea name={name} rows="3" value={values[name] || ""} onChange={update} className="input mt-2 resize-y"/> : <input name={name} type={type} value={values[name] || ""} onChange={update} className="input mt-2"/>}</label>)}</div>
+      <div className="mt-6 grid gap-5 sm:grid-cols-2">{section.fields.map(([name, label, type = "text", help]) => type === "toggle" ? <label key={name} className="flex items-center justify-between gap-5 rounded-2xl border border-[#e1e4e1] bg-[#f8f9f7] px-4 py-4 sm:col-span-2"><span><span className="block text-[11px] font-bold">{label}</span><span className="mt-1 block text-[10px] font-normal text-[#7a817c]">{help || "Turn this off to hide the offer bar from the website."}</span></span><input name={name} type="checkbox" checked={Boolean(values[name])} onChange={(event) => setValues((current) => ({ ...current, [name]: event.target.checked }))} className="h-4 w-4" /></label> : <label key={name} className={`text-[11px] font-bold ${type === "textarea" ? "sm:col-span-2" : ""}`}>{label}{type === "textarea" ? <textarea name={name} rows="3" value={values[name] || ""} onChange={update} className="input mt-2 resize-y"/> : <input name={name} type={type} value={values[name] || ""} onChange={update} className="input mt-2"/>}</label>)}</div>
     </section>)}
     <div className="sticky bottom-4 z-10"><button disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-[#173f2c] px-6 py-3.5 text-xs font-bold text-white shadow-lg disabled:opacity-60">{saving ? <LoaderCircle size={15} className="animate-spin"/> : <Save size={15}/>}Save {mode === "profile" ? "settings" : "website content"}</button></div>
     {logoModalOpen && <div className="fixed inset-0 z-[100] grid place-items-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="logo-upload-title">

@@ -11,3 +11,12 @@ export async function getManagerAccount() {
   return manager ? JSON.parse(JSON.stringify(manager)) : null;
 }
 
+export async function getAdminAccount() {
+  if (!process.env.MONGODB_URI) return null;
+  await connectDB();
+  const admin = await User.findOne({ role: "admin" })
+    .select("name email role updatedAt")
+    .lean()
+    .maxTimeMS(5000);
+  return admin ? JSON.parse(JSON.stringify(admin)) : null;
+}
