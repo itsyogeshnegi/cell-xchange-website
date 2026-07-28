@@ -92,7 +92,7 @@ input[type="checkbox"].h-4.w-4:focus-visible { outline: 3px solid rgba(31, 85, 2
 .offer-ticker-track {
   display: flex;
   width: max-content;
-  animation: offer-ticker-scroll 24s linear infinite;
+  animation: offer-ticker-scroll 45s linear infinite;
   will-change: transform;
 }
 .offer-ticker-group {

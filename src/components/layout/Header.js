@@ -10,7 +10,7 @@ import { store } from "@/lib/store";
 const links = [["/phones", "Shop devices"], ["/about", "Our store"], ["/about#contact", "Visit us"]];
 
 function OfferTicker({ text }) {
-  return <div className="offer-ticker border-t border-white/10 bg-[#173f2c] text-white" role="region" aria-label="Current offers">
+  return <div className="offer-ticker border-t border-white/10 bg-black text-white" role="region" aria-label="Current offers">
     <span className="sr-only">{text}</span>
     <div className="offer-ticker-track h-8 items-center text-[9px] font-bold uppercase tracking-[.14em]" aria-hidden="true">
       {[0, 1].map((copy) => <div key={copy} className="offer-ticker-group">
