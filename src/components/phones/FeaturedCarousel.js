@@ -42,7 +42,7 @@ export default function FeaturedCarousel({ phones }) {
   >
     <div ref={scrollerRef} className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2">
       {phones.map((phone) => <div key={phone._id} data-carousel-card className="min-w-0 shrink-0 basis-[86%] snap-start sm:basis-[62%] lg:basis-[52%]">
-        <PhoneCard phone={phone}/>
+        <PhoneCard phone={phone} compact/>
       </div>)}
     </div>
     {phones.length > 1 && <>
