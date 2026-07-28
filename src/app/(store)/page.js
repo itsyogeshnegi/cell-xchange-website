@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  ArrowUpRight,
   BadgeCheck,
   Clock3,
   MapPin,
@@ -11,64 +10,16 @@ import {
   RefreshCw,
   ShieldCheck,
 } from "lucide-react";
-import PhoneCard from "@/components/phones/PhoneCard";
+import FeaturedCarousel from "@/components/phones/FeaturedCarousel";
 import { brands } from "@/lib/demo-data";
 import { getPhones } from "@/services/phoneService";
 import { getStoreProfile } from "@/services/settingsService";
-import { formatPrice } from "@/utils/format";
 
 export const dynamic = "force-dynamic";
 
-function FeaturedPhone({ phone }) {
-  const href = `/phones/${phone._id}`;
-
-  return (
-    <article className="grid overflow-hidden border border-[#dedfdd] bg-[#f5f5f2] lg:grid-cols-[1.08fr_.92fr]">
-      <Link href={href} className="group relative min-h-[390px] overflow-hidden bg-[#ececea] sm:min-h-[520px]">
-        <Image
-          src={phone.images?.[0]?.url}
-          alt={`${phone.brand} ${phone.model}`}
-          fill
-          sizes="(min-width: 1024px) 54vw, 100vw"
-          className="object-cover transition duration-700 group-hover:scale-[1.025]"
-        />
-        <div className="absolute left-5 top-5 flex gap-2">
-          <span className="bg-white/90 px-3 py-2 text-[9px] font-bold uppercase tracking-[.14em] backdrop-blur">
-            {phone.stock ? "Available now" : "Sold out"}
-          </span>
-        </div>
-      </Link>
-
-      <div className="flex flex-col justify-between p-7 sm:p-11 lg:p-14">
-        <div>
-          <p className="eyebrow text-[#777a80]">Featured in store · {phone.brand}</p>
-          <h3 className="display mt-5 text-5xl font-semibold leading-none sm:text-6xl">{phone.model}</h3>
-          {phone.description && <p className="mt-6 line-clamp-4 max-w-md text-sm leading-7 text-[#65686e]">{phone.description}</p>}
-          <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 border-y border-black/10 py-5 text-sm">
-            <span><strong className="block text-[10px] uppercase tracking-[.14em] text-[#85888e]">Storage</strong><span className="mt-1 block font-semibold">{phone.storage}</span></span>
-            <span><strong className="block text-[10px] uppercase tracking-[.14em] text-[#85888e]">Condition</strong><span className="mt-1 block font-semibold">{phone.condition}</span></span>
-            <span><strong className="block text-[10px] uppercase tracking-[.14em] text-[#85888e]">Colour</strong><span className="mt-1 block font-semibold">{phone.color}</span></span>
-          </div>
-        </div>
-
-        <div className="mt-10 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="eyebrow text-[#85888e]">Store price</p>
-            <p className="mt-2 text-3xl font-semibold">{formatPrice(phone.price)}</p>
-          </div>
-          <Link href={href} className="inline-flex items-center gap-3 bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white hover:bg-[#1f55ff]">
-            View phone <ArrowUpRight size={15} />
-          </Link>
-        </div>
-      </div>
-    </article>
-  );
-}
-
 export default async function HomePage() {
   const store = await getStoreProfile();
-  const phones = await getPhones({}, 4);
-  const [featuredPhone, ...morePhones] = phones;
+  const phones = await getPhones({}, 8);
   const stockUpdatesUrl = `https://wa.me/${store.phoneE164.replace("+", "")}?text=${encodeURIComponent(`Hi ${store.name}, please share your latest phone stock and offers.`)}`;
 
   return (
@@ -119,10 +70,7 @@ export default async function HomePage() {
           <Link href="/phones" className="hidden items-center gap-2 border-b border-black pb-1 text-xs font-bold uppercase tracking-[.1em] sm:flex">Browse all <ArrowRight size={14} /></Link>
         </div>
 
-        {featuredPhone ? <>
-          <FeaturedPhone phone={featuredPhone} />
-          {morePhones.length > 0 && <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{morePhones.map((phone) => <PhoneCard key={phone._id} phone={phone} />)}</div>}
-        </> : <div className="border border-[#dedfdd] bg-[#f7f7f5] px-6 py-16 text-center"><p className="text-xl font-semibold">Fresh stock is being prepared.</p><p className="mt-3 text-sm text-[#74777d]">Message us for today&apos;s availability.</p><a href={store.whatsappUrl} target="_blank" rel="noreferrer" className="mt-7 inline-flex bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white">Ask on WhatsApp</a></div>}
+        {phones.length ? <FeaturedCarousel phones={phones}/> : <div className="border border-[#dedfdd] bg-[#f7f7f5] px-6 py-16 text-center"><p className="text-xl font-semibold">Fresh stock is being prepared.</p><p className="mt-3 text-sm text-[#74777d]">Message us for today&apos;s availability.</p><a href={store.whatsappUrl} target="_blank" rel="noreferrer" className="mt-7 inline-flex bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white">Ask on WhatsApp</a></div>}
       </section>
 
       <section className="bg-[#0b0c0e] py-20 text-white sm:py-24">
