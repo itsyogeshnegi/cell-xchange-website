@@ -90,8 +90,8 @@ export default async function HomePage() {
             <Image src={store.heroImage.url} alt={store.heroImageAlt} fill priority sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover object-center" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
             <div className="absolute right-6 top-6 border border-white/25 bg-black/80 px-5 py-4 text-white backdrop-blur-sm sm:right-8 sm:top-8">
-              <p className="eyebrow text-white/60">Open every day</p>
-              <p className="mt-2 text-sm font-bold">12 PM — 10 PM</p>
+              <p className="eyebrow text-white/60">{store.days}</p>
+              <p className="mt-2 text-sm font-bold">{store.hours}</p>
             </div>
             <p className="eyebrow absolute bottom-7 left-7 text-white/70 sm:bottom-9 sm:left-9">Phones · Accessories · Exchange</p>
           </div>
