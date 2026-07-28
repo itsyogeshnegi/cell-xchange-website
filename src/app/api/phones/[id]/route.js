@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { revalidateTag } from "next/cache";
 import { connectDB } from "@/lib/db";
 import { deleteImages, uploadImage } from "@/lib/cloudinary";
-import { handleError, ok, requireAdmin } from "@/lib/api";
+import { handleError, ok, requireDashboardUser } from "@/lib/api";
 import { phones as demoPhones } from "@/lib/demo-data";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { parsePhoneForm, publicPhoneFields, validateImageFiles } from "@/lib/phone-input";
@@ -37,7 +37,7 @@ export async function PUT(request, { params }) {
   let uploaded = [];
   try {
     await enforceRateLimit(request, { scope: "phones-write", limit: 30 });
-    await requireAdmin();
+    await requireDashboardUser();
     if (Number(request.headers.get("content-length") || 0) > 70 * 1024 * 1024) throw Object.assign(new Error("Upload is too large"), { status: 413 });
     const { id } = await params;
     await connectDB();
@@ -64,7 +64,7 @@ export async function PUT(request, { params }) {
 export async function PATCH(request, { params }) {
   try {
     await enforceRateLimit(request, { scope: "phones-write", limit: 30 });
-    await requireAdmin();
+    await requireDashboardUser();
     const { id } = await params;
     const { visible } = await request.json();
     if (typeof visible !== "boolean") throw Object.assign(new Error("Visibility must be true or false"), { status: 422 });
@@ -79,7 +79,7 @@ export async function PATCH(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await enforceRateLimit(request, { scope: "phones-write", limit: 30 });
-    await requireAdmin();
+    await requireDashboardUser();
     const { id } = await params;
     await connectDB();
     const phone = await Phone.findOneAndDelete(findFilter(id)).select("images").maxTimeMS(5000);

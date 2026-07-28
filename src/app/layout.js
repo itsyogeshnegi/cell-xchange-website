@@ -1,5 +1,6 @@
 import { Playwrite_NZ_Basic } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const playwrite = Playwrite_NZ_Basic({
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning>
         <Toaster position="top-right" toastOptions={{ style: { borderRadius: 12, fontSize: 13 } }} />
         {children}
+        <Analytics />
       </body>
     </html>
   );

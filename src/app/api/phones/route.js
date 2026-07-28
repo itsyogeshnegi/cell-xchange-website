@@ -1,6 +1,6 @@
 import { revalidateTag } from "next/cache";
 import { connectDB } from "@/lib/db";
-import { handleError, ok, requireAdmin } from "@/lib/api";
+import { handleError, ok, requireDashboardUser } from "@/lib/api";
 import { deleteImages, uploadImage } from "@/lib/cloudinary";
 import { phones as demoPhones } from "@/lib/demo-data";
 import { enforceRateLimit } from "@/lib/rate-limit";
@@ -47,7 +47,7 @@ export async function GET(request) {
     const status = safeString(searchParams.get("status"));
     const device = safeString(searchParams.get("device"));
     const admin = searchParams.get("admin") === "1";
-    if (admin) await requireAdmin();
+    if (admin) await requireDashboardUser();
     if (status && !["Available", "Sold", "Block"].includes(status)) throw Object.assign(new Error("Invalid product status"), { status: 422 });
     if (device && !deviceFilters.includes(device)) throw Object.assign(new Error("Invalid device filter"), { status: 422 });
 
@@ -86,7 +86,7 @@ export async function POST(request) {
   let images = [];
   try {
     await enforceRateLimit(request, { scope: "phones-write", limit: 30 });
-    await requireAdmin();
+    await requireDashboardUser();
     if (Number(request.headers.get("content-length") || 0) > 70 * 1024 * 1024) throw Object.assign(new Error("Upload is too large"), { status: 413 });
     const form = await request.formData();
     const files = form.getAll("images").filter((file) => file?.size);

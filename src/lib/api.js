@@ -6,11 +6,17 @@ export const ok = (data, status = 200) => NextResponse.json({ success: true, dat
 export const fail = (message, status = 400, details) => NextResponse.json({ success: false, message, ...(details && { details }) }, { status });
 
 export async function requireAdmin() {
+  const payload = await requireDashboardUser();
+  if (payload.role !== "admin") throw Object.assign(new Error("Administrator access required"), { status: 403 });
+  return payload;
+}
+
+export async function requireDashboardUser() {
   const store = await cookies();
   const token = store.get(sessionCookie.name)?.value;
   if (!token) throw Object.assign(new Error("Authentication required"), { status: 401 });
   const payload = verifyToken(token);
-  if (payload.role !== "admin") throw Object.assign(new Error("Administrator access required"), { status: 403 });
+  if (!["admin", "manager"].includes(payload.role)) throw Object.assign(new Error("Dashboard access required"), { status: 403 });
   return payload;
 }
 

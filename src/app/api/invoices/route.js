@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 import mongoose from "mongoose";
 import { connectDB } from "@/lib/db";
-import { handleError, ok, requireAdmin } from "@/lib/api";
+import { handleError, ok, requireDashboardUser } from "@/lib/api";
 import { deleteImages, uploadInvoiceImage } from "@/lib/cloudinary";
 import { invoiceTerms } from "@/lib/invoice";
 import { enforceRateLimit } from "@/lib/rate-limit";
@@ -15,7 +15,7 @@ const serialize = (value) => JSON.parse(JSON.stringify(value));
 export async function GET(request) {
   try {
     await enforceRateLimit(request, { scope: "invoices-read", limit: 120 });
-    await requireAdmin();
+    await requireDashboardUser();
     const { searchParams } = new URL(request.url);
     const limit = 10;
     const requestedPage = Math.max(1, Number(searchParams.get("page")) || 1);
@@ -38,7 +38,7 @@ export async function POST(request) {
   let invoiceImage;
   try {
     await enforceRateLimit(request, { scope: "invoices-write", limit: 30 });
-    await requireAdmin();
+    await requireDashboardUser();
     if (Number(request.headers.get("content-length") || 0) > 14 * 1024 * 1024) throw Object.assign(new Error("Invoice upload is too large"), { status: 413 });
     const form = await request.formData();
     const image = form.get("invoiceImage");
@@ -92,7 +92,7 @@ export async function POST(request) {
 export async function DELETE(request) {
   try {
     await enforceRateLimit(request, { scope: "invoices-delete", limit: 30 });
-    await requireAdmin();
+    await requireDashboardUser();
     const id = new URL(request.url).searchParams.get("id");
     if (!mongoose.isValidObjectId(id)) throw Object.assign(new Error("Invalid invoice"), { status: 422 });
     await connectDB();

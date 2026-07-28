@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
 import { connectDB } from "@/lib/db";
-import { handleError, fail, requireAdmin } from "@/lib/api";
+import { handleError, fail, requireDashboardUser } from "@/lib/api";
 import { phones as demoPhones } from "@/lib/demo-data";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import Phone from "@/models/Phone";
@@ -8,7 +8,7 @@ import Phone from "@/models/Phone";
 export async function GET(request) {
   try {
     await enforceRateLimit(request, { scope: "phones-export", limit: 30 });
-    await requireAdmin();
+    await requireDashboardUser();
 
     const { searchParams } = new URL(request.url);
     const brand = searchParams.get("brand")?.trim();
