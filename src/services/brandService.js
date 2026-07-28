@@ -100,6 +100,23 @@ export async function getBrandCatalog() {
   return serialize(catalog);
 }
 
+export async function getBrandsForAdmin() {
+  if (!process.env.MONGODB_URI) {
+    const categoriesByName = new Map();
+    for (const [category, names] of Object.entries(defaultBrandsByCategory)) {
+      for (const name of names) {
+        const item = categoriesByName.get(name) || { _id: name, name, categories: [], active: true };
+        item.categories.push(category);
+        categoriesByName.set(name, item);
+      }
+    }
+    return [...categoriesByName.values()].sort((a, b) => a.name.localeCompare(b.name));
+  }
+  await ensureDefaultBrands();
+  await connectDB();
+  return serialize(await Brand.find({ active: true }).select("name categories active createdAt updatedAt").sort({ name: 1 }).lean().maxTimeMS(5000));
+}
+
 export async function registerBrand(name, category) {
   const cleanName = normalizeBrandName(name);
   if (!cleanName || !productCategories.includes(category)) {
@@ -111,7 +128,8 @@ export async function registerBrand(name, category) {
   return Brand.findOneAndUpdate(
     { normalizedName: normalizeBrandKey(cleanName) },
     {
-      $setOnInsert: { name: cleanName, normalizedName: normalizeBrandKey(cleanName), active: true },
+      $set: { name: cleanName, active: true },
+      $setOnInsert: { normalizedName: normalizeBrandKey(cleanName) },
       $addToSet: { categories: category },
     },
     { new: true, upsert: true, runValidators: true },
