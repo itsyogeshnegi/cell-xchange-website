@@ -49,11 +49,7 @@ export async function PUT(request) {
     if (!Array.isArray(heroOrder) || !heroOrder.length || heroOrder.length > 8) throw Object.assign(new Error("Keep between 1 and 8 hero images"), { status: 422 });
     for (const file of heroFiles) uploadedImages.push(await uploadSiteImage(file));
     const heroImages = heroOrder.map((item) => {
-      const caption = clean(item?.caption, 120);
-      if (item?.type === "new" && Number.isInteger(item.index)) {
-        const uploaded = uploadedImages[item.index];
-        return uploaded ? { ...uploaded, caption } : null;
-      }
+      if (item?.type === "new" && Number.isInteger(item.index)) return uploadedImages[item.index];
       if (item?.type === "existing") {
         const url = clean(item.url, 1000);
         const publicId = clean(item.publicId, 300);
@@ -61,7 +57,7 @@ export async function PUT(request) {
         if (!validUrl) {
           try { validUrl = new URL(url).hostname === "res.cloudinary.com"; } catch {}
         }
-        if (validUrl && (!publicId || publicId.startsWith("mobile-hub/site/"))) return { url, publicId, caption };
+        if (validUrl && (!publicId || publicId.startsWith("mobile-hub/site/"))) return { url, publicId };
       }
       return null;
     }).filter(Boolean);

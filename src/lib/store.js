@@ -9,9 +9,10 @@ export const store = {
   addressLine2: "Opposite CNG Station, Near Gate No. 3, Gaushala Road",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=140%2F9%20Kishan%20Garh%20Vasant%20Kunj%20Gaushala%20Road",
   brandLogo: { url: "", publicId: "" },
-  heroImage: { url: "/hero-black", publicId: "", caption: "Phones · Accessories · Exchange" },
-  heroImages: [{ url: "/hero-black", publicId: "", caption: "Phones · Accessories · Exchange" }],
+  heroImage: { url: "/hero-black", publicId: "" },
+  heroImages: [{ url: "/hero-black", publicId: "" }],
   heroImageAlt: "Black iPhone available from cell.xchange",
+  heroBannerText: "Phones · Accessories · Exchange",
   heroEyebrow: "Independent mobile store · Vasant Kunj",
   heroTitle: "A better phone.",
   heroTitleAccent: "A simpler choice.",
@@ -84,20 +85,9 @@ export const editableStoreFields = Object.keys(store).filter((key) => ![
 export function createStoreProfile(values = {}) {
   const legacyHero = values.heroImage?.url ? values.heroImage : store.heroImage;
   const heroImages = Array.isArray(values.heroImages)
-    ? values.heroImages
-      .filter((image) => image?.url)
-      .slice(0, 8)
-      .map((image) => ({
-        ...image,
-        caption: typeof image.caption === "string" ? image.caption : "Phones · Accessories · Exchange",
-      }))
+    ? values.heroImages.filter((image) => image?.url).slice(0, 8)
     : [];
-  if (!heroImages.length) {
-    heroImages.push({
-      ...legacyHero,
-      caption: typeof legacyHero.caption === "string" ? legacyHero.caption : "Phones · Accessories · Exchange",
-    });
-  }
+  if (!heroImages.length) heroImages.push(legacyHero);
   const profile = {
     ...store,
     ...values,

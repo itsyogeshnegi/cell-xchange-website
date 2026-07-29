@@ -7,8 +7,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { ArrowDown, ArrowUp, ImagePlus, LoaderCircle, Save, Trash2, UploadCloud, X } from "lucide-react";
 
-const defaultHeroCaption = "Phones · Accessories · Exchange";
-
 const sections = [
   {
     title: "Store profile",
@@ -26,6 +24,7 @@ const sections = [
       ["heroEyebrow", "Eyebrow"], ["heroTitle", "Main heading"], ["heroTitleAccent", "Accent heading"],
       ["heroDescription", "Description", "textarea"], ["heroPrimaryCta", "Primary button"],
       ["heroSecondaryCta", "WhatsApp button"], ["heroImageAlt", "Hero image description"],
+      ["heroBannerText", "Banner text"],
     ],
   },
   {
@@ -101,12 +100,7 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
   const [logoModalOpen, setLogoModalOpen] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [logoInputKey, setLogoInputKey] = useState(0);
-  const [heroItems, setHeroItems] = useState(() => initialHeroImages.map((image, index) => ({
-    ...image,
-    caption: typeof image.caption === "string" ? image.caption : defaultHeroCaption,
-    id: `saved-${image.publicId || index}`,
-    file: null,
-  })));
+  const [heroItems, setHeroItems] = useState(() => initialHeroImages.map((image, index) => ({ ...image, id: `saved-${image.publicId || index}`, file: null })));
   const [heroInputKey, setHeroInputKey] = useState(0);
   const [saving, setSaving] = useState(false);
   const update = (event) => setValues((current) => ({ ...current, [event.target.name]: event.target.value }));
@@ -119,7 +113,6 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
       id: `new-${Date.now()}-${index}`,
       url: URL.createObjectURL(file),
       publicId: "",
-      caption: defaultHeroCaption,
       file,
     }));
     setHeroItems((current) => [...current, ...additions]);
@@ -132,9 +125,6 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
     [next[index], next[target]] = [next[target], next[index]];
     return next;
   });
-  const updateHeroCaption = (index, caption) => setHeroItems((current) => current.map((item, itemIndex) => (
-    itemIndex === index ? { ...item, caption: caption.slice(0, 120) } : item
-  )));
   const removeHero = (index) => setHeroItems((current) => {
     if (current.length === 1) { toast.error("Keep at least one hero image"); return current; }
     const removed = current[index];
@@ -177,20 +167,15 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
       const newHeroItems = heroItems.filter((item) => item.file);
       newHeroItems.forEach((item) => body.append("heroImageFiles", item.file));
       body.append("heroImageOrder", JSON.stringify(heroItems.map((item) => item.file
-        ? { type: "new", index: newHeroItems.indexOf(item), caption: item.caption || "" }
-        : { type: "existing", url: item.url, publicId: item.publicId || "", caption: item.caption || "" })));
+        ? { type: "new", index: newHeroItems.indexOf(item) }
+        : { type: "existing", url: item.url, publicId: item.publicId || "" })));
       const { data } = await axios.put("/api/settings", body);
       if (stagedLogo && data.data.brandLogo?.publicId !== stagedLogo.publicId) throw new Error("Logo URL was not persisted");
       heroItems.filter((item) => item.file).forEach((item) => URL.revokeObjectURL(item.url));
       setValues(data.data);
       setStagedLogo(null);
       setLogoPreview(data.data.brandLogo?.url || "");
-      setHeroItems((data.data.heroImages?.length ? data.data.heroImages : [data.data.heroImage]).map((image, index) => ({
-        ...image,
-        caption: typeof image.caption === "string" ? image.caption : defaultHeroCaption,
-        id: `saved-${image.publicId || index}`,
-        file: null,
-      })));
+      setHeroItems((data.data.heroImages?.length ? data.data.heroImages : [data.data.heroImage]).map((image, index) => ({ ...image, id: `saved-${image.publicId || index}`, file: null })));
       router.refresh();
       toast.success(mode === "profile" ? "Store settings saved" : "Website content saved");
     } catch (error) { toast.error(error.response?.data?.message || "Could not save website content"); }
@@ -222,21 +207,7 @@ export default function SettingsForm({ initialSettings, mode = "content" }) {
         <div className="mt-3 grid gap-3">
           {heroItems.map((item, index) => <div key={item.id} className="grid gap-3 rounded-2xl border border-[#e1e4e1] bg-[#f8f9f7] p-3 sm:grid-cols-[110px_1fr_auto] sm:items-center">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#eceeeb]"><Image src={item.url} fill sizes="110px" className="object-cover" alt={`Hero priority ${index + 1} preview`}/></div>
-            <div>
-              <p className="text-xs font-black">Priority {index + 1}</p>
-              <p className="mt-1 text-[10px] text-[#7a817c]">{item.file ? item.file.name : index === 0 ? "First carousel slide" : `Carousel slide ${index + 1}`}</p>
-              <label className="mt-3 block text-[10px] font-bold text-[#626b64]">
-                Banner text
-                <input
-                  type="text"
-                  value={item.caption || ""}
-                  maxLength={120}
-                  placeholder="Leave empty to hide the text"
-                  onChange={(event) => updateHeroCaption(index, event.target.value)}
-                  className="input mt-1.5 bg-white"
-                />
-              </label>
-            </div>
+            <div><p className="text-xs font-black">Priority {index + 1}</p><p className="mt-1 text-[10px] text-[#7a817c]">{item.file ? item.file.name : index === 0 ? "First carousel slide" : `Carousel slide ${index + 1}`}</p></div>
             <div className="flex items-center gap-1 sm:justify-end">
               <button type="button" onClick={() => moveHero(index, -1)} disabled={index === 0} aria-label={`Move hero image ${index + 1} up`} className="grid size-9 place-items-center rounded-full border border-[#d9ddda] bg-white disabled:opacity-30"><ArrowUp size={15}/></button>
               <button type="button" onClick={() => moveHero(index, 1)} disabled={index === heroItems.length - 1} aria-label={`Move hero image ${index + 1} down`} className="grid size-9 place-items-center rounded-full border border-[#d9ddda] bg-white disabled:opacity-30"><ArrowDown size={15}/></button>

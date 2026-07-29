@@ -39,7 +39,7 @@ export default async function HomePage() {
           </div>
 
           <div className="relative min-h-[510px] overflow-hidden lg:min-h-full">
-            <HeroImageCarousel images={store.heroImages} alt={store.heroImageAlt}/>
+            <HeroImageCarousel images={store.heroImages} alt={store.heroImageAlt} bannerText={store.heroBannerText}/>
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
             <div className="absolute right-6 top-6 border border-white/25 bg-black/80 px-5 py-4 text-white backdrop-blur-sm sm:right-8 sm:top-8">
               <p className="eyebrow text-white/60">{store.days}</p>

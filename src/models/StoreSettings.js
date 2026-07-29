@@ -21,12 +21,10 @@ const storeSettingsSchema = new mongoose.Schema({
   heroImage: {
     url: { type: String, trim: true },
     publicId: { type: String, trim: true },
-    caption: { type: String, trim: true, maxlength: 120, default: "" },
   },
   heroImages: [{
     url: { type: String, required: true, trim: true },
     publicId: { type: String, trim: true, default: "" },
-    caption: { type: String, trim: true, maxlength: 120, default: "" },
     _id: false,
   }],
 }, { timestamps: true });

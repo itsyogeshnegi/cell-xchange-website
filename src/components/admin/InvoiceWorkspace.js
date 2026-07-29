@@ -84,16 +84,16 @@ function InvoicePreview({ form, profile, previewRef }) {
       </section>
 
       <section className="grid flex-1 grid-cols-[minmax(0,1fr)_clamp(90px,22%,220px)] text-[clamp(5px,1.1vw,12px)]">
-        <div className="border-r-2 border-black">
+        <div className="flex min-w-0 flex-col border-r-2 border-black">
           <h3 className="border-b border-black bg-[#e8e8e8] px-[2%] py-[1%] text-center text-[clamp(6px,1.2vw,13px)] font-black">DESCRIPTION OF GOODS</h3>
-          <dl className="grid grid-cols-[clamp(80px,19%,150px)_minmax(0,1fr)] gap-x-[2%] gap-y-[clamp(3px,1vw,12px)] p-[2.5%] leading-[1.45]">
+          <dl className="grid flex-1 grid-cols-[clamp(80px,19%,150px)_minmax(0,1fr)] content-start gap-x-[2%] gap-y-[clamp(3px,1vw,12px)] p-[2.5%] leading-[1.45]">
             <dt className="whitespace-nowrap font-bold">Model</dt><dd className="relative min-w-0 pb-[clamp(3px,.55vw,6px)] leading-[1.25] [overflow-wrap:anywhere] after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-dotted after:border-black">{form.model || "—"}</dd>
             <dt className="whitespace-nowrap font-bold">IMEI No.</dt><dd className="relative min-w-0 pb-[clamp(3px,.55vw,6px)] leading-[1.25] [overflow-wrap:anywhere] after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-dotted after:border-black">{form.imei || "—"}</dd>
             <dt className="whitespace-nowrap font-bold">Color / Details</dt><dd className="relative min-w-0 pb-[clamp(3px,.55vw,6px)] leading-[1.25] [overflow-wrap:anywhere] after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-dotted after:border-black">{form.colorDetails || "—"}</dd>
             <dt className="whitespace-nowrap font-bold">RAM / Capacity</dt><dd className="relative min-w-0 pb-[clamp(3px,.55vw,6px)] leading-[1.25] [overflow-wrap:anywhere] after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-dotted after:border-black">{form.ramCapacity || "—"}</dd>
             <dt className="whitespace-nowrap font-bold">Description</dt><dd className="relative min-w-0 pb-[clamp(3px,.55vw,6px)] leading-[1.25] [overflow-wrap:anywhere] after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-dotted after:border-black">{form.description || "—"}</dd>
-            <dt className="whitespace-nowrap font-bold">Amount in Words</dt><dd className="relative min-w-0 pb-[clamp(3px,.55vw,6px)] font-semibold leading-[1.25] [overflow-wrap:anywhere] after:absolute after:inset-x-0 after:bottom-0 after:border-b after:border-dotted after:border-black">{words}</dd>
           </dl>
+          <div className="flex min-h-[clamp(28px,4.5vw,48px)] items-center border-t-2 border-black px-[2.5%] py-[1.5%] font-semibold leading-[1.25] [overflow-wrap:anywhere]">{words}</div>
         </div>
         <div className="flex flex-col">
           <h3 className="border-b border-black bg-[#e8e8e8] px-[2%] py-[1%] text-center text-[clamp(6px,1.2vw,13px)] font-black">AMOUNT</h3>
