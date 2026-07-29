@@ -9,6 +9,16 @@ import { parsePhoneForm, publicPhoneFields, safeString, validateImageFiles } fro
 import Phone from "@/models/Phone";
 import { registerBrand } from "@/services/brandService";
 
+const slugSuffix = () => globalThis.crypto.randomUUID().replaceAll("-", "").slice(0, 8);
+
+async function uniqueProductSlug(baseSlug) {
+  const used = new Set(await Phone.distinct("slug", { slug: { $regex: `^${baseSlug}(?:-[0-9]+)?$` } }).maxTimeMS(5000));
+  if (!used.has(baseSlug)) return baseSlug;
+  let suffix = 2;
+  while (used.has(`${baseSlug}-${suffix}`)) suffix += 1;
+  return `${baseSlug}-${suffix}`;
+}
+
 function cached(data) {
   const response = ok(data);
   response.headers.set("Cache-Control", "public, s-maxage=30, stale-while-revalidate=300");
@@ -75,7 +85,15 @@ export async function POST(request) {
     await registerBrand(values.brand, values.category);
     images = await Promise.all(files.map(uploadImage));
     await connectDB();
-    const phone = await Phone.create({ ...values, images });
+    values.slug = await uniqueProductSlug(values.slug);
+    let phone;
+    try {
+      phone = await Phone.create({ ...values, images });
+    } catch (error) {
+      if (error.code !== 11000 || (!error.keyPattern?.slug && !error.keyValue?.slug)) throw error;
+      values.slug = `${values.slug}-${slugSuffix()}`;
+      phone = await Phone.create({ ...values, images });
+    }
     revalidateTag("phones", "max");
     return ok(phone, 201);
   } catch (error) {
