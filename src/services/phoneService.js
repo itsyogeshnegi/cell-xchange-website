@@ -5,7 +5,7 @@ import { applyDeviceFilter, matchesDeviceFilter } from "@/lib/device-filters";
 import { phones as demoPhones } from "@/lib/demo-data";
 import Phone from "@/models/Phone";
 
-const PUBLIC_FIELDS = "category brand model slug description price color storage ram battery processor display camera accessories warrantyStatus condition status stock featured latest visible images createdAt updatedAt";
+const PUBLIC_FIELDS = "category brand model slug description price color country storage ram battery processor display camera accessories warrantyStatus condition status stock featured latest visible images createdAt updatedAt";
 const serialize = (value) => JSON.parse(JSON.stringify(value));
 
 const readCachedPhones = (filter, limit) =>

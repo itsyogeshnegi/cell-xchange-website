@@ -14,7 +14,7 @@ import { slugify } from "@/utils/format";
 
 const fields = [
   ["price", "Price (₹)", "119900", "decimal"],
-  ["color", "Colour", "Black"], ["storage", "Storage", "256 GB"], ["ram", "RAM", "8 GB"],
+  ["color", "Colour", "Black"], ["country", "Country", "e.g. India"], ["storage", "Storage", "256 GB"], ["ram", "RAM", "8 GB"],
   ["warrantyStatus", "Warranty status", "12 months manufacturer warranty"],
   ["battery", "Battery health", "e.g. 89%"], ["display", "Display", "Display size and type"],
   ["processor", "Processor", "Processor or chipset"], ["camera", "Camera", "Camera details"],

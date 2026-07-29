@@ -12,9 +12,9 @@ const playwrite = Playwrite_NZ_Basic({
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
-  title: { default: "cell.xchange — Smartphones in Vasant Kunj", template: "%s — cell.xchange" },
+  title: { default: "CellXchange : Pre-Owned Phones and other Gadgets", template: "%s — CellXchange" },
   description: "Browse verified smartphones and visit cell.xchange in Kishan Garh, Vasant Kunj. Open all seven days, 12 p.m. to 10 p.m.",
-  openGraph: { title: "cell.xchange", description: "The right phone. No sales noise.", type: "website" },
+  openGraph: { title: "CellXchange : Pre-Owned Phones and other Gadgets", description: "The right phone. No sales noise.", type: "website" },
 };
 
 export default function RootLayout({ children }) {

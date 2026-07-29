@@ -8,7 +8,7 @@ const phoneSchema = new mongoose.Schema({
   slug: { type: String, required: true, unique: true, lowercase: true, trim: true },
   description: { type: String, default: "", maxlength: 4000 },
   price: { type: Number, required: true, min: 0 },
-  color: { type: String, trim: true, default: "" }, storage: { type: String, trim: true, default: "", index: true }, ram: { type: String, trim: true, default: "" },
+  color: { type: String, trim: true, default: "" }, country: { type: String, trim: true, default: "", maxlength: 80 }, storage: { type: String, trim: true, default: "", index: true }, ram: { type: String, trim: true, default: "" },
   battery: String, processor: String, display: String, camera: String,
   accessories: { type: [{ type: String, trim: true, maxlength: 80 }], default: [], validate: { validator(items) { return items.length <= 20; }, message: "Use up to 20 accessories" } },
   warrantyStatus: { type: String, trim: true, default: "Not specified", maxlength: 120 },

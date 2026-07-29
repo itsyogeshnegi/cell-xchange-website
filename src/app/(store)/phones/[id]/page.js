@@ -21,6 +21,7 @@ export default async function PhoneDetails({ params }) {
   const details = [
     ["Brand", phone.brand],
     ["Model", phone.model],
+    ["Country", phone.country || "Not specified"],
     ["RAM / Storage", [phone.ram, phone.storage].filter(Boolean).join(" / ")],
     ["Warranty status", phone.warrantyStatus || "Not specified"],
     ["Battery health", phone.battery || "Not specified"],

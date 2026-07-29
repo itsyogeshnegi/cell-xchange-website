@@ -1,7 +1,7 @@
 import { slugify } from "@/utils/format";
 
 export const allowedImageTypes = ["image/jpeg", "image/png", "image/webp", "image/avif"];
-export const publicPhoneFields = "category brand model slug description price color storage ram battery processor display camera accessories warrantyStatus condition status stock featured latest visible images createdAt updatedAt";
+export const publicPhoneFields = "category brand model slug description price color country storage ram battery processor display camera accessories warrantyStatus condition status stock featured latest visible images createdAt updatedAt";
 export const safeString = (value, max = 80) => String(value || "").trim().slice(0, max);
 
 export function parsePhoneForm(form) {
@@ -17,7 +17,7 @@ export function parsePhoneForm(form) {
     brand: brand === "__custom__" ? undefined : brand, model: safeString(form.get("model")),
     slug: slugify(safeString(form.get("slug") || form.get("model"))),
     description: safeString(form.get("description"), 4000), price: form.get("price") === null || form.get("price") === "" ? undefined : number("price"),
-    color: safeString(form.get("color")), storage: safeString(form.get("storage")), ram: safeString(form.get("ram")),
+    color: safeString(form.get("color")), country: safeString(form.get("country")), storage: safeString(form.get("storage")), ram: safeString(form.get("ram")),
     battery: safeString(form.get("battery")), processor: safeString(form.get("processor")), display: safeString(form.get("display")), camera: safeString(form.get("camera")),
     accessories,
     warrantyStatus: safeString(form.get("warrantyStatus"), 120) || "Not specified",
