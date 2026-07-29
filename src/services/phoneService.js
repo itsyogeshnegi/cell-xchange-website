@@ -5,13 +5,23 @@ import { applyDeviceFilter, matchesDeviceFilter } from "@/lib/device-filters";
 import { phones as demoPhones } from "@/lib/demo-data";
 import Phone from "@/models/Phone";
 
-const PUBLIC_FIELDS = "category brand model slug description price color country storage ram battery processor display camera accessories warrantyStatus condition status stock featured latest visible images createdAt updatedAt";
+const PUBLIC_FIELDS = "category brand model slug description price color country storage ram battery processor display camera accessories warrantyStatus condition status stock featured featuredPriority latest visible images createdAt updatedAt";
 const serialize = (value) => JSON.parse(JSON.stringify(value));
 
 const readCachedPhones = (filter, limit) =>
   unstable_cache(
     async () => {
       await connectDB();
+      if (filter.featured === true && limit) {
+        const prioritized = await Phone.find({ ...filter, featuredPriority: { $gte: 1, $lte: 100 } }).select(PUBLIC_FIELDS).sort({ featuredPriority: 1, createdAt: -1 }).limit(limit).lean().maxTimeMS(5000);
+        if (prioritized.length >= limit) return serialize(prioritized);
+        const fallback = await Phone.find({
+          ...filter,
+          _id: { $nin: prioritized.map((phone) => phone._id) },
+          $or: [{ featuredPriority: { $exists: false } }, { featuredPriority: null }, { featuredPriority: { $gt: 100 } }],
+        }).select(PUBLIC_FIELDS).sort({ createdAt: -1 }).limit(limit - prioritized.length).lean().maxTimeMS(5000);
+        return serialize([...prioritized, ...fallback]);
+      }
       let query = Phone.find(filter).select(PUBLIC_FIELDS).sort({ createdAt: -1 }).lean().maxTimeMS(5000);
       if (limit) query = query.limit(limit);
       return serialize(await query);
@@ -61,7 +71,10 @@ const readCachedFacets = unstable_cache(async () => {
 export async function getPhones(filter = {}, limit = 12) {
   const safeLimit = Math.min(Math.max(1, Number(limit) || 12), 50);
   if (!process.env.MONGODB_URI) {
-    return demoPhones.filter((phone) => Object.entries(filter).every(([key, value]) => phone[key] === value)).slice(0, safeLimit);
+    return demoPhones
+      .filter((phone) => Object.entries(filter).every(([key, value]) => phone[key] === value))
+      .sort((a, b) => filter.featured ? (a.featuredPriority || 999) - (b.featuredPriority || 999) : 0)
+      .slice(0, safeLimit);
   }
   return readCachedPhones({ visible: { $ne: false }, ...filter }, safeLimit);
 }
@@ -93,6 +106,24 @@ export async function getPhoneFacets({ admin = false } = {}) {
     return { brands: brands.sort(), storages: storages.sort() };
   }
   return readCachedFacets();
+}
+
+export async function getFeaturedProductsForAdmin() {
+  if (!process.env.MONGODB_URI) {
+    return demoPhones
+      .filter((phone) => phone.featured)
+      .sort((a, b) => (a.featuredPriority || 999) - (b.featuredPriority || 999));
+  }
+  await connectDB();
+  const products = serialize(await Phone.find({ featured: true })
+    .select("brand model images featuredPriority createdAt")
+    .lean()
+    .maxTimeMS(5000));
+  return products.sort((a, b) => {
+    const priorityA = a.featuredPriority >= 1 && a.featuredPriority <= 100 ? a.featuredPriority : 999;
+    const priorityB = b.featuredPriority >= 1 && b.featuredPriority <= 100 ? b.featuredPriority : 999;
+    return priorityA - priorityB || new Date(b.createdAt) - new Date(a.createdAt);
+  });
 }
 
 export async function getBrandStats() {

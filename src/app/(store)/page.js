@@ -19,7 +19,7 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const store = await getStoreProfile();
-  const phones = await getPhones({}, 8);
+  const phones = await getPhones({ featured: true }, 8);
   const stockUpdatesUrl = `https://wa.me/${store.phoneE164.replace("+", "")}?text=${encodeURIComponent(`Hi ${store.name}, please share your latest phone stock and offers.`)}`;
   const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(`${store.name}, ${store.addressLine1}, ${store.addressLine2}`)}&output=embed`;
 
@@ -45,7 +45,6 @@ export default async function HomePage() {
               <p className="eyebrow text-white/60">{store.days}</p>
               <p className="mt-2 text-sm font-bold">{store.hours}</p>
             </div>
-            <p className="eyebrow absolute bottom-7 left-7 text-white/70 sm:bottom-9 sm:left-9">Phones · Accessories · Exchange</p>
           </div>
         </div>
       </section>

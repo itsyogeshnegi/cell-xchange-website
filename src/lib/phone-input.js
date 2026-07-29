@@ -1,11 +1,12 @@
 import { slugify } from "@/utils/format";
 
 export const allowedImageTypes = ["image/jpeg", "image/png", "image/webp", "image/avif"];
-export const publicPhoneFields = "category brand model slug description price color country storage ram battery processor display camera accessories warrantyStatus condition status stock featured latest visible images createdAt updatedAt";
+export const publicPhoneFields = "category brand model slug description price color country storage ram battery processor display camera accessories warrantyStatus condition status stock featured featuredPriority latest visible images createdAt updatedAt";
 export const safeString = (value, max = 80) => String(value || "").trim().slice(0, max);
 
 export function parsePhoneForm(form) {
   const number = (key) => Number(form.get(key) || 0);
+  const featured = form.get("featured") === "true";
   const brand = safeString(form.get("brand"));
   const accessories = safeString(form.get("accessories"), 1000)
     .split(",")
@@ -25,7 +26,9 @@ export function parsePhoneForm(form) {
     status: safeString(form.get("status")) || undefined,
     imei: safeString(form.get("imei"), 15) || undefined,
     imei2: safeString(form.get("imei2"), 15) || undefined,
-    featured: form.get("featured") === "true", latest: form.get("latest") === "true", visible: form.get("visible") !== "false",
+    featured,
+    featuredPriority: featured ? Math.min(100, Math.max(1, number("featuredPriority") || 100)) : 999,
+    latest: form.get("latest") === "true", visible: form.get("visible") !== "false",
   };
 }
 

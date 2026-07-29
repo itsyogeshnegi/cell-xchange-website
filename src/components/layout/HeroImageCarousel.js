@@ -44,6 +44,13 @@ export default function HeroImageCarousel({ images = [], alt = "Store hero image
         className="object-cover object-center"
       />
     </div>)}
+    {slides[visibleSlide].caption && <p
+      key={slides[visibleSlide].publicId || slides[visibleSlide].url}
+      className="eyebrow absolute bottom-7 left-7 z-10 max-w-[calc(100%-8rem)] text-white/70 sm:bottom-9 sm:left-9"
+      aria-live="polite"
+    >
+      {slides[visibleSlide].caption}
+    </p>}
     {slides.length > 1 && <>
       <button type="button" onClick={() => goTo(visibleSlide - 1)} aria-label="Show previous hero image" className="absolute left-4 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-white/30 bg-black/45 text-white backdrop-blur-sm transition hover:bg-black/75"><ChevronLeft size={19}/></button>
       <button type="button" onClick={() => goTo(visibleSlide + 1)} aria-label="Show next hero image" className="absolute right-4 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-white/30 bg-black/45 text-white backdrop-blur-sm transition hover:bg-black/75"><ChevronRight size={19}/></button>

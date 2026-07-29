@@ -47,7 +47,7 @@ const initialForm = (invoiceDate, invoiceNumber) => ({
 function InvoicePreview({ form, profile, previewRef }) {
   const words = amountInWords(form.amount);
   const terms = String(profile.invoiceTermsText || "").split(/\r?\n/).map((term) => term.trim()).filter(Boolean);
-  return <div ref={previewRef} className="mx-auto aspect-[297/210] w-full overflow-hidden bg-white text-black" style={{ fontFamily: "Arial, sans-serif" }}>
+  return <div ref={previewRef} className="mx-auto aspect-[210/297] w-full overflow-hidden bg-white text-black" style={{ fontFamily: "Arial, sans-serif" }}>
     <div className="flex h-full flex-col border-2 border-black p-[3.2%]">
       <header className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)] gap-[2%] border-b-2 border-black pb-[1.5%]">
         <div className="flex min-w-0 items-center gap-5">
@@ -149,8 +149,11 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
 
   const exportCanvasToPdf = async (canvas, invoiceNumber) => {
     const { jsPDF } = await import("jspdf");
-    const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4", compress: true });
-    pdf.addImage(canvas.toDataURL("image/jpeg", .96), "JPEG", 0, 0, 297, 210, undefined, "FAST");
+    const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4", compress: true });
+    const scale = Math.min(210 / canvas.width, 297 / canvas.height);
+    const width = canvas.width * scale;
+    const height = canvas.height * scale;
+    pdf.addImage(canvas.toDataURL("image/jpeg", .96), "JPEG", (210 - width) / 2, (297 - height) / 2, width, height, undefined, "FAST");
     pdf.save(`invoice-${invoiceNumber}.pdf`);
   };
 
@@ -159,9 +162,18 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
       const response = await fetch(invoice.image.url);
       const blob = await response.blob();
       const dataUrl = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(blob); });
+      const dimensions = await new Promise((resolve, reject) => {
+        const image = document.createElement("img");
+        image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
+        image.onerror = reject;
+        image.src = dataUrl;
+      });
       const { jsPDF } = await import("jspdf");
-      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4", compress: true });
-      pdf.addImage(dataUrl, "PNG", 0, 0, 297, 210, undefined, "FAST");
+      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4", compress: true });
+      const scale = Math.min(210 / dimensions.width, 297 / dimensions.height);
+      const width = dimensions.width * scale;
+      const height = dimensions.height * scale;
+      pdf.addImage(dataUrl, "PNG", (210 - width) / 2, (297 - height) / 2, width, height, undefined, "FAST");
       pdf.save(`invoice-${invoice.invoiceNumber}.pdf`);
     } catch { toast.error("Could not download this invoice PDF"); }
   };
@@ -292,8 +304,8 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
       </form>
 
       <section className="mt-6 rounded-[22px] border border-[#dfe2df] bg-[#eceeeb] p-2.5 sm:p-6">
-        <div className="mb-4"><h2 className="text-sm font-black">Live invoice preview</h2><p className="mt-1 text-[10px] text-[#747c76]">Responsive A4 landscape preview · This exact layout is exported and archived.</p></div>
-        <div className="w-full overflow-hidden shadow-xl"><InvoicePreview form={form} profile={profile} previewRef={previewRef}/></div>
+        <div className="mb-4"><h2 className="text-sm font-black">Live invoice preview</h2><p className="mt-1 text-[10px] text-[#747c76]">Responsive A4 portrait preview · This exact layout is exported and archived.</p></div>
+        <div className="mx-auto w-full max-w-[760px] overflow-hidden shadow-xl"><InvoicePreview form={form} profile={profile} previewRef={previewRef}/></div>
       </section>
     </div>}
 
@@ -320,12 +332,12 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
     </div>}
 
     {previewInvoice && <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/75 p-3 sm:p-6" role="dialog" aria-modal="true" aria-label={`Invoice ${previewInvoice.invoiceNumber} preview`} onClick={() => setPreviewInvoice(null)}>
-      <div className="w-full max-w-6xl overflow-hidden rounded-2xl bg-white shadow-2xl" onClick={(event) => event.stopPropagation()}>
+      <div className="w-full max-w-[800px] overflow-hidden rounded-2xl bg-white shadow-2xl" onClick={(event) => event.stopPropagation()}>
         <div className="flex items-center justify-between gap-3 border-b px-4 py-3 sm:px-5">
           <div className="min-w-0"><h2 className="truncate text-sm font-black">{previewInvoice.invoiceNumber}</h2><p className="mt-0.5 truncate text-[10px] text-[#747c76]">{previewInvoice.customerName} · {previewInvoice.model}</p></div>
           <div className="flex shrink-0 items-center gap-2"><a href={previewInvoice.image.url} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center gap-2 rounded-full border px-3 text-[10px] font-bold"><ExternalLink size={14}/><span className="hidden sm:inline">Open original</span></a><button type="button" onClick={() => setPreviewInvoice(null)} aria-label="Close invoice preview" className="grid h-9 w-9 place-items-center rounded-full bg-[#f0f2f0]"><X size={16}/></button></div>
         </div>
-        <div className="relative aspect-[297/210] max-h-[calc(100vh-120px)] w-full bg-[#eceeeb]"><Image src={previewInvoice.image.url} fill priority sizes="(max-width: 768px) 100vw, 1152px" className="object-contain" alt={`Full invoice ${previewInvoice.invoiceNumber}`}/></div>
+        <div className="relative mx-auto aspect-[210/297] max-h-[calc(100vh-120px)] w-full max-w-[760px] bg-[#eceeeb]"><Image src={previewInvoice.image.url} fill priority sizes="(max-width: 768px) 100vw, 760px" className="object-contain" alt={`Full invoice ${previewInvoice.invoiceNumber}`}/></div>
       </div>
     </div>}
   </div>;
