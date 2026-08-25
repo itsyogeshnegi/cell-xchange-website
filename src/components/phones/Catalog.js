@@ -31,7 +31,7 @@ export default function Catalog({ initialPage, initialDevice = "All" }) {
     setLoading(true);
     const controller = new AbortController();
     const timer = setTimeout(async () => {
-      const params = new URLSearchParams({ page: "1", limit: "12" });
+      const params = new URLSearchParams({ page: "1", limit: "12", sort: "price-desc" });
       if (deferredQuery) params.set("q", deferredQuery);
       if (device !== "All") params.set("device", device);
       try {
@@ -62,7 +62,7 @@ export default function Catalog({ initialPage, initialDevice = "All" }) {
     const controller = new AbortController();
     loadMoreAbortRef.current = controller;
     const nextPage = loadedPage + 1;
-    const params = new URLSearchParams({ page: String(nextPage), limit: "12" });
+    const params = new URLSearchParams({ page: String(nextPage), limit: "12", sort: "price-desc" });
     if (deferredQuery) params.set("q", deferredQuery);
     if (device !== "All") params.set("device", device);
     try {

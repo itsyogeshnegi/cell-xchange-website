@@ -36,6 +36,7 @@ export async function GET(request) {
     const storage = safeString(searchParams.get("storage"));
     const status = safeString(searchParams.get("status"));
     const device = safeString(searchParams.get("device"));
+    const sortName = searchParams.get("sort");
     const admin = searchParams.get("admin") === "1";
     if (admin) await requireDashboardUser();
     if (status && !["Available", "Sold", "Block"].includes(status)) throw Object.assign(new Error("Invalid product status"), { status: 422 });
@@ -50,6 +51,7 @@ export async function GET(request) {
           && (!status || productStatus === status)
           && matchesDeviceFilter(phone, device);
       });
+      items.sort((a, b) => sortName === "price-asc" ? a.price - b.price : sortName === "price-desc" ? b.price - a.price : new Date(b.createdAt) - new Date(a.createdAt));
       const total = items.length;
       items = items.slice((page - 1) * limit, page * limit);
       return cached({ items, total, page, pages: Math.max(1, Math.ceil(total / limit)) });
@@ -62,7 +64,6 @@ export async function GET(request) {
     if (storage) filter.storage = storage;
     if (status) filter.status = status;
     applyDeviceFilter(filter, device);
-    const sortName = searchParams.get("sort");
     const sort = sortName === "price-asc" ? { price: 1, _id: 1 } : sortName === "price-desc" ? { price: -1, _id: -1 } : { createdAt: -1, _id: -1 };
     const [items, total] = await Promise.all([
       Phone.find(filter).select(publicPhoneFields).sort(sort).skip((page - 1) * limit).limit(limit).lean().maxTimeMS(5000),
