@@ -23,7 +23,7 @@ export async function GET(request) {
     const totalPages = Math.max(1, Math.ceil(total / limit));
     const page = Math.min(requestedPage, totalPages);
     const items = await Invoice.find({})
-      .select("invoiceNumber invoiceDate customerName customerMobile paymentMode model amount amountInWords image store createdAt")
+      .select("invoiceNumber invoiceDate customerName customerAddress customerMobile paymentMode model amount amountInWords image store createdAt")
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
@@ -48,6 +48,7 @@ export async function POST(request) {
       invoiceNumber: clean(form.get("invoiceNumber"), 40).toUpperCase(),
       invoiceDate: new Date(clean(form.get("invoiceDate"), 30)),
       customerName: clean(form.get("customerName"), 120),
+      customerAddress: clean(form.get("customerAddress"), 240),
       customerMobile: clean(form.get("customerMobile"), 20),
       paymentMode: clean(form.get("paymentMode"), 30),
       model: clean(form.get("model"), 160),

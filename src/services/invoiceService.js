@@ -10,7 +10,7 @@ export async function getInvoiceHistory(page = 1, limit = 10) {
   await connectDB();
   const [items, total] = await Promise.all([
     Invoice.find({})
-      .select("invoiceNumber invoiceDate customerName customerMobile paymentMode model amount image createdAt")
+      .select("invoiceNumber invoiceDate customerName customerAddress customerMobile paymentMode model amount image createdAt")
       .sort({ createdAt: -1 })
       .skip((safePage - 1) * safeLimit)
       .limit(safeLimit)

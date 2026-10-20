@@ -8,6 +8,6 @@ export const metadata = { title: "Inventory" };
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const initialPage = await getPhonePage({ limit: 10, admin: true });
+  const initialPage = await getPhonePage({ limit: 12, admin: true });
   return <div className="mx-auto max-w-7xl"><PhonesTable initialPage={initialPage}/></div>;
 }

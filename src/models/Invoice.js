@@ -20,6 +20,7 @@ const invoiceSchema = new mongoose.Schema({
   invoiceNumber: { type: String, required: true, unique: true, trim: true, uppercase: true, maxlength: 40 },
   invoiceDate: { type: Date, required: true, index: true },
   customerName: { type: String, required: true, trim: true, maxlength: 120 },
+  customerAddress: { type: String, trim: true, maxlength: 240, default: "" },
   customerMobile: { type: String, required: true, trim: true, maxlength: 20 },
   paymentMode: { type: String, required: true, enum: ["Cash", "UPI", "Card", "Bank Transfer", "Other"] },
   model: { type: String, required: true, trim: true, maxlength: 160 },

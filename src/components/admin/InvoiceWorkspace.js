@@ -34,6 +34,7 @@ const initialForm = (invoiceDate, invoiceNumber) => ({
   invoiceNumber,
   invoiceDate,
   customerName: "",
+  customerAddress: "",
   customerMobile: "",
   paymentMode: "Cash",
   model: "",
@@ -72,10 +73,11 @@ function InvoicePreview({ form, profile, previewRef }) {
       </header>
 
       <section className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)] border-b-2 border-black text-[clamp(5px,1.1vw,12px)]">
-        <div className="grid grid-cols-2 gap-x-[3%] border-r-2 border-black p-[2%]">
+        <div className="grid grid-cols-2 gap-x-[3%] gap-y-[1.5px] border-r-2 border-black p-[2%]">
           <p><strong>M/s.</strong> {form.customerName || "—"}</p>
           <p><strong>Mob.</strong> {form.customerMobile || "—"}</p>
-          <p className="col-span-2 mt-2"><strong>Mode of Payment:</strong> {form.paymentMode}</p>
+          <p className="col-span-2 [overflow-wrap:anywhere]"><strong>Address:</strong> {form.customerAddress || "—"}</p>
+          <p className="col-span-2"><strong>Mode of Payment:</strong> {form.paymentMode}</p>
         </div>
         <div className="grid min-w-0 grid-cols-[1.35fr_.65fr]">
           <p className="min-w-0 border-r border-black p-[5%] leading-[1.35]"><strong>Sr. No.</strong><br/><span className="[overflow-wrap:anywhere]">{form.invoiceNumber}</span></p>
@@ -158,28 +160,26 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
   };
 
   const downloadHistoryPdf = async (invoice) => {
+    const toastId = toast.loading("Preparing PDF...");
     try {
       const response = await fetch(invoice.image.url);
       const blob = await response.blob();
-      const dataUrl = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(blob); });
-      const dimensions = await new Promise((resolve, reject) => {
-        const image = document.createElement("img");
-        image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
-        image.onerror = reject;
-        image.src = dataUrl;
-      });
-      const { jsPDF } = await import("jspdf");
-      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4", compress: true });
-      const scale = Math.min(210 / dimensions.width, 297 / dimensions.height);
-      const width = dimensions.width * scale;
-      const height = dimensions.height * scale;
-      pdf.addImage(dataUrl, "PNG", (210 - width) / 2, (297 - height) / 2, width, height, undefined, "FAST");
-      pdf.save(`invoice-${invoice.invoiceNumber}.pdf`);
-    } catch { toast.error("Could not download this invoice PDF"); }
+      const bitmap = await createImageBitmap(blob);
+      const canvas = document.createElement("canvas");
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      const context = canvas.getContext("2d");
+      context.drawImage(bitmap, 0, 0);
+      bitmap.close();
+      await exportCanvasToPdf(canvas, invoice.invoiceNumber);
+      toast.success("Invoice PDF downloaded", { id: toastId });
+    } catch {
+      toast.error("Could not download PDF. Opening image instead.", { id: toastId });
+      window.open(invoice.image.url, "_blank", "noopener,noreferrer");
+    }
   };
 
   const loadHistoryPage = async (page) => {
-    if (historyLoading || page < 1 || page > pagination.totalPages) return;
     setHistoryLoading(true);
     try {
       const { data } = await axios.get("/api/invoices", { params: { page } });
@@ -251,10 +251,14 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
 
       <div className="mt-5 hidden max-h-[560px] overflow-auto rounded-xl border border-[#e8eae8] sm:block">
         <table className="w-full min-w-[620px] text-left">
-          <thead className="sticky top-0 bg-[#f7f8f6] text-[9px] uppercase tracking-wider text-[#838a85]"><tr><th className="px-4 py-3">Invoice</th><th>Customer</th><th>Image</th><th>Amount</th><th className="pr-4 text-right">Actions</th></tr></thead>
+          <thead className="sticky top-0 bg-[#f7f8f6] text-[9px] uppercase tracking-wider text-[#838a85]"><tr><th className="px-4 py-3">Invoice</th><th>Customer &amp; Address</th><th>Image</th><th>Amount</th><th className="pr-4 text-right">Actions</th></tr></thead>
           <tbody>{history.map((invoice) => <tr key={invoice._id} className="border-t border-[#eceeec] text-[10px]">
             <td className="px-4 py-3"><strong className="block break-all">{invoice.invoiceNumber}</strong><span className="mt-1 block text-[#858c87]">{new Date(invoice.invoiceDate).toLocaleDateString("en-IN")}</span></td>
-            <td><strong className="block">{invoice.customerName}</strong><span className="mt-1 block text-[#858c87]">{invoice.model}</span></td>
+            <td>
+              <strong className="block">{invoice.customerName}</strong>
+              {invoice.customerAddress && <span className="mt-0.5 block max-w-[220px] truncate text-[9px] text-[#717873]">{invoice.customerAddress}</span>}
+              <span className="mt-0.5 block text-[#858c87]">{invoice.model}</span>
+            </td>
             <td><button type="button" onClick={() => setPreviewInvoice(invoice)} aria-label={`Preview invoice ${invoice.invoiceNumber}`} className="relative block h-12 w-16 overflow-hidden rounded-lg border bg-white transition hover:border-[#173f2c] hover:shadow-md"><Image src={invoice.image.url} fill sizes="64px" className="object-contain" alt={`Invoice ${invoice.invoiceNumber}`}/></button></td>
             <td className="font-bold">{formatPrice(invoice.amount)}</td>
             <td className="pr-4"><div className="flex justify-end gap-1"><a href={invoice.image.url} target="_blank" rel="noreferrer" aria-label="Open invoice image" className="grid h-9 w-9 place-items-center rounded-full hover:bg-[#f0f2f0]"><ExternalLink size={14}/></a><button type="button" onClick={() => downloadHistoryPdf(invoice)} aria-label="Download invoice PDF" className="grid h-9 w-9 place-items-center rounded-full hover:bg-[#f0f2f0]"><Download size={14}/></button><button type="button" disabled={Boolean(deletingId)} onClick={() => setDeleteTarget(invoice)} aria-label={`Delete invoice ${invoice.invoiceNumber}`} className="grid h-9 w-9 place-items-center rounded-full text-[#b33a3a] hover:bg-[#fff0f0] disabled:opacity-40">{deletingId === invoice._id ? <LoaderCircle size={14} className="animate-spin"/> : <Trash2 size={14}/>}</button></div></td>
@@ -267,7 +271,11 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
         {history.map((invoice) => <article key={invoice._id} className="rounded-2xl border border-[#e8eae8] p-3">
           <div className="flex items-start gap-3">
             <button type="button" onClick={() => setPreviewInvoice(invoice)} aria-label={`Preview invoice ${invoice.invoiceNumber}`} className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl border bg-white"><Image src={invoice.image.url} fill sizes="80px" className="object-contain" alt={`Invoice ${invoice.invoiceNumber}`}/></button>
-            <div className="min-w-0 flex-1"><strong className="block break-all text-[11px]">{invoice.invoiceNumber}</strong><p className="mt-1 text-[10px] text-[#747c76]">{invoice.customerName} · {invoice.model}</p><p className="mt-2 text-xs font-black">{formatPrice(invoice.amount)}</p></div>
+            <div className="min-w-0 flex-1">
+              <strong className="block break-all text-[11px]">{invoice.invoiceNumber}</strong>
+              <p className="mt-1 text-[10px] text-[#747c76]">{invoice.customerName}{invoice.customerAddress ? ` · ${invoice.customerAddress}` : ""} · {invoice.model}</p>
+              <p className="mt-2 text-xs font-black">{formatPrice(invoice.amount)}</p>
+            </div>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-2"><a href={invoice.image.url} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-1.5 rounded-xl border px-2 py-2.5 text-[9px] font-bold"><ExternalLink size={13}/>Image</a><button type="button" onClick={() => downloadHistoryPdf(invoice)} className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#f0f2f0] px-2 py-2.5 text-[9px] font-bold"><Download size={13}/>PDF</button><button type="button" disabled={Boolean(deletingId)} onClick={() => setDeleteTarget(invoice)} className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#fff0f0] px-2 py-2.5 text-[9px] font-bold text-[#b33a3a] disabled:opacity-40">{deletingId === invoice._id ? <LoaderCircle size={13} className="animate-spin"/> : <Trash2 size={13}/>}Delete</button></div>
         </article>)}
@@ -291,6 +299,7 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
           <label className="text-[11px] font-bold">Date *<input name="invoiceDate" type="date" required value={form.invoiceDate} onChange={update} className="input mt-2"/></label>
           <label className="text-[11px] font-bold">Customer / M/s. *<input name="customerName" required value={form.customerName} onChange={update} placeholder="Customer name" className="input mt-2"/></label>
           <label className="text-[11px] font-bold">Mobile *<input name="customerMobile" required inputMode="numeric" value={form.customerMobile} onChange={numericUpdate("customerMobile", 10)} placeholder="10-digit mobile" className="input mt-2"/></label>
+          <label className="text-[11px] font-bold sm:col-span-2">Customer Address<input name="customerAddress" value={form.customerAddress} onChange={update} placeholder="Customer street address, city, state, pincode" className="input mt-2"/></label>
           <label className="text-[11px] font-bold">Mode of payment *<select name="paymentMode" value={form.paymentMode} onChange={update} className="input mt-2"><option>Cash</option><option>UPI</option><option>Card</option><option>Bank Transfer</option><option>Other</option></select></label>
           <label className="text-[11px] font-bold">Model *<input name="model" required value={form.model} onChange={update} placeholder="Device model" className="input mt-2"/></label>
           <label className="text-[11px] font-bold">IMEI No. <span className="font-normal text-[#909791]">(optional, 15 digits)</span><input name="imei" inputMode="numeric" value={form.imei} onChange={numericUpdate("imei", 15)} placeholder="15-digit IMEI" className="input mt-2"/></label>
@@ -320,7 +329,7 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
           <p id="delete-invoice-description" className="mt-2 text-xs leading-6 text-[#6f7771]">This permanently removes the invoice record from MongoDB and deletes its archived image from Cloudinary. This action cannot be undone.</p>
           <div className="mt-5 rounded-2xl border border-[#e7e9e7] bg-[#f7f8f6] p-4">
             <p className="break-all text-xs font-black">{deleteTarget.invoiceNumber}</p>
-            <p className="mt-1 text-[10px] text-[#747c76]">{deleteTarget.customerName} · {deleteTarget.model}</p>
+            <p className="mt-1 text-[10px] text-[#747c76]">{deleteTarget.customerName}{deleteTarget.customerAddress ? ` · ${deleteTarget.customerAddress}` : ""} · {deleteTarget.model}</p>
             <p className="mt-2 text-sm font-black">{formatPrice(deleteTarget.amount)}</p>
           </div>
         </div>
@@ -334,7 +343,7 @@ export default function InvoiceWorkspace({ initialHistory, initialPagination, in
     {previewInvoice && <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/75 p-3 sm:p-6" role="dialog" aria-modal="true" aria-label={`Invoice ${previewInvoice.invoiceNumber} preview`} onClick={() => setPreviewInvoice(null)}>
       <div className="w-full max-w-[800px] overflow-hidden rounded-2xl bg-white shadow-2xl" onClick={(event) => event.stopPropagation()}>
         <div className="flex items-center justify-between gap-3 border-b px-4 py-3 sm:px-5">
-          <div className="min-w-0"><h2 className="truncate text-sm font-black">{previewInvoice.invoiceNumber}</h2><p className="mt-0.5 truncate text-[10px] text-[#747c76]">{previewInvoice.customerName} · {previewInvoice.model}</p></div>
+          <div className="min-w-0"><h2 className="truncate text-sm font-black">{previewInvoice.invoiceNumber}</h2><p className="mt-0.5 truncate text-[10px] text-[#747c76]">{previewInvoice.customerName}{previewInvoice.customerAddress ? ` · ${previewInvoice.customerAddress}` : ""} · {previewInvoice.model}</p></div>
           <div className="flex shrink-0 items-center gap-2"><a href={previewInvoice.image.url} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center gap-2 rounded-full border px-3 text-[10px] font-bold"><ExternalLink size={14}/><span className="hidden sm:inline">Open original</span></a><button type="button" onClick={() => setPreviewInvoice(null)} aria-label="Close invoice preview" className="grid h-9 w-9 place-items-center rounded-full bg-[#f0f2f0]"><X size={16}/></button></div>
         </div>
         <div className="relative mx-auto aspect-[210/297] max-h-[calc(100vh-120px)] w-full max-w-[760px] bg-[#eceeeb]"><Image src={previewInvoice.image.url} fill priority sizes="(max-width: 768px) 100vw, 760px" className="object-contain" alt={`Full invoice ${previewInvoice.invoiceNumber}`}/></div>
