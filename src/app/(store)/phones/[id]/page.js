@@ -93,9 +93,8 @@ export default async function PhoneDetails({ params }) {
               <span className="text-3xl font-semibold tracking-[-.04em]">{formatPrice(phone.price)}</span>
             </div>
             <div
-              className={`mt-5 inline-flex items-center gap-2 border px-3 py-2 text-[10px] font-bold uppercase tracking-[.1em] ${
-                available ? "border-[#b9d9c3] bg-[#f0f8f2] text-[#24613d]" : "border-[#e5cccc] bg-[#faf2f2] text-[#8a3838]"
-              }`}
+              className={`mt-5 inline-flex items-center gap-2 border px-3 py-2 text-[10px] font-bold uppercase tracking-[.1em] ${available ? "border-[#b9d9c3] bg-[#f0f8f2] text-[#24613d]" : "border-[#e5cccc] bg-[#faf2f2] text-[#8a3838]"
+                }`}
             >
               <span className={`h-1.5 w-1.5 rounded-full ${available ? "bg-[#37a35f]" : "bg-[#b85454]"}`} />
               {status}
@@ -108,7 +107,7 @@ export default async function PhoneDetails({ params }) {
               className="group mt-9 flex w-full items-center justify-center gap-2.5 bg-black px-6 py-4 text-xs font-bold uppercase tracking-[.12em] text-white transition hover:bg-[#20b83f]"
             >
               <WhatsAppIcon className="h-4.5 w-4.5 text-[#25D366] transition-colors group-hover:text-white" />
-              <span>Ask about this phone on WhatsApp</span>
+              <span>Share This</span>
             </a>
 
             <div className="mt-5 grid grid-cols-2 border border-[#e1e2df]">
